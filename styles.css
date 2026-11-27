@@ -288,3 +288,9 @@ svg text{font-family:inherit}
 .sec th{background:var(--soft)}
 .sec h3{font-size:1rem;margin:1.1em 0 .3em;color:var(--accent)}
 .sec p.fx{font-size:1.05rem;margin:.5em 0}
+
+/* Home button in the header on every page */
+.topr{display:flex;align-items:center;gap:8px}
+.homebtn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--edge);border-radius:999px;background:var(--paper);color:var(--ink);font-weight:600;font-size:.88rem;padding:6px 12px;min-height:38px;text-decoration:none;white-space:nowrap}
+.homebtn[hidden]{display:none}
+.homebtn:active{background:var(--ink);color:var(--paper)}
