@@ -244,28 +244,8 @@ function pageHTML(bk,idx){
 }
 
 /* ---------- views ---------- */
-function home(){
-  var shelf=[11,12].map(function(cls){
-    return '<div class="bk">'+coverHTML(cls,false,'#c'+cls)
-      +'<p class="meta">Physics · Chemistry · Maths</p>'
-      +'<div class="btns"><a class="btn pri" href="#c'+cls+'">'+t(U.openBook)+'</a></div></div>';
-  }).join('');
-  shelf+='<div class="bk mock-book"><a href="#mock" class="coverlink"><div class="cover mockcover"><div class="cvtop">VENU JEE</div><div class="cvtitle">'+t(U.testWord)+'</div><div class="cvsub">JEE MAIN · JEE ADVANCED</div></div></a><p class="meta">'+t(U.testWord)+' · PYQs</p><div class="btns"><a class="btn pri" href="#mock">'+t(U.openBook)+'</a></div></div>';
-  app.innerHTML='<div class="in"><section class="hero"><h1>'+brandHTML()+'</h1><p>'+t(U.heroP)+'</p></section><div class="shelf">'+shelf+'</div></div>';
-}
-function classView(cls){
-  var shelf=SUBS.map(function(sub){
-    var bk=book(cls,sub), saved=LS.get('venu.last.'+bk.base)||'', mm=new RegExp('^'+bk.base+'-p(\\d+)$').exec(saved), cont='';
-    if(mm&&+mm[1]>=1&&+mm[1]<=bk.total){cont='<a class="btn" href="#'+saved+'">'+t(U.contin)+' '+mm[1]+'</a>'}
-    return '<div class="bk" data-subject="'+sub+'">'+coverHTML(cls,false,'#'+bk.base,sub)
-      +'<p class="meta">'+(bk.chs.filter(function(c){return !c.pending}).length?bk.chs.filter(function(c){return !c.pending}).length+' '+t(U.chaptersN):t(U.soon))+'</p>'
-      +'<div class="btns"><a class="btn pri" href="#'+bk.base+'">'+t(U.openBook)+'</a>'+cont+'</div></div>';
-  }).join('');
-  pager.hidden=true; cur={book:false,prev:'',next:''};
-  document.body.removeAttribute('data-subject');
-  app.innerHTML='<div class="in"><p class="crumb"><a href="#home">‹ '+t(U.homeWord)+'</a></p><section class="hero"><h1>'+brandHTML()+' · '+t(CLS[cls].name)+'</h1><p>'+t(U.pickBook)+'</p></section><div class="shelf">'+shelf+'</div>'
-    +'</div>';
-}
+
+
 
 function setPager(bk,idx){
   var last=bk.pages.length-1, pp=bk.pages[idx];
@@ -306,10 +286,10 @@ function route(anim,top){
     }else if((m=/^t(11|12)(?:-(physics|chemistry|maths))?$/.exec(h))){
     testView(+m[1],m[2]||'');
   }else if((m=/^c(11|12)(?:-.*)?$/.exec(h))){
-    classView(+m[1]);
+    window.VENU_CLASS_VIEW(+m[1],{app:app,pager:pager,cur:cur,SUBS:SUBS,book:book,LS:LS,t:t,U:U,coverHTML:coverHTML,CLS:CLS});
   }else{
     pager.hidden=true; cur={book:false,prev:'',next:''};
-    home();
+    window.VENU_HOME_VIEW({app:app,t:t,U:U,coverHTML:coverHTML,brandHTML:brandHTML});
   }
   if(top){window.scrollTo(0,0)}
 }
