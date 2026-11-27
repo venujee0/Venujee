@@ -1,4 +1,4 @@
-// Sequential loader: chapter shells, content, photos, 2D diagrams, visual registrations, then UI.
+// Sequential loader: chapter shells, individual content, photos, 2D diagrams, chapter extensions, then UI.
 (function(){'use strict';var files=[
   "src/classes/class-11/chemistry/chapter-01-mole-concept/index.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/index.js",
@@ -218,9 +218,6 @@
   "src/classes/class-11/chemistry/chapter-01-mole-concept/formulas/14-formula-14.js",
   "src/classes/class-11/chemistry/chapter-01-mole-concept/formulas/15-formula-15.js",
   "src/classes/class-11/chemistry/chapter-01-mole-concept/formulas/16-formula-16.js",
-  "app.js",
-  "src/features/books/navigation.js",
-  "mock-test-engine.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/photos/vernier.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/photos/screw-gauge.js",
   "src/classes/class-11/chemistry/chapter-01-mole-concept/photos/titration.js",
@@ -238,5 +235,8 @@
   "src/classes/class-11/physics/chapter-01-units-dimensions/diagrams-2d/physdims.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/diagrams-2d/physigfig.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/diagrams-2d/physerrors.js",
-  "src/classes/class-11/content-extensions.js"
-];var i=0;function fail(src){var root=document.getElementById('app');if(root)root.innerHTML='<div class="in"><p role="alert">Venu JEE could not load '+src+'. Refresh the page or report this issue.</p></div>';}function next(){if(i>=files.length)return;var src=files[i++],el=document.createElement('script');el.src=src+'?v=5';el.onload=next;el.onerror=function(){fail(src)};document.body.appendChild(el);}next();})();
+  "src/classes/class-11/content-extensions.js",
+  "app.js",
+  "src/features/books/navigation.js",
+  "mock-test-engine.js"
+];var i=0;function fail(src){var root=document.getElementById('app');if(root)root.innerHTML='<div class="in"><p role="alert">Venu JEE could not load '+src+'. Refresh the page or report this issue.</p></div>';}function next(){if(i>=files.length)return;var src=files[i++],el=document.createElement('script');el.src=src+'?v=6';el.onload=next;el.onerror=function(){fail(src)};document.body.appendChild(el);}next();})();
