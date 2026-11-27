@@ -44,7 +44,7 @@ There are also 3 real-apparatus photo reference modules (Vernier caliper, screw 
 
 - Split remaining route-controller responsibilities (hash routing, pager/touch/keyboard events and progress/bookmark/search) into smaller modules. Home, class shelf, book model and Notes page renderer are already separate.
 - Split the shared 2D companion-diagram data registry further if a future chapter requires independently maintained model companion drawings. The common renderer is separate and the 13 topic-specific flow diagrams are already separate.
-- Review and archive inactive root-level legacy duplicates (`90-3d-engine.js`, `99-books-navigation.js`, and `ch01-*.js`) after final comparison. They are not loaded by the active entrypoint; `99-books-navigation.js` fails a standalone syntax parse and must not be loaded.
+- Archived inactive root-level legacy duplicates under `legacy/` for historical comparison. They are not loaded by the active entrypoint; `legacy/inactive-99-books-navigation.js` fails a standalone syntax parse and must not be loaded.
 - Class 12 chapter content is not migrated/populated.
 - Mock Test and PYQ question banks remain empty placeholders; no changes were made to their engine.
 - Full academic proofreading of every answer and diagram remains pending.

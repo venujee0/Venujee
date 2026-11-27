@@ -44,6 +44,7 @@ src/
     engines/                  shared 3D renderer and registries
     diagrams/                 shared 2D renderer and flow primitive
 assets/                       styles and image assets
+legacy/                      archived inactive scripts; do not load
 docs/                         architecture and maintenance notes
 tests/                        structural validation guidance
 ```
