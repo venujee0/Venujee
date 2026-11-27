@@ -280,3 +280,11 @@ svg text{font-family:inherit}
 /* PYQ paper selector: twenty clearly numbered paper choices */
 .pyq-choice{min-height:82px}
 @media(min-width:560px){.mock-grid:has(.pyq-choice){grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* chapter tables and headings */
+.sec{overflow-wrap:anywhere}
+.sec table{display:block;overflow-x:auto}
+.sec th,.sec td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+.sec th{background:var(--soft)}
+.sec h3{font-size:1rem;margin:1.1em 0 .3em;color:var(--accent)}
+.sec p.fx{font-size:1.05rem;margin:.5em 0}
