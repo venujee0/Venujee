@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-units-dimensions';})[0];if(!ch)throw new Error('Missing chapter physics-units-dimensions');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.6.4 Picture: frequency of a stretched string','1.6.4 तस्वीर: तने तार की आवृत्ति'),
+  body:B('<p>The frequency of a stretched string depends on length l, tension F and mass per unit length µ. Dimensional analysis (Example 10) gives f = (k/l)√(F/µ).</p>',
+  '<p>तने हुए तार की आवृत्ति लंबाई l, तनाव F और प्रति इकाई लंबाई द्रव्यमान µ पर निर्भर करती है। विमीय विश्लेषण (उदाहरण 10) से f = (k/l)√(F/µ) मिलता है।</p>'),
+  d3:'string',cap3:B('Change length, tension and mass per length and watch how the frequency changes.','लंबाई, तनाव और प्रति इकाई लंबाई द्रव्यमान बदलकर देखो कि आवृत्ति कैसे बदलती है।')});})();

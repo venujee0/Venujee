@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('Mole relations','मोल संबंध'),'n = w/M = N/N<sub>A</sub> = V/V<sub>m</sub> = PV/RT']);})();

@@ -1,0 +1,3 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.7 Stoichiometry','1.7 स्टॉइकियोमेट्री'),
+  body:B('<p>The coefficients of a balanced equation give <b>mole ratios</b>, not mass ratios.</p><p>CH₄ + 2 O₂ → CO₂ + 2 H₂O</p><p>1 mol : 2 mol : 1 mol : 2 mol, that is 16 g : 64 g : 44 g : 36 g. See Example 9 (impure sample).</p>',
+  '<p>संतुलित समीकरण के गुणांक <b>मोल अनुपात</b> बताते हैं, द्रव्यमान अनुपात नहीं।</p><p>CH₄ + 2 O₂ → CO₂ + 2 H₂O</p><p>1 मोल : 2 मोल : 1 मोल : 2 मोल, यानी 16 g : 64 g : 44 g : 36 g। उदाहरण 9 देखो (अशुद्ध नमूना)।</p>')});})();

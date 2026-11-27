@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-units-dimensions';})[0];if(!ch)throw new Error('Missing chapter physics-units-dimensions');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.9.4 Picture: measuring g with a pendulum','1.9.4 तस्वीर: लोलक से g नापना'),
+  body:B('<p>One oscillation means going and coming back. A stopwatch counts the oscillations and the length is measured with a scale. Change the length with the slider and see how the time period changes.</p>',
+  '<p>एक दोलन का मतलब है जाकर वापस आना। स्टॉपवॉच दोलन गिनती है और लंबाई स्केल से नापी जाती है। स्लाइडर से लंबाई बदलकर देखो कि आवर्तकाल कैसे बदलता है।</p>'),
+  d3:'pendulum',cap3:B('The pendulum swings, the stopwatch counts oscillations and the length is measured.','लोलक झूलता है, स्टॉपवॉच दोलन गिनती है और लंबाई नापी जाती है।')});})();

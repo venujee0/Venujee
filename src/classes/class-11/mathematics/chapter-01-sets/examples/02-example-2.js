@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('Write {1/2, 2/3, 3/4, 4/5, 5/6, 6/7} in set-builder form.','{1/2, 2/3, 3/4, 4/5, 5/6, 6/7} को समुच्चय-निर्माण रूप में लिखो।'),
+   a:B('Each denominator is 1 more than the numerator: <b>{x : x = n/(n + 1), n ∈ N, n ≤ 6}</b>.','हर में अंश से 1 अधिक है: <b>{x : x = n/(n + 1), n ∈ N, n ≤ 6}</b>।')});})();

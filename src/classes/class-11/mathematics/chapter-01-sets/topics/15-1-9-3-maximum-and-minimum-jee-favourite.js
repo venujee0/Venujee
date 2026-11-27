@@ -1,0 +1,3 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.9.3 Maximum and minimum (JEE favourite)','1.9.3 अधिकतम एवं न्यूनतम (JEE का पसंदीदा)'),
+  body:B('<p class="fx">max{0, n(A) + n(B) − n(U)} ≤ n(A ∩ B) ≤ min{n(A), n(B)}<br>max{n(A), n(B)} ≤ n(A ∪ B) ≤ min{n(A) + n(B), n(U)}</p><p><b>Trick:</b> take complements. See Examples 14 and 15.</p>',
+  '<p class="fx">max{0, n(A) + n(B) − n(U)} ≤ n(A ∩ B) ≤ min{n(A), n(B)}<br>max{n(A), n(B)} ≤ n(A ∪ B) ≤ min{n(A) + n(B), n(U)}</p><p><b>ट्रिक:</b> पूरक लो। उदाहरण 14 और 15 देखो।</p>')});})();

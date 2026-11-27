@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('How many sets X satisfy {1, 2} ⊆ X ⊆ {1, 2, 3, 4, 5}?','कितने समुच्चय X हैं जिनके लिए {1, 2} ⊆ X ⊆ {1, 2, 3, 4, 5}?'),
+   a:B('1 and 2 are fixed; 3, 4, 5 each have 2 choices: 2³ = <b>8</b>.','1, 2 निश्चित हैं; 3, 4, 5 के पास 2-2 विकल्प: 2³ = <b>8</b>।')});})();

@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('3 M NaCl has d = 1.25 g mL⁻¹. Find the molality.','3 M NaCl का घनत्व d = 1.25 g mL⁻¹। मोललता ज्ञात करो।'),
+  a:B('1 L: solution 1250 g, solute 175.5 g, solvent 1.0745 kg. m = 3/1.0745 = <b>2.79</b>.','1 L में: विलयन 1250 g, विलेय 175.5 g, विलायक 1.0745 kg। m = 3/1.0745 = <b>2.79</b>।')});})();

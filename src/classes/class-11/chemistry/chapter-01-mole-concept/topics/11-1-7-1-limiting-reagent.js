@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.7.1 Limiting reagent','1.7.1 सीमांत अभिकर्मक'),
+  body:B('<p>The reactant that is used up <b>first</b>. Find moles / coefficient for each reactant; the <b>smallest</b> value is the limiting reagent. The product is always calculated from it. See Example 10.</p>',
+  '<p>जो अभिकारक <b>सबसे पहले</b> खत्म होता है। हर अभिकारक का मोल / गुणांक निकालो; <b>सबसे छोटा</b> मान सीमांत अभिकर्मक है। उत्पाद हमेशा उसी से निकलता है। उदाहरण 10 देखो।</p>'),
+  d3:'limiting',cap3:B('Molecules react; the reactant that runs out first stops the reaction and the other is left over.','अणु अभिक्रिया करते हैं; जो पहले खत्म होता है वही अभिक्रिया रोकता है और दूसरा बच जाता है।')});})();

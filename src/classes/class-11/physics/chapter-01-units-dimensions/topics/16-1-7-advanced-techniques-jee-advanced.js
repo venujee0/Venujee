@@ -1,0 +1,3 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-units-dimensions';})[0];if(!ch)throw new Error('Missing chapter physics-units-dimensions');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.7 Advanced techniques (JEE Advanced)','1.7 उन्नत तकनीकें (JEE Advanced)'),
+  body:B('<p><b>1.7.1 Choosing new base quantities.</b> Method (A): write Q = XᵃYᵇZᶜ and compare M, L, T. Method (B): first write M, L, T in terms of the new bases. See Examples 11 and 12.</p>',
+  '<p><b>1.7.1 नई मूल राशियाँ चुनना।</b> विधि (A): Q = XᵃYᵇZᶜ लिखकर M, L, T की तुलना करो। विधि (B): पहले M, L, T को नई मूल राशियों में लिखो। उदाहरण 11 और 12 देखो।</p>')});})();

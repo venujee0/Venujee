@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('Write {x : x ∈ N, x² &lt; 40} in roster form.','{x : x ∈ N, x² &lt; 40} को रोस्टर रूप में लिखो।'),
+   a:B('6² = 36 &lt; 40 and 7² = 49 &gt; 40. Answer: <b>{1, 2, 3, 4, 5, 6}</b>.','6² = 36 &lt; 40 और 7² = 49 &gt; 40। उत्तर: <b>{1, 2, 3, 4, 5, 6}</b>।')});})();

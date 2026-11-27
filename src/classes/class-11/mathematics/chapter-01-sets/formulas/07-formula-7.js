@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('Exactly one / exactly two','ठीक एक / ठीक दो'),'S<sub>1</sub> − 2S<sub>2</sub> + 3S<sub>3</sub>; S<sub>2</sub> − 3S<sub>3</sub>']);})();

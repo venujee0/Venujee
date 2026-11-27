@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('70% like coffee and 60% like tea. Find the range of x%, those who like both.','70% को कॉफ़ी और 60% को चाय पसंद है। दोनों पसंद करने वाले x% की सीमा ज्ञात करो।'),
+   a:B('x ≥ 70 + 60 − 100 = 30 and x ≤ 60. So <b>30 ≤ x ≤ 60</b>.','x ≥ 70 + 60 − 100 = 30 और x ≤ 60। अतः <b>30 ≤ x ≤ 60</b>।')});})();

@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-units-dimensions';})[0];if(!ch)throw new Error('Missing chapter physics-units-dimensions');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('Convert G = 6.67 × 10⁻¹¹ (SI) into CGS.','G = 6.67 × 10⁻¹¹ (SI) को CGS में बदलो।'),
+  a:B('a = −1, b = 3, c = −2. n₂ = 6.67 × 10⁻¹¹ (10³)⁻¹ (10²)³ = <b>6.67 × 10⁻⁸ dyne cm² g⁻²</b>.','a = −1, b = 3, c = −2। n₂ = 6.67 × 10⁻¹¹ (10³)⁻¹ (10²)³ = <b>6.67 × 10⁻⁸ dyne cm² g⁻²</b>।')});})();

@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('400 students: 100 drink apple juice, 150 orange juice, 75 both. How many drink neither?','400 विद्यार्थी: 100 सेब का जूस, 150 संतरे का जूस, 75 दोनों पीते हैं। कितने कोई नहीं पीते?'),
+   a:B('n(A ∪ O) = 100 + 150 − 75 = 175. Neither = 400 − 175 = <b>225</b>.','n(A ∪ O) = 100 + 150 − 75 = 175। कोई नहीं = 400 − 175 = <b>225</b>।')});})();

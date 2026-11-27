@@ -1,0 +1,3 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.7.2 Percentage yield and sequential reactions','1.7.2 प्रतिशत उपज एवं क्रमिक अभिक्रियाएँ'),
+  body:B('<p class="fx">% yield = (actual / theoretical) × 100</p><p>In a series of reactions the overall yield is the <b>product of all the yields</b>. See Example 11.</p>',
+  '<p class="fx">% उपज = (वास्तविक / सैद्धांतिक) × 100</p><p>क्रमिक अभिक्रियाओं में कुल उपज <b>सभी उपजों का गुणनफल</b> होती है। उदाहरण 11 देखो।</p>')});})();

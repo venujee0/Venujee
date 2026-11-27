@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.9.2 Picture of a survey (Example 12)','1.9.2 सर्वे की तस्वीर (उदाहरण 12)'),
+  body:B('<p>Of 400 students, 100 drink apple juice (A), 150 drink orange juice (O), and 75 drink both. Then only A = 25, both = 75, only O = 75, and the rest, 400 − 175 = 225, drink neither.</p>',
+  '<p>400 विद्यार्थियों में से 100 सेब का जूस (A), 150 संतरे का जूस (O) और 75 दोनों पीते हैं। तब सिर्फ़ A = 25, दोनों = 75, सिर्फ़ O = 75, और बाकी 400 − 175 = 225 कोई नहीं पीते।</p>'),
+  d3:'juice',cap3:B('400 dots move into their own regions and the count of each region appears.','400 बिंदु अपने-अपने क्षेत्र में जाते हैं और हर क्षेत्र की गिनती दिखती है।')});})();

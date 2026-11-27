@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('25 mL of FeSO₄ needs 20 mL of 0.02 M acidic KMnO₄. Find the molarity of FeSO₄.','25 mL FeSO₄ को 20 mL 0.02 M अम्लीय KMnO₄ चाहिए। FeSO₄ की मोलरता ज्ञात करो।'),
+  a:B('M₁(25)(1) = 0.02(20)(5) ⇒ <b>M₁ = 0.08 M</b>.','M₁(25)(1) = 0.02(20)(5) ⇒ <b>M₁ = 0.08 M</b>।')});})();

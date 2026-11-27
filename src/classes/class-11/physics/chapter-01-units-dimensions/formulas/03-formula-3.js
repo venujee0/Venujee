@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-units-dimensions';})[0];if(!ch)throw new Error('Missing chapter physics-units-dimensions');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('Planck units','प्लांक मात्रक'),'l<sub>P</sub> = √(Gh/c³), t<sub>P</sub> = √(Gh/c⁵), m<sub>P</sub> = √(hc/G)']);})();

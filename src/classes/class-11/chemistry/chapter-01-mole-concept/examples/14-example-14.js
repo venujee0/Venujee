@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('In a 1 molal aqueous solution, find the mole fraction of the solute.','1 मोलल जलीय विलयन में विलेय का मोल अंश ज्ञात करो।'),
+  a:B('1 mol solute, 1000/18 = 55.56 mol water. x = 1/56.56 = <b>0.0177</b>.','1 मोल विलेय, 1000/18 = 55.56 मोल पानी। x = 1/56.56 = <b>0.0177</b>।')});})();

@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('Prove: A − (B ∪ C) = (A − B) ∩ (A − C).','सिद्ध करो: A − (B ∪ C) = (A − B) ∩ (A − C)।'),
+   a:B('LHS = A ∩ (B ∪ C)′ = A ∩ B′ ∩ C′ = (A ∩ B′) ∩ (A ∩ C′) = RHS. (We used A = A ∩ A.)','बायाँ पक्ष = A ∩ (B ∪ C)′ = A ∩ B′ ∩ C′ = (A ∩ B′) ∩ (A ∩ C′) = दायाँ पक्ष। (A = A ∩ A प्रयोग किया।)')});})();
