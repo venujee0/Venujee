@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.empirical=function(l){return DG.flow(l==='hi'?['द्रव्यमान / %','मोल में बदलें','सरल अनुपात']:['Mass / percentage','Convert to moles','Simplest ratio'],l==='hi'?'मूलानुपाती सूत्र की विधि':'Empirical formula workflow')};})();

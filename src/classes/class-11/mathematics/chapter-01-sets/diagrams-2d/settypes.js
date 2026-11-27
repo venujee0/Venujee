@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.settypes=function(l){return DG.flow(l==='hi'?['रिक्त / एकल','परिमित / अपरिमित','समान / समतुल्य']:['Empty / singleton','Finite / infinite','Equal / equivalent'],l==='hi'?'समुच्चयों के प्रकार':'Types of sets')};})();

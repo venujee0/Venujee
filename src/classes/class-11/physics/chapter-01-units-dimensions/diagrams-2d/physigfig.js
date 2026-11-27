@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.physigfig=function(l){return DG.flow(l==='hi'?['अंक पहचानें','नियम चुनें','अंतिम पूर्णांकन']:['Identify digits','Choose operation rule','Round final result'],l==='hi'?'सार्थक अंकों के नियम':'Significant-figure workflow')};})();

@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.chemcomb=function(l){return DG.flow(l==='hi'?['द्रव्यमान संरक्षण','निश्चित अनुपात','गुणित अनुपात']:['Conservation of mass','Definite proportions','Multiple proportions'],l==='hi'?'रासायनिक संयोजन के नियम':'Laws of chemical combination')};})();

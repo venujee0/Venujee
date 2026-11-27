@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.moleflow=function(l){return DG.flow(l==='hi'?['द्रव्यमान (g)','मोल = m/M','कण = nNₐ']:['Mass (g)','Moles = m/M','Particles = nNₐ'],l==='hi'?'द्रव्यमान से मोल और कण':'Mass to moles to particles')};})();

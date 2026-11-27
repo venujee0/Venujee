@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.solutionprep=function(l){return DG.flow(l==='hi'?['विलेय तौलें','घोलकर फ्लास्क में','निशान तक भरें']:['Weigh solute','Dissolve and transfer','Make up to mark'],l==='hi'?'मानक विलयन तैयार करना':'Prepare a standard solution')};})();
