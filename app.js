@@ -526,7 +526,7 @@ D3.dilution={en:'Dilution',hi:'तनुकरण',h:0.7,view:{yaw:-0.45,pitch:0
  params:[{k:'w',en:'Water added',hi:'मिलाया पानी',min:0,max:100,val:0,step:1,unit:'%'}],
  frame:function(S,t,P,l){
   var V=1+3*P.w/100,h=0.45*V;
-  S.glassBox([0,-0.05,0],[2.05,2.05,2.05]);S.poly([[-0.92,-1+h,-0.92],[0.92,-1+h,-0.92],[0.92,-1+h,0.92],[-0.92,-1+h,0.92]],'#7dd3fc',0.16,'#38bdf8');
+  S.glassBox([0,-1+h,0],[2.05,2*h,2.05]);S.poly([[-0.92,-1+2*h,-0.92],[0.92,-1+2*h,-0.92],[0.92,-1+2*h,0.92],[-0.92,-1+2*h,0.92]],'#7dd3fc',0.16,'#38bdf8');
   for(var i=0;i<12;i++){
     var u=((i*37)%100)/100,v=((i*53)%100)/100,w=((i*71)%100)/100;
     S.ball([(u*2-1)*0.8+0.04*Math.sin(t*3+i),-1+(v*2*h)*0.92+0.04,(w*2-1)*0.8+0.04*Math.cos(t*3+i)],0.1,'bad');
@@ -857,7 +857,7 @@ D3.vzero={en:'Vernier zero error',hi:'वर्नियर शून्य त�
 /* 10. Screw gauge */
 D3.screw={en:'Micrometer screw gauge',hi:'माइक्रोमीटर स्क्रू गेज',h:0.72,scale:1.05,view:{yaw:-0.24,pitch:0.18,zoom:1},params:[{k:'p',en:'Object diameter (mm)',hi:'वस्तु का व्यास (mm)',min:0,max:10,val:2.35,step:0.01,unit:' mm'}],
  frame:function(S,t,P,l){
-  var p=P.p,ang=t*0.42,gap=0.10+p*0.064,anvil=-0.88,face=anvil+gap,i,read=p.toFixed(2);
+  var p=P.p,ang=t*0.42,gap=0.10+p*0.064,anvil=-0.88,face=anvil+gap,i,read=p.toFixed(2),msr=Math.floor((p+1e-8)/0.5)*0.5,csr=Math.round((p-msr)/0.01);
   S.rod([-1.78,1.18,0],[-1.78,-1.18,0],0.23,'muted');
   S.rod([-1.78,1.18,0],[0.34,1.18,0],0.23,'muted');
   S.rod([-1.78,-1.18,0],[0.34,-1.18,0],0.23,'muted');
@@ -880,7 +880,7 @@ D3.screw={en:'Micrometer screw gauge',hi:'माइक्रोमीटर स�
   S.text([1.54,-0.68,0],T(l,'Thimble / circular scale','थिम्बल / वृत्ताकार पैमाना'),'ink',8,'center',true);
   S.text([2.18,-0.4,0],T(l,'Ratchet','रैचेट'),'muted',9,'center',true);
   S.hud(0.5,0.91,T(l,'Pitch = 0.5 mm · 50 divisions · LC = 0.01 mm','पिच = 0.5 mm · 50 भाग · अल्पतमांक = 0.01 mm'),'accent',10,'center',true);
-  S.hud(0.5,0.97,T(l,'Object diameter = ','वस्तु का व्यास = ')+read+' mm','ink',11,'center',true);
+  S.hud(0.5,0.97,T(l,'Reading = ','पाठ्यांक = ')+msr.toFixed(2)+' + '+csr+' × 0.01 = '+read+' mm','ink',10,'center',true);
  }};
 
 /* 11. Screw gauge zero error */
