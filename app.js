@@ -221,6 +221,7 @@ var D3R={mounts:[],running:false,last:0,colTick:0,COL:null};
         items.push({z:z,f:function(){ctx.beginPath();Q.forEach(function(q,i){if(i)ctx.lineTo(q[0],q[1]);else ctx.moveTo(q[0],q[1])});ctx.closePath();ctx.fillStyle=shade(c,lit);ctx.fill();ctx.strokeStyle=col('ink',0.35);ctx.lineWidth=0.8;ctx.stroke()}});
       });
     };
+    S.glassBox=function(c0,sz){var x=c0[0],y=c0[1],z=c0[2],a=sz[0]/2,b=sz[1]/2,d=sz[2]/2,v=[[-a,-b,-d],[a,-b,-d],[a,b,-d],[-a,b,-d],[-a,-b,d],[a,-b,d],[a,b,d],[-a,b,d]];[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]].forEach(function(e){S.line([x+v[e[0]][0],y+v[e[0]][1],z+v[e[0]][2]],[x+v[e[1]][0],y+v[e[1]][1],z+v[e[1]][2]],'#7dd3fc',1.35)});};
     S.ball=function(c0,R,c){var p=P(c0),r=Math.max(2.5,R*sc*p[3]);items.push({z:p[2],f:function(){var g=ctx.createRadialGradient(p[0]-r*.35,p[1]-r*.35,r*.1,p[0],p[1],r);g.addColorStop(0,shade(c,1.6));g.addColorStop(.6,shade(c,1));g.addColorStop(1,shade(c,.55));ctx.beginPath();ctx.arc(p[0],p[1],r,0,6.2832);ctx.fillStyle=g;ctx.fill()}})};
     S.text=function(p,s,c,size,al,bold){
       var A=P(p);items.push({z:1e7,f:function(){ctx.font=(bold?'700 ':'500 ')+(size||12)+'px '+FONT;ctx.fillStyle=col(c||'ink');ctx.textAlign=al||'center';ctx.textBaseline='middle';ctx.fillText(s,A[0],A[1])}});
@@ -347,7 +348,7 @@ D3.states={en:'Solid, liquid and gas',hi:'ठोस, द्रव और गै�
  frame:function(S,t,P,l){
   var k=P.T/100,xs=[-2.3,0,2.3],names=[T(l,'Solid','ठोस'),T(l,'Liquid','द्रव'),T(l,'Gas','गैस')];
   for(var b=0;b<3;b++){
-    wire(S,'line',xs[b],0,0,0.9,0.9,0.9);S.text([xs[b],-1.2,0],names[b],'accent',13,'center',true);
+    S.glassBox([xs[b],-0.05,0],[1.9,2.05,1.9]);S.text([xs[b],-1.2,0],names[b],'accent',13,'center',true);
     for(var i=0;i<12;i++){
       var gx=(i%3)-1,gy=(Math.floor(i/3)%2)-0.5,gz=Math.floor(i/6)-0.5,s=i*1.7,x,y,z;
       if(b===0){var a=0.03+0.12*k;x=gx*0.5+a*Math.sin(t*9+s);y=gy*0.5-0.35+a*Math.sin(t*8+s*2);z=gz*0.5+a*Math.cos(t*7+s)}
@@ -361,7 +362,7 @@ D3.states={en:'Solid, liquid and gas',hi:'ठोस, द्रव और गै�
 D3.classify={en:'Classification of matter',hi:'पदार्थ का वर्गीकरण',h:0.7,spin:true,view:{yaw:-0.5,pitch:0.35,zoom:1},
  frame:function(S,t,P,l){
   var pos=[[-2.4,0.7],[-0.8,0.7],[0.8,0.7],[2.4,0.7]],nm=[T(l,'Element (O₂)','तत्व (O₂)'),T(l,'Compound (H₂O)','यौगिक (H₂O)'),T(l,'Homogeneous','समांगी'),T(l,'Heterogeneous','विषमांगी')];
-  for(var i=0;i<4;i++){wire(S,'line',pos[i][0]*0.9,0,0,0.6,0.6,0.6);S.text([pos[i][0]*0.9,-0.95,0],nm[i],'accent',11,'center',true)}
+  for(var i=0;i<4;i++){S.glassBox([pos[i][0]*0.9,0,0],[1.18,1.18,1.18]);S.text([pos[i][0]*0.9,-0.95,0],nm[i],'accent',11,'center',true)}
   var w=function(i,x,y,z,f){return [x*0.9+0.18*Math.sin(t*2+i)+f[0],y+0.12*Math.sin(t*2.2+i*2)+f[1],z+f[2]]};
   for(var i=0;i<3;i++){var o=w(i,-2.4,i*0.35-0.35,0,[0,0,0]);mol(S,[[-0.12,0,0,O_,0.12],[0.12,0,0,O_,0.12]],[[0,1]],o,l)}
   for(var j=0;j<2;j++){var o2=w(j+5,-0.8,j*0.6-0.3,0,[0,0,0]);mol(S,[[0,0,0,O_,0.15],[-0.22,-0.17,0,H_,0.09],[0.22,-0.17,0,H_,0.09]],[[0,1],[0,2]],o2,l)}
@@ -516,7 +517,7 @@ D3.dilution={en:'Dilution',hi:'तनुकरण',h:0.7,view:{yaw:-0.45,pitch:0
  params:[{k:'w',en:'Water added',hi:'मिलाया पानी',min:0,max:100,val:0,step:1,unit:'%'}],
  frame:function(S,t,P,l){
   var V=1+3*P.w/100,h=0.45*V;
-  wire(S,'ink',0,-1+h,0,0.9,h,0.9);
+  S.glassBox([0,-0.05,0],[2.05,2.05,2.05]);S.poly([[-0.92,-1+h,-0.92],[0.92,-1+h,-0.92],[0.92,-1+h,0.92],[-0.92,-1+h,0.92]],'#7dd3fc',0.16,'#38bdf8');
   for(var i=0;i<12;i++){
     var u=((i*37)%100)/100,v=((i*53)%100)/100,w=((i*71)%100)/100;
     S.ball([(u*2-1)*0.8+0.04*Math.sin(t*3+i),-1+(v*2*h)*0.92+0.04,(w*2-1)*0.8+0.04*Math.cos(t*3+i)],0.1,'bad');
@@ -625,7 +626,7 @@ D3.eudio={en:'Eudiometry',hi:'यूडियोमेट्री (गैस �
  frame:function(S,t,P,l){
   var st=Math.floor((t%15)/5),vol=[65,40,10][st],i,base=-1.2;
   /* Gas burette / graduated tube with water jacket */
-  S.box([-0.95,0.05,0],[0.58,2.55,0.58],'soft');S.box([-0.95,0.0,0.31],[0.34,2.25,0.08],'#D7EAF7');
+  S.glassBox([-0.95,0.05,0],[0.72,2.65,0.72]);S.box([-0.95,0.0,0.31],[0.34,2.25,0.08],'#D7EAF7');
   for(i=0;i<=10;i++){var y=1.0-i*0.2;S.line([-0.72,y,0.38],[-0.56,y,0.38],'ink',0.9);if(i%2===0)S.text([-0.42,y,0.38],''+(i*5),'ink',9,'left')}
   S.text([-0.95,1.55,0],'Gas tube','ink',10,'center',true);
   S.box([-0.95,base+vol/65*2.2/2,0.32],[0.3,vol/65*2.2,0.06],'#B7D9EC');
