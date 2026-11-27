@@ -22,7 +22,11 @@ The migration is isolated on this branch. **The main branch and deployed/main we
 - `diagrams-2d/`: one JavaScript file per topic-specific 2D flow diagram.
 - `photos/`: individual real-apparatus photo reference modules.
 - `src/classes/class-11/content-extensions.js`: additional chapter content, photo attachment and diagram-to-topic wiring.
-- `src/features/books/navigation.js`: book, notes, page and route navigation.
+- `src/features/home/home.js`: home shelf.
+- `src/features/chapter-list/class-view.js`: class and subject shelf.
+- `src/features/books/book-model.js`: chapter ordering, page map and page URL model.
+- `src/features/notes/page-renderer.js`: cover, topic, formula, example and notes page composition.
+- `src/features/books/navigation.js`: route controller, page-turn controls, language refresh and app event wiring.
 - `mock-test-engine.js`: separate Mock Test/PYQ route shell; left unchanged.
 
 ## Class 11 content inventory in the active loader
@@ -38,7 +42,7 @@ There are also 3 real-apparatus photo reference modules (Vernier caliper, screw 
 
 ## Remaining architecture work
 
-- Split the remaining responsibilities inside `src/features/books/navigation.js` into smaller home, chapter-list, notes/page-rendering and progress/bookmark/search feature modules.
+- Split remaining route-controller responsibilities (hash routing, pager/touch/keyboard events and progress/bookmark/search) into smaller modules. Home, class shelf, book model and Notes page renderer are already separate.
 - Split the shared 2D companion-diagram data registry further if a future chapter requires independently maintained model companion drawings. The common renderer is separate and the 13 topic-specific flow diagrams are already separate.
 - Review and archive inactive root-level legacy duplicates (`90-3d-engine.js`, `99-books-navigation.js`, and `ch01-*.js`) after final comparison. They are not loaded by the active entrypoint; `99-books-navigation.js` fails a standalone syntax parse and must not be loaded.
 - Class 12 chapter content is not migrated/populated.

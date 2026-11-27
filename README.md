@@ -35,7 +35,11 @@ src/
         chapter-01-sets/ (same layout)
     class-12/                 reserved structure; content not migrated
   features/
-    books/navigation.js       book, notes, page and route navigation
+    home/home.js               home shelf
+    chapter-list/class-view.js class/subject shelf
+    books/book-model.js        chapter ordering and page map
+    books/navigation.js        route/controller logic
+    notes/page-renderer.js     cover, topic, example, formula and notes pages
   visuals/
     engines/                  shared 3D renderer and registries
     diagrams/                 shared 2D renderer and flow primitive
