@@ -77,6 +77,7 @@ var DG={};// Topic-specific 2D diagrams are added only from supplied PDFs.
 
 /* Paired 2D companion drawings for every interactive 3D model. Labels are bilingual. */
 function diagram2D(name,l){
+ var T=function(locale,en,hi){return locale==='hi'?hi:en};
  var data={
   states:[['Solid','ठोस'],['Liquid','द्रव'],['Gas','गैस']],
   classify:[['Pure substance','शुद्ध पदार्थ'],['Element / compound','तत्व / यौगिक'],['Mixture','मिश्रण']],
