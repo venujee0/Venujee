@@ -359,7 +359,7 @@ var B=function(e,h){return {en:e,hi:h}};
 CH.push({
  id:'chemistry-mole-concept',cls:11,subject:'chemistry',ord:1,
  title:B('Some Basic Concepts of Chemistry','रसायन विज्ञान की कुछ मूल अवधारणाएँ'),
- blurb:B('Matter, measurement, laws of combination, atomic mass and the mole concept — from foundation to JEE Advanced level. (Part 1 of 3.)','पदार्थ, मापन, रासायनिक संयोजन के नियम, परमाणु द्रव्यमान और मोल अवधारणा — आधार से JEE Advanced स्तर तक। (भाग 1 / 3)'),
+ blurb:B('Matter, measurement, laws of combination, atomic mass and the mole concept — from foundation to JEE Advanced level.','पदार्थ, मापन, रासायनिक संयोजन के नियम, परमाणु द्रव्यमान और मोल अवधारणा — आधार से JEE Advanced स्तर तक।'),
  sections:[
  {h:B('1.1 Matter','1.1 पदार्थ'),
   body:B('<p>Chemistry studies the composition, structure, properties and reactions of matter. Medicines, fertilisers, plastics and fuels all come from it.</p><p><b>Matter</b> is anything that has mass and occupies space.</p><table><tr><th></th><th>Solid</th><th>Liquid</th><th>Gas</th></tr><tr><td>Volume</td><td>fixed</td><td>fixed</td><td>not fixed</td></tr><tr><td>Shape</td><td>fixed</td><td>not fixed</td><td>not fixed</td></tr><tr><td>Particles</td><td>very close</td><td>close</td><td>far apart</td></tr></table>',
@@ -854,7 +854,7 @@ function classView(cls){
     var bk=book(cls,sub), saved=LS.get('venu.last.'+bk.base)||'', mm=new RegExp('^'+bk.base+'-p(\\d+)$').exec(saved), cont='';
     if(mm&&+mm[1]>=1&&+mm[1]<=bk.total){cont='<a class="btn" href="#'+saved+'">'+t(U.contin)+' '+mm[1]+'</a>'}
     return '<div class="bk" data-subject="'+sub+'">'+coverHTML(cls,false,'#'+bk.base,sub)
-      +'<p class="meta">'+t(U.soon)+'</p>'
+      +'<p class="meta">'+(bk.chs.filter(function(c){return !c.pending}).length?bk.chs.filter(function(c){return !c.pending}).length+' '+t(U.chaptersN):t(U.soon))+'</p>'
       +'<div class="btns"><a class="btn pri" href="#'+bk.base+'">'+t(U.openBook)+'</a>'+cont+'</div></div>';
   }).join('');
   pager.hidden=true; cur={book:false,prev:'',next:''};
