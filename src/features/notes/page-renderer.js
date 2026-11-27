@@ -94,5 +94,5 @@ function pageHTML(bk,idx){
   }
   return '<div class="paper '+(odd?'odd':'even')+'"'+(subj?' data-subject="'+subj+'"':'')+'><div class="run"><span>'+head+'</span></div><div class="pbody">'+body+'</div><div class="pnum">'+p.label+'</div></div>';
 }
-return {coverHTML,segHTML,tlRow,openerBody,conceptBody,formulasBody,examplesBody,revisionBody,soonRow,tocBody,pageHTML};
+return {coverHTML,segHTML,tlRow,openerBody,conceptBody,formulasBody,examplesBody,revisionBody,soonRow,tocBody,pageHTML,setLanguage:function(next){lang=next}};
 };})(window);

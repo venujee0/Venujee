@@ -4,9 +4,7 @@ var rt=window.VENU_RUNTIME;
 var B=rt.B,S=rt.S,F=rt.F,R=rt.R,SP=rt.SP,SUBJ=rt.SUBJ;
 var CH=rt.CH,D3=rt.D3,D3ATT=rt.D3ATT,DG=rt.DG,LS=rt.LS,diagram2D=rt.diagram2D;
 var U=rt.U,reduce=rt.reduce,esc=rt.esc,t=rt.t,lang=rt.lang;
-var page=window.VENU_PAGE_RENDERER({CLS:CLS,SUBJ:SUBJ,U:U,MOTIF:MOTIF,BRAND:BRAND,lang:lang,t:t,esc:esc,diagram2D:diagram2D,DG:DG,isDone:isDone,numHref:numHref});
-var coverHTML=page.coverHTML,segHTML=page.segHTML,tlRow=page.tlRow,openerBody=page.openerBody,conceptBody=page.conceptBody,formulasBody=page.formulasBody,examplesBody=page.examplesBody,revisionBody=page.revisionBody,soonRow=page.soonRow,tocBody=page.tocBody,pageHTML=page.pageHTML;
-window.addEventListener('venu:languagechange',function(){lang=rt.lang});
+
 // Class and book navigation, chapter pages and Notes
 /* ===== Engine: books, pages, tests ===== */
 var BRAND='Venu JEE';
@@ -76,6 +74,10 @@ var MOTIF={
   11:'<svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6,112 Q50,-12 94,112"/><path d="M6,112 Q60,28 114,112"/><path d="M6,112 Q38,62 70,112"/><circle cx="50" cy="31" r="3" fill="currentColor"/></svg>',
   12:'<svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="60" cy="60" r="14"/><circle cx="60" cy="60" r="28"/><circle cx="60" cy="60" r="42"/><circle cx="60" cy="60" r="56"/><path d="M60,4 V116 M4,60 H116 M20,20 L100,100 M100,20 L20,100"/></svg>'
 };
+
+var page=window.VENU_PAGE_RENDERER({CLS:CLS,SUBJ:SUBJ,U:U,MOTIF:MOTIF,BRAND:BRAND,lang:lang,t:t,esc:esc,diagram2D:diagram2D,DG:DG,isDone:isDone,numHref:numHref});
+var coverHTML=page.coverHTML,segHTML=page.segHTML,tlRow=page.tlRow,openerBody=page.openerBody,conceptBody=page.conceptBody,formulasBody=page.formulasBody,examplesBody=page.examplesBody,revisionBody=page.revisionBody,soonRow=page.soonRow,tocBody=page.tocBody,pageHTML=page.pageHTML;
+window.addEventListener('venu:languagechange',function(){lang=rt.lang;page.setLanguage(lang)});
 
 /* ---------- state ---------- */
 var app=document.getElementById('app');
