@@ -68,5 +68,6 @@ var D3=window.VENU_D3, D3ATT=window.VENU_D3ATT;
 
 
 // The book and route controller is loaded from src/features/books/navigation.js.
+window.VENU_RUNTIME={get lang(){return lang},get U(){return U},get reduce(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches},t:function(o){return o[lang]},esc:function(s){return String(s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]})}};
 window.VENU_RUNTIME.B=B; window.VENU_RUNTIME.S=S; window.VENU_RUNTIME.F=F; window.VENU_RUNTIME.R=R; window.VENU_RUNTIME.SP=SP; window.VENU_RUNTIME.SUBJ=SUBJ; window.VENU_RUNTIME.CH=CH; window.VENU_RUNTIME.D3=D3; window.VENU_RUNTIME.D3ATT=D3ATT; window.VENU_RUNTIME.DG=DG; window.VENU_RUNTIME.LS=LS; window.VENU_RUNTIME.diagram2D=window.diagram2D;
 })();

@@ -79,7 +79,6 @@ var MOTIF={
 var app=document.getElementById('app');
 var pager=document.getElementById('pager');
 var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-window.VENU_RUNTIME={get lang(){return lang},get U(){return U},get reduce(){return reduce},t:function(v){return t(v)},esc:function(v){return esc(v)}};
 var cur={book:false,prev:'',next:''};
 
 function t(o){return o[lang]}
