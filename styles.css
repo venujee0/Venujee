@@ -294,3 +294,9 @@ svg text{font-family:inherit}
 .homebtn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--edge);border-radius:999px;background:var(--paper);color:var(--ink);font-weight:600;font-size:.88rem;padding:6px 12px;min-height:38px;text-decoration:none;white-space:nowrap}
 .homebtn[hidden]{display:none}
 .homebtn:active{background:var(--ink);color:var(--paper)}
+
+
+/* Small Home shortcut at the top-right of every notes page */
+.pagehome{display:flex;justify-content:flex-end;margin:-8px 8px 12px 0}
+.pagehome a{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:4px 10px;border:1px solid var(--edge);border-radius:999px;background:var(--paper);color:var(--ink);font-size:.82rem;font-weight:600;text-decoration:none;line-height:1.2}
+.pagehome a:active{background:var(--ink);color:var(--paper)}
