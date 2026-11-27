@@ -1621,7 +1621,7 @@ function openerBody(bk,p){
 function conceptBody(bk,p){
   var c=bk.info[p.ci].c, s=c.sections[p.si];
   return '<h2 class="ph">'+t(s.h)+'</h2><div class="sec">'+t(s.body)
-    +(s.d3?'<figure class="fig2"><figcaption><b>'+T(lang,'2D labelled schematic','2D नामांकित आरेख')+'</b></figcaption>'+diagram2D(s.d3,lang)+'</figure>':'')
+    +(s.d3?'<figure class="fig2"><figcaption><b>'+(lang==='hi'?'2D नामांकित आरेख':'2D labelled schematic')+'</b></figcaption>'+diagram2D(s.d3,lang)+'</figure>':'')
     +(s.photo?'<figure class="realphoto"><img src="'+s.photo.url+'" alt="'+esc(t(s.photo.alt))+'" loading="lazy"><figcaption>'+t(s.photo.caption)+' · <a href="'+s.photo.source+'" target="_blank" rel="noopener">Image source / licence</a></figcaption></figure>':'')
     +(s.d3?'<figure class="fig3">'+window.d3HTML(s.d3)+'<figcaption><b>'+t(U.fig)+' '+p.fig+'.</b> '+t(s.cap3||s.cap)+'</figcaption></figure>':'')
     +(s.dg?'<figure>'+DG[s.dg](lang)+'<figcaption><b>'+t(U.fig)+' '+(p.fig2||p.fig)+'.</b> '+t(s.cap)+'</figcaption></figure>':'')
