@@ -116,8 +116,11 @@ function diagram2D(name,l){
  var labs=d.map(function(x){return esc(l==='hi'?x[1]:x[0])});
  var isChem=['states','classify','gasvol','limiting'].indexOf(name)>=0;
  if(name==='vernier'||name==='vzero'){
-  var ticks='';for(var i=0;i<=20;i++){var x=70+i*24;ticks+='<path d="M'+x+' 90v'+(i%5===0?22:12)+'" stroke="#334155" stroke-width="1.5"/>'}
-  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+esc(l==='hi'?'वर्नियर कैलिपर्स के नामांकित भाग':'Labelled vernier caliper schematic')+'"><rect x="55" y="66" width="510" height="34" rx="5" fill="#cbd5e1" stroke="#475569"/>'+ticks+'<rect x="205" y="45" width="150" height="24" rx="4" fill="#94a3b8" stroke="#334155"/><rect x="205" y="100" width="150" height="30" rx="4" fill="#dbeafe" stroke="#2563eb"/><path d="M75 65V22h18v43M75 100v70h18v-70M350 45V22h18v23M350 130v40h18v-40" fill="none" stroke="#475569" stroke-width="8"/><path d="M95 181H520" stroke="#d97706" stroke-width="4"/><g font-size="13" fill="#111827" font-weight="600"><text x="105" y="18">'+labs[0]+'</text><text x="270" y="39">'+labs[1]+'</text><text x="370" y="151">'+labs[2]+'</text><text x="260" y="205">'+esc(l==='hi'?'मुख्य स्केल / वर्नियर स्केल':'Main scale / vernier scale')+'</text></g></svg>';
+  var mt='',vt='',labels='';
+  for(var i=0;i<=50;i++){var x=95+i*8.5;mt+='<path d="M'+x.toFixed(1)+' 92v'+(i%10===0?19:i%5===0?14:8)+'" stroke="#334155" stroke-width="1.4"/>'}
+  for(var j=0;j<=10;j++){var vx=95+3.27*85+j*7.65;vt+='<path d="M'+vx.toFixed(1)+' 128v'+(j===7?24:14)+'" stroke="'+(j===7?'#d97706':'#2563eb')+'" stroke-width="'+(j===7?3:1.6)+'"/>'}
+  for(var k=0;k<=5;k++)labels+='<text x="'+(95+k*85)+'" y="82" text-anchor="middle">'+k+'</text>';
+  return '<svg class="diagram2d" viewBox="0 0 640 250" role="img" aria-label="'+esc(l==='hi'?'वर्नियर कैलिपर्स: 10 वर्नियर भाग 9 मुख्य भाग के बराबर':'Vernier caliper: 10 vernier divisions equal 9 main divisions')+'"><rect x="85" y="88" width="450" height="27" rx="4" fill="#cbd5e1" stroke="#475569"/><path d="M85 101H535" stroke="#475569" stroke-width="2"/>'+mt+'<g font-size="11" fill="#111827">'+labels+'</g><rect x="'+(95+3.27*85-8).toFixed(1)+'" y="119" width="93" height="28" rx="3" fill="#dbeafe" stroke="#2563eb"/>'+vt+'<path d="M95 88V35h17v53M95 115v72h17v-72M'+(95+3.27*85-8).toFixed(1)+' 119V45h16v74M'+(95+3.27*85+85).toFixed(1)+' 147v40h16v-40" fill="none" stroke="#475569" stroke-width="6"/><path d="M'+(95+3.27*85+7*7.65).toFixed(1)+' 151v22" stroke="#d97706" stroke-width="2"/><g font-size="12" fill="#111827" font-weight="600"><text x="105" y="25">'+labs[0]+'</text><text x="265" y="39">'+labs[1]+'</text><text x="430" y="205">'+labs[2]+'</text><text x="300" y="232">'+esc(l==='hi'?'10 VSD = 9 MSD · LC = 0.01 cm · VSR = 7':'10 VSD = 9 MSD · LC = 0.01 cm · VSR = 7')+'</text></g><text x="'+(95+3.27*85+7*7.65+12).toFixed(1)+'" y="174" font-size="11" fill="#d97706">7</text></svg>';
  }
  if(name==='screw'||name==='szero'){
   var mt='';for(var j=0;j<18;j++){var tx=270+j*13;mt+='<path d="M'+tx+' 75v'+(j%3===0?22:11)+'" stroke="#334155" stroke-width="1.5"/>'}
@@ -822,9 +825,9 @@ D3.pendulum={en:'Simple pendulum',hi:'सरल लोलक',h:0.85,view:{yaw:-
 
 /* 8. Vernier calipers */
 D3.vernier={en:'Vernier calipers',hi:'वर्नियर कैलिपर्स',h:0.66,view:{yaw:0,pitch:0.1,zoom:1},
- params:[{k:'p',en:'Jaw opening (cm)',hi:'जबड़ों का खुलाव (cm)',min:0,max:5,val:3.27,step:0.01,unit:''}],
+ params:[{k:'p',en:'Jaw opening (cm)',hi:'जबड़ों का खुलाव (cm)',min:0,max:4.5,val:3.27,step:0.01,unit:''}],
  frame:function(S,t,P,l){
-  var p=P.p,X=function(c){return c-2.6},i,msr=Math.floor(p*10+1e-6)/10,vsr=Math.round((p-msr)*100),jaw=X(p);
+  var p=Math.max(0,Math.min(4.5,P.p)),X=function(c){return c-2.6},i,msr=Math.floor(p*10+1e-6)/10,vsr=Math.round((p-msr)*100),jaw=X(p);
   /* Main beam, fixed jaw, moving slider and measuring faces */
   S.box([0,0.22,0],[5.5,0.24,0.42],'soft');
   S.box([X(0)-0.06,-0.28,0],[0.18,1.28,0.42],'muted');
@@ -843,13 +846,15 @@ D3.vernier={en:'Vernier calipers',hi:'वर्नियर कैलिपर�
   S.rod([jaw+0.34,0.42,0.28],[jaw+0.34,0.66,0.28],0.055,'muted');
   for(i=0;i<=50;i++){var h=i%10===0?0.24:i%5===0?0.17:0.1;S.line([X(i/10),0.36,0.22],[X(i/10),0.36-h,0.22],'ink',i%10===0?1.5:0.9)}
   for(i=0;i<=5;i++)S.text([X(i),0.62,0.22],''+i,'ink',10,'center',true);
-  for(i=0;i<=10;i++){var vx=X(msr+i*0.01),on=i===vsr;S.line([vx,0.03,0.26],[vx,on?-0.16:-0.07,0.26],on?'gold':'ink',on?2.8:1)}
+  /* 10 VSD = 9 MSD: each vernier division is 0.09 cm, LC = 0.01 cm. */
+  for(i=0;i<=10;i++){var vx=X(p+i*0.09),on=i===vsr;S.line([vx,0.03,0.26],[vx,on?-0.19:-0.075,0.26],on?'gold':'ink',on?2.8:1)}
+  S.text([X(p),-0.25,0.28],'0','hi',8,'center',true);S.text([X(p+0.9),-0.25,0.28],'10','hi',8,'center',true);
   S.text([-1.95,0.98,0],T(l,'Fixed jaw','स्थिर जबड़ा'),'muted',10,'center',true);S.text([jaw+0.25,0.98,0],T(l,'Movable jaw','चल जबड़ा'),'accent',10,'center',true);
   S.text([0,-0.93,0.3],T(l,'Measured object','मापी जा रही वस्तु'),'gold',9,'center',true);S.text([1.9,0.54,0.2],T(l,'Main scale','मुख्य पैमाना'),'muted',10,'center',true);
   S.text([-1.55,1.16,0],T(l,'Inside jaws','आंतरिक जबड़े'),'muted',8,'center',true);S.text([2.7,0.72,-0.12],T(l,'Depth rod','गहराई छड़'),'muted',8,'center',true);
   S.text([jaw+0.56,0.48,0.3],T(l,'Lock screw','लॉक स्क्रू'),'muted',8,'center',true);
-  S.hud(0.5,0.91,T(l,'MSR ','मुख्य पाठ ')+msr.toFixed(2)+' cm  +  VSR '+vsr+' × 0.01 cm','accent',11,'center',true);
-  S.hud(0.5,0.97,T(l,'Reading = ','पाठ्यांक = ')+p.toFixed(2)+' cm  ·  LC = 0.01 cm','ink',11,'center',true);
+  S.hud(0.5,0.91,T(l,'10 VSD = 9 MSD · LC = 0.01 cm','10 वर्नियर भाग = 9 मुख्य भाग · अल्पतमांक = 0.01 cm'),'accent',10,'center',true);
+  S.hud(0.5,0.97,T(l,'MSR ','मुख्य पाठ ')+msr.toFixed(2)+' cm + '+vsr+' × 0.01 = '+p.toFixed(2)+' cm','ink',11,'center',true);
  }};
 
 /* 9. Vernier zero error */
@@ -869,7 +874,7 @@ D3.vzero={en:'Vernier zero error',hi:'वर्नियर शून्य त�
 /* 10. Screw gauge */
 D3.screw={en:'Micrometer screw gauge',hi:'माइक्रोमीटर स्क्रू गेज',h:0.72,scale:1.05,view:{yaw:-0.24,pitch:0.18,zoom:1},params:[{k:'p',en:'Object diameter (mm)',hi:'वस्तु का व्यास (mm)',min:0,max:10,val:2.35,step:0.01,unit:' mm'}],
  frame:function(S,t,P,l){
-  var p=P.p,ang=t*0.42,gap=0.10+p*0.064,anvil=-0.88,face=anvil+gap,i,read=p.toFixed(2),msr=Math.floor((p+1e-8)/0.5)*0.5,csr=Math.round((p-msr)/0.01);
+  var p=Math.max(0,Math.min(10,P.p)),gap=0.10+p*0.064,anvil=-0.88,face=anvil+gap,i,read=p.toFixed(2),msr=Math.floor((p+1e-8)/0.5)*0.5,csr=Math.max(0,Math.min(49,Math.round((p-msr)/0.01))),ang=Math.PI/2-csr*6.283185307179586/50;
   S.rod([-1.78,1.18,0],[-1.78,-1.18,0],0.23,'muted');
   S.rod([-1.78,1.18,0],[0.34,1.18,0],0.23,'muted');
   S.rod([-1.78,-1.18,0],[0.34,-1.18,0],0.23,'muted');
@@ -880,7 +885,8 @@ D3.screw={en:'Micrometer screw gauge',hi:'माइक्रोमीटर स�
   S.rod([face,0,0],[0.92,0,0],0.13,'ink');
   S.rod([face,-0.28,0],[face,0.28,0],0.09,'ink');
   S.rod([0.52,0,0],[1.14,0,0],0.19,'soft');
-  S.line([0.58,0,0.22],[1.12,0,0.22],'bad',2);
+  /* Reference line is at the top of the thimble; CSR division aligns to it. */
+  S.line([0.58,0,0.46],[1.12,0,0.46],'bad',2);
   for(i=0;i<=10;i++){var x=0.62+i*0.048;S.line([x,0.16,0.2],[x,i%5===0?-0.12:-0.055,0.2],'ink',i%5===0?1.8:0.9);if(i%5===0)S.text([x,0.31,0.2],String(i/2),'ink',8,'center',true)}
   S.rod([1.12,0,0],[1.92,0,0],0.43,'hi');S.ring([1.54,0,0],0.46,'yz','ink',2);
   for(i=0;i<50;i++){var a=ang+i/50*6.2832;S.line([1.54,0.46*Math.cos(a),0.46*Math.sin(a)],[1.54,0.35*Math.cos(a),0.35*Math.sin(a)],i%5===0?'gold':'ink',i%5===0?2:0.85)}
@@ -1750,7 +1756,13 @@ function syncSeg(){
   for(var i=0;i<bs.length;i++){bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-lang')===lang))}
   document.documentElement.lang=lang;
 }
-function go(href){if(href){location.hash=href.slice(1)}}
+function go(href){
+  if(!href)return;
+  var target=href.charAt(0)==='#'?href.slice(1):href;
+  if(!target)return;
+  if(location.hash.slice(1)===target){route(true,true);syncSeg();return}
+  location.hash=target;
+}
 
 window.addEventListener('venu:languagechange',function(){
   var h=location.hash.slice(1);
@@ -1763,13 +1775,24 @@ app.addEventListener('click',function(e){
 });
 var tx=0,ty=0,tok=false;
 app.addEventListener('touchstart',function(e){
-  var p0=e.touches[0];tx=p0.clientX;ty=p0.clientY;
-  tok=!e.target.closest('.fx,.eq,.mx,.dt,.d3');
+  if(!e.touches||!e.touches.length)return;
+  var target=e.target,p0=e.touches[0];tx=p0.clientX;ty=p0.clientY;
+  tok=!!(target&&target.closest)&&!target.closest('a,button,input,textarea,select,.fx,.eq,.mx,.dt,.d3');
 },{passive:true});
 app.addEventListener('touchend',function(e){
-  if(!tok||!cur.book)return;
+  if(!tok||!cur.book||!e.changedTouches||!e.changedTouches.length){tok=false;return}
   var p1=e.changedTouches[0],dx=p1.clientX-tx,dy=p1.clientY-ty;
-  if(Math.abs(dx)>70&&Math.abs(dy)<45){go(dx<0?cur.next:cur.prev)}
+  tok=false;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.25){go(dx<0?cur.next:cur.prev)}
+},{passive:true});
+app.addEventListener('touchcancel',function(){tok=false},{passive:true});
+pager.addEventListener('click',function(e){
+  var target=e.target&&e.target.closest?e.target.closest('#pg-prev,#pg-next,#pg-mid'):null;
+  if(!target)return;
+  var href=target.getAttribute('href');
+  if(!href||href==='#')return;
+  e.preventDefault();
+  go(href);
 });
 document.addEventListener('keydown',function(e){
   if(!cur.book)return;
