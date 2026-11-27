@@ -6,7 +6,7 @@
 <title>Venu JEE</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Serif:wght@600;700&family=Noto+Serif+Devanagari:wght@600;700&display=swap">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 <svg class="hid" aria-hidden="true" focusable="false"><defs>
@@ -15,9 +15,12 @@
 </defs></svg>
 <header class="top"><div class="in">
   <a class="brand" href="#home">Venu <i>JEE</i></a>
-  <div class="seg" role="group" aria-label="Choose language / भाषा चुनें">
-    <button type="button" data-lang="en" aria-pressed="true">EN</button>
-    <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
+  <div class="topr">
+    <a class="homebtn" id="homebtn" href="#home" hidden>Home</a>
+    <div class="seg" role="group" aria-label="Choose language / भाषा चुनें">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
+    </div>
   </div>
 </div></header>
 <main id="app"></main>
@@ -26,7 +29,7 @@
   <a class="pm" id="pg-mid" href="#home"></a>
   <a class="pb" id="pg-next" href="#home">›</a>
 </div></nav>
-<script src="app.js"></script>
-<script src="mock-test-engine.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/mock-test-engine.js"></script>
 </body>
 </html>
