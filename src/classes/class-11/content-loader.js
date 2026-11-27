@@ -1,4 +1,4 @@
-// Sequential loader: chapter shells, models, content, visuals, application, page renderer, views, navigation and tests.
+// Sequential loader: chapter shells, models, content, visuals, application, book model, page renderer, views, navigation and tests.
 (function(){'use strict';var files=[
   "src/classes/class-11/chemistry/chapter-01-mole-concept/index.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/index.js",
@@ -271,7 +271,8 @@
   "app.js",
   "src/features/home/home.js",
   "src/features/chapter-list/class-view.js",
+  "src/features/books/book-model.js",
   "src/features/notes/page-renderer.js",
   "src/features/books/navigation.js",
   "mock-test-engine.js"
-];var i=0;function fail(src){var root=document.getElementById('app');if(root)root.innerHTML='<div class="in"><p role="alert">Venu JEE could not load '+src+'. Refresh the page or report this issue.</p></div>';}function next(){if(i>=files.length)return;var src=files[i++],el=document.createElement('script');el.src=src+'?v=9';el.onload=next;el.onerror=function(){fail(src)};document.body.appendChild(el);}next();})();
+];var i=0;function fail(src){var root=document.getElementById('app');if(root)root.innerHTML='<div class="in"><p role="alert">Venu JEE could not load '+src+'. Refresh the page or report this issue.</p></div>';}function next(){if(i>=files.length)return;var src=files[i++],el=document.createElement('script');el.src=src+'?v=10';el.onload=next;el.onerror=function(){fail(src)};document.body.appendChild(el);}next();})();
