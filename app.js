@@ -759,13 +759,20 @@ D3.vernier={en:'Vernier calipers',hi:'वर्नियर कैलिपर�
   S.rod([jaw+0.05,-0.9,0],[jaw+0.05,-0.28,0],0.07,'hi');
   S.rod([X(0)-0.06,0.38,0],[X(0)-0.06,0.82,0],0.045,'muted');
   S.rod([jaw+0.05,0.38,0],[jaw+0.05,0.82,0],0.045,'hi');
+  /* Object, depth blade and lock screw make the physical mechanism explicit. */
+  S.rod([X(0)+0.02,-0.62,0.16],[jaw-0.02,-0.62,0.16],0.105,'gold');
+  S.rod([2.75,0.22,-0.12],[3.55,0.22,-0.12],0.035,'muted');
+  S.ball([jaw+0.38,0.43,0.28],0.105,'gold');
+  S.rod([jaw+0.34,0.42,0.28],[jaw+0.34,0.66,0.28],0.055,'muted');
   for(i=0;i<=50;i++){var h=i%10===0?0.24:i%5===0?0.17:0.1;S.line([X(i/10),0.36,0.22],[X(i/10),0.36-h,0.22],'ink',i%10===0?1.5:0.9)}
   for(i=0;i<=5;i++)S.text([X(i),0.62,0.22],''+i,'ink',10,'center',true);
   for(i=0;i<=10;i++){var vx=X(msr+i*0.01),on=i===vsr;S.line([vx,0.03,0.26],[vx,on?-0.16:-0.07,0.26],on?'gold':'ink',on?2.8:1)}
-  S.text([-1.95,0.98,0],'Fixed jaw','muted',10,'center',true);S.text([jaw+0.25,0.98,0],'Sliding jaw','accent',10,'center',true);
-  S.text([0,-0.62,0.3],'External jaws','ink',10,'center',true);S.text([1.9,0.54,0.2],'Main scale','muted',10,'center',true);
-  S.hud(0.5,0.91,'MSR '+msr.toFixed(2)+' cm  +  VSR '+vsr+' × 0.01 cm','accent',12,'center',true);
-  S.hud(0.5,0.97,'Reading = '+p.toFixed(2)+' cm  ·  LC = 0.01 cm','ink',12,'center',true);
+  S.text([-1.95,0.98,0],T(l,'Fixed jaw','स्थिर जबड़ा'),'muted',10,'center',true);S.text([jaw+0.25,0.98,0],T(l,'Movable jaw','चल जबड़ा'),'accent',10,'center',true);
+  S.text([0,-0.93,0.3],T(l,'Measured object','मापी जा रही वस्तु'),'gold',9,'center',true);S.text([1.9,0.54,0.2],T(l,'Main scale','मुख्य पैमाना'),'muted',10,'center',true);
+  S.text([-1.55,1.16,0],T(l,'Inside jaws','आंतरिक जबड़े'),'muted',8,'center',true);S.text([2.7,0.72,-0.12],T(l,'Depth rod','गहराई छड़'),'muted',8,'center',true);
+  S.text([jaw+0.56,0.48,0.3],T(l,'Lock screw','लॉक स्क्रू'),'muted',8,'center',true);
+  S.hud(0.5,0.91,T(l,'MSR ','मुख्य पाठ ')+msr.toFixed(2)+' cm  +  VSR '+vsr+' × 0.01 cm','accent',11,'center',true);
+  S.hud(0.5,0.97,T(l,'Reading = ','पाठ्यांक = ')+p.toFixed(2)+' cm  ·  LC = 0.01 cm','ink',11,'center',true);
  }};
 
 /* 9. Vernier zero error */
@@ -783,25 +790,32 @@ D3.vzero={en:'Vernier zero error',hi:'वर्नियर शून्य त�
  }};
 
 /* 10. Screw gauge */
-D3.screw={en:'Screw gauge',hi:'स्क्रू गेज',h:0.62,view:{yaw:-0.35,pitch:0.25,zoom:1},params:[{k:'p',en:'Illustrative reading (mm)',hi:'उदाहरण रीडिंग (mm)',min:0,max:10,val:2.35,step:0.01,unit:' mm'}],
+D3.screw={en:'Micrometer screw gauge',hi:'माइक्रोमीटर स्क्रू गेज',h:0.72,scale:1.05,view:{yaw:-0.24,pitch:0.18,zoom:1},params:[{k:'p',en:'Object diameter (mm)',hi:'वस्तु का व्यास (mm)',min:0,max:10,val:2.35,step:0.01,unit:' mm'}],
  frame:function(S,t,P,l){
-  var p=P.p||1.2,ang=t*0.75,cx=0.85,i,read=p.toFixed(2);
-  /* C-frame body and measuring line */
-  S.rod([-1.8,1.15,0],[-1.8,-1.1,0],0.2,'muted');S.rod([-1.8,1.15,0],[0.25,1.15,0],0.2,'muted');S.rod([-1.8,-1.1,0],[0.25,-1.1,0],0.2,'muted');
-  S.box([-1.48,0.02,0],[0.48,0.65,0.62],'muted');
-  S.ball([-1.12,0.02,0],0.24,'gold');S.text([-1.12,-0.42,0],'Anvil','ink',10,'center',true);
-  S.rod([-0.9,0.02,0],[0.45,0.02,0],0.12,'ink');S.text([-0.35,0.35,0],'Spindle','ink',10,'center',true);
-  S.rod([0.42,0.02,0],[1.1,0.02,0],0.14,'muted');
-  S.box([0.78,0.02,0],[0.8,0.62,0.62],'soft');
-  for(i=0;i<=10;i++){var x=0.42+i*0.065;S.line([x,0.34,0.32],[x,0.34-(i%5===0?0.19:0.1),0.32],'ink',1);if(i%5===0)S.text([x,0.57,0.32],''+(i/10),'ink',9,'center',true)}
-  S.text([0.7,0.84,0],'Sleeve / main scale','muted',10,'center',true);
-  /* Rotating thimble and ratchet with readable circular divisions */
-  S.rod([1.15,0.02,0],[2.1,0.02,0],0.38,'hi');S.ring([1.55,0.02,0],0.48,'yz','ink',2);
-  for(i=0;i<25;i++){var a=ang+i/25*6.2832;S.line([1.55,0.02+0.48*Math.cos(a),0.48*Math.sin(a)],[1.55,0.02+0.37*Math.cos(a),0.37*Math.sin(a)],i===0?'gold':'ink',i===0?3:1)}
-  S.rod([2.08,0.02,0],[2.42,0.02,0],0.22,'muted');S.ring([2.35,0.02,0],0.25,'yz','muted',2);
-  S.text([1.55,-0.72,0],'Thimble','ink',10,'center',true);S.text([2.28,-0.48,0],'Ratchet','ink',10,'center',true);
-  S.hud(0.5,0.91,'Pitch = 0.5 mm  ·  50 divisions  ·  LC = 0.01 mm','accent',12,'center',true);
-  S.hud(0.5,0.97,'Illustrative reading = '+read+' mm','ink',12,'center',true);
+  var p=P.p,ang=t*0.42,gap=0.10+p*0.064,anvil=-0.88,face=anvil+gap,i,read=p.toFixed(2);
+  S.rod([-1.78,1.18,0],[-1.78,-1.18,0],0.23,'muted');
+  S.rod([-1.78,1.18,0],[0.34,1.18,0],0.23,'muted');
+  S.rod([-1.78,-1.18,0],[0.34,-1.18,0],0.23,'muted');
+  S.box([-1.48,0,0],[0.48,0.76,0.72],'muted');
+  S.rod([-1.28,0,0],[anvil,0,0],0.19,'gold');
+  S.rod([anvil,-0.29,0],[anvil,0.29,0],0.08,'gold');
+  S.rod([anvil+0.02,0,0],[face-0.03,0,0],0.13,'chem');
+  S.rod([face,0,0],[0.92,0,0],0.13,'ink');
+  S.rod([face,-0.28,0],[face,0.28,0],0.09,'ink');
+  S.rod([0.52,0,0],[1.14,0,0],0.19,'soft');
+  S.line([0.58,0,0.22],[1.12,0,0.22],'bad',2);
+  for(i=0;i<=10;i++){var x=0.62+i*0.048;S.line([x,0.16,0.2],[x,i%5===0?-0.12:-0.055,0.2],'ink',i%5===0?1.8:0.9);if(i%5===0)S.text([x,0.31,0.2],String(i/2),'ink',8,'center',true)}
+  S.rod([1.12,0,0],[1.92,0,0],0.43,'hi');S.ring([1.54,0,0],0.46,'yz','ink',2);
+  for(i=0;i<50;i++){var a=ang+i/50*6.2832;S.line([1.54,0.46*Math.cos(a),0.46*Math.sin(a)],[1.54,0.35*Math.cos(a),0.35*Math.sin(a)],i%5===0?'gold':'ink',i%5===0?2:0.85)}
+  S.rod([1.9,0,0],[2.24,0,0],0.23,'muted');S.ring([2.2,0,0],0.25,'yz','muted',2);
+  S.text([-1.18,0.55,0],T(l,'Anvil','एनविल'),'ink',9,'center',true);
+  S.text([-0.28,0.47,0],T(l,'Object / wire','वस्तु / तार'),'chem',9,'center',true);
+  S.text([0.08,-0.34,0],T(l,'Spindle','स्पिंडल'),'ink',9,'center',true);
+  S.text([0.82,0.55,0],T(l,'Sleeve / main scale','स्लीव / मुख्य पैमाना'),'muted',9,'center',true);
+  S.text([1.54,-0.68,0],T(l,'Thimble / circular scale','थिम्बल / वृत्ताकार पैमाना'),'ink',8,'center',true);
+  S.text([2.18,-0.4,0],T(l,'Ratchet','रैचेट'),'muted',9,'center',true);
+  S.hud(0.5,0.91,T(l,'Pitch = 0.5 mm · 50 divisions · LC = 0.01 mm','पिच = 0.5 mm · 50 भाग · अल्पतमांक = 0.01 mm'),'accent',10,'center',true);
+  S.hud(0.5,0.97,T(l,'Object diameter = ','वस्तु का व्यास = ')+read+' mm','ink',11,'center',true);
  }};
 
 /* 11. Screw gauge zero error */
@@ -1392,7 +1406,7 @@ function toggleDone(id){var a=getDone(),i=a.indexOf(id);if(i>-1){a.splice(i,1)}e
  if(!chem||!phys||!math)return;
  /* Real reference photographs for laboratory/measurement apparatus; abstract maths stays diagrammatic. */
  var photos={
-  vernier:{url:'https://commons.wikimedia.org/wiki/Special:FilePath/Vernier_Caliper.jpg',source:'https://commons.wikimedia.org/wiki/File:Vernier_Caliper.jpg',alt:B('A real vernier caliper with fixed and sliding scales','मुख्य और चल पैमाने वाला वास्तविक वर्नियर कैलिपर'),caption:B('Real instrument reference: identify the fixed main scale, sliding vernier scale and jaws. The interactive model below is for reading practice.','वास्तविक उपकरण: मुख्य पैमाना, चल वर्नियर पैमाना और जबड़े पहचानो। नीचे दिया मॉडल रीडिंग अभ्यास के लिए है।')},
+  vernier:{url:'https://commons.wikimedia.org/wiki/Special:FilePath/Vernier_calipers.jpg',source:'https://commons.wikimedia.org/wiki/File:Vernier_calipers.jpg',alt:B('A real vernier caliper with fixed and sliding scales','मुख्य और चल पैमाने वाला वास्तविक वर्नियर कैलिपर'),caption:B('Real instrument reference: identify the fixed main scale, sliding vernier scale and jaws. The interactive model below is for reading practice.','वास्तविक उपकरण: मुख्य पैमाना, चल वर्नियर पैमाना और जबड़े पहचानो। नीचे दिया मॉडल रीडिंग अभ्यास के लिए है।')},
   screw:{url:'https://commons.wikimedia.org/wiki/Special:FilePath/Micrometer_screw_gauge.jpg',source:'https://commons.wikimedia.org/wiki/Category:Micrometers',alt:B('A real micrometer screw gauge','वास्तविक माइक्रोमीटर स्क्रू गेज'),caption:B('Real instrument reference: anvil, spindle, sleeve, thimble and ratchet.','वास्तविक उपकरण: एनविल, स्पिंडल, स्लीव, थिम्बल और रैचेट।')},
   titration:{url:'https://commons.wikimedia.org/wiki/Special:FilePath/Titration_Set-up.jpg',source:'https://commons.wikimedia.org/wiki/File:Titration_Set-up.jpg',alt:B('A real school laboratory titration setup','स्कूल प्रयोगशाला का वास्तविक अनुमापन सेटअप'),caption:B('Real laboratory reference: burette, clamp, stand and conical flask.','वास्तविक प्रयोगशाला संदर्भ: ब्यूरेट, क्लैम्प, स्टैंड और शंक्वाकार फ्लास्क।')}
  };
@@ -1530,6 +1544,7 @@ function openerBody(bk,p){
 function conceptBody(bk,p){
   var c=bk.info[p.ci].c, s=c.sections[p.si];
   return '<h2 class="ph">'+t(s.h)+'</h2><div class="sec">'+t(s.body)
+    +(s.d3?'<figure class="fig2"><figcaption><b>'+T(lang,'2D labelled schematic','2D नामांकित आरेख')+'</b></figcaption>'+diagram2D(s.d3,lang)+'</figure>':'')
     +(s.photo?'<figure class="realphoto"><img src="'+s.photo.url+'" alt="'+esc(t(s.photo.alt))+'" loading="lazy"><figcaption>'+t(s.photo.caption)+' · <a href="'+s.photo.source+'" target="_blank" rel="noopener">Image source / licence</a></figcaption></figure>':'')
     +(s.d3?'<figure class="fig3">'+window.d3HTML(s.d3)+'<figcaption><b>'+t(U.fig)+' '+p.fig+'.</b> '+t(s.cap3||s.cap)+'</figcaption></figure>':'')
     +(s.dg?'<figure>'+DG[s.dg](lang)+'<figcaption><b>'+t(U.fig)+' '+(p.fig2||p.fig)+'.</b> '+t(s.cap)+'</figcaption></figure>':'')
