@@ -301,6 +301,8 @@ function route(anim,top){
   if(top){window.scrollTo(0,0)}
 }
 function syncSeg(){
+  var hb=document.getElementById('homebtn');
+  if(hb){var hh=location.hash.slice(1);hb.textContent='\u2302 '+t(U.homeWord);hb.hidden=(hh===''||hh==='home')}
   var bs=document.querySelectorAll('[data-lang]');
   for(var i=0;i<bs.length;i++){bs[i].setAttribute('aria-pressed',String(bs[i].getAttribute('data-lang')===lang))}
   document.documentElement.lang=lang;
@@ -309,7 +311,7 @@ function go(href){if(href){location.hash=href.slice(1)}}
 
 window.addEventListener('venu:languagechange',function(){
   var h=location.hash.slice(1);
-  if(/^(mock|mock-|mock11|mock12|pyq|instructions)/.test(h))return;
+  if(/^(mock|mock-|mock11|mock12|pyq|instructions)/.test(h)){syncSeg();return}
   var y=window.scrollY;route(false,false);syncSeg();window.scrollTo(0,y);
 });
 app.addEventListener('click',function(e){
