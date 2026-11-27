@@ -1531,7 +1531,7 @@ function bookView(cls,sub,which,numStr,anim){
   var bk=book(cls,sub), idx=0;
   if(which==='toc'){idx=1}else if(numStr){var nn=+numStr;if(nn>=1&&nn<=bk.total){idx=nn+1}}
   document.body.removeAttribute('data-subject');
-  app.innerHTML='<div class="in page">'+pageHTML(bk,idx)+'</div>';
+  app.innerHTML='<div class="in page"><div class="pagehome"><a href="#home">⌂ '+t(U.homeWord)+'</a></div>'+pageHTML(bk,idx)+'</div>';
   if(window.mount3d)window.mount3d(app);
   setPager(bk,idx);
   if(idx>=2){LS.set('venu.last.'+bk.base,bk.base+'-p'+bk.pages[idx].num)}
