@@ -1,21 +1,51 @@
 #!/usr/bin/env python3
+"""Validate the checked-in, root-level Venu JEE website files.
+
+The project currently ships app.js as a ready-to-serve bundle. The former
+assets/js/* source tree no longer exists, so this script must not try to
+rebuild app.js from those removed modules.
+"""
 from pathlib import Path
-root=Path(__file__).resolve().parents[1]
-parts=[
- 'assets/js/core/00-language-manager.js',
- 'assets/js/core/00-ui-and-diagram-helpers.js',
- 'assets/js/data/01-chapter-registry.js',
- 'assets/js/core/01-chapter-render-helpers.js',
- 'assets/js/core/90-3d-engine.js',
- 'assets/js/data/chapters/class-11/chemistry/ch01-mole-concept.js',
- 'assets/js/data/chapters/class-11/physics/ch01-units-dimensions.js',
- 'assets/js/data/chapters/class-11/mathematics/ch01-sets.js',
- 'assets/js/core/99-books-navigation.js',
-]
-chunks=[]
-for rel in parts:
- p=root/rel
- if not p.is_file(): raise SystemExit(f'Missing source module: {rel}')
- chunks.append(p.read_text(encoding='utf-8'))
-(root/'assets/js/app.js').write_text('\n'.join(chunks),encoding='utf-8')
-print('Built assets/js/app.js from',len(parts),'source modules (no lesson/question/diagram data)')
+import re
+import sys
+from urllib.parse import urlsplit
+
+ROOT = Path(__file__).resolve().parent
+INDEX = ROOT / "index.html"
+
+REQUIRED_FILES = (
+    "index.html",
+    "styles.css",
+    "app.js",
+    "mock-test-engine.js",
+)
+
+def main() -> int:
+    missing = [name for name in REQUIRED_FILES if not (ROOT / name).is_file()]
+    if missing:
+        print("Missing required project file(s): " + ", ".join(missing), file=sys.stderr)
+        return 1
+
+    html = INDEX.read_text(encoding="utf-8")
+    refs = re.findall(r'''(?:src|href)\s*=\s*["']([^"']+)["']''', html, re.I)
+    local_refs = []
+    for ref in refs:
+        parsed = urlsplit(ref)
+        if parsed.scheme or parsed.netloc or ref.startswith(("#", "data:")):
+            continue
+        path = parsed.path
+        if path:
+            local_refs.append(path)
+
+    missing_refs = sorted({path for path in local_refs if not (ROOT / path).is_file()})
+    if missing_refs:
+        print("index.html references missing local file(s): " + ", ".join(missing_refs), file=sys.stderr)
+        return 1
+
+    print("Validation passed.")
+    print("All required root-level files and local index.html references exist.")
+    print("app.js is the committed runtime bundle; no source-module rebuild is configured.")
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
