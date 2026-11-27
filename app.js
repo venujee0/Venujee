@@ -766,7 +766,7 @@ D3.vzero={en:'Vernier zero error',hi:'वर्नियर शून्य त�
  }};
 
 /* 10. Screw gauge */
-D3.screw={en:'Screw gauge',hi:'स्क्रू गेज',h:0.62,view:{yaw:-0.35,pitch:0.25,zoom:1},
+D3.screw={en:'Screw gauge',hi:'स्क्रू गेज',h:0.62,view:{yaw:-0.35,pitch:0.25,zoom:1},params:[{k:'p',en:'Illustrative reading (mm)',hi:'उदाहरण रीडिंग (mm)',min:0,max:10,val:2.35,step:0.01,unit:' mm'}],
  frame:function(S,t,P,l){
   var p=P.p||1.2,ang=t*0.75,cx=0.85,i,read=p.toFixed(2);
   /* C-frame body and measuring line */
