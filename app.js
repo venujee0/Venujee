@@ -330,7 +330,7 @@ D3.isotopes={en:'Isotopes of chlorine',hi:'क्लोरीन के सम�
   atom(-1.25,18,'³⁵Cl');atom(1.25,20,'³⁷Cl');
   S.hud(0.5,0.91,'Same atomic number (17), different neutron count','accent',12,'center',true);
   S.hud(0.5,0.97,'Isotopes: same element · different mass number','ink',11,'center',true);
- };
+ }};
 
 D3.molemap={en:'Mole map',hi:'मोल का नक्शा',h:0.7,view:{yaw:-0.2,pitch:0.2,zoom:1},
  frame:function(S,t,P,l){
@@ -355,7 +355,7 @@ D3.water={en:'Water molecule H₂O',hi:'जल अणु H₂O',h:0.7,spin:true,
   S.text([A[0]-0.1,A[1]-0.25,A[2]],'H','ink',11,'center',true);S.text([B[0]+0.1,B[1]-0.25,B[2]],'H','ink',11,'center',true);
   S.hud(0.5,0.91,'H–O–H bond angle = 104.5°','accent',13,'center',true);
   S.hud(0.5,0.97,'Bent molecule · 2 O–H bonds · oxygen has 2 lone pairs','ink',11,'center',true);
- };
+ }};
 
 var B=function(e,h){return {en:e,hi:h}};
 
@@ -438,7 +438,7 @@ D3.limiting={en:'Limiting reagent',hi:'सीमांत अभिकर्म�
   else{S.arrow([-1.0,0,0],[0.4,0,0],'gold',2)}
   S.hud(0.5,0.91,'2 N₂ + 3 H₂ → 2 NH₃ + N₂ left over','accent',12,'center',true);
   S.hud(0.5,0.97,'H₂ is limiting: it is consumed first; N₂ remains in excess','ink',11,'center',true);
- };
+ }};
 
 D3.dilution={en:'Dilution',hi:'तनुकरण',h:0.7,view:{yaw:-0.45,pitch:0.28,zoom:1},
  params:[{k:'w',en:'Water added',hi:'मिलाया पानी',min:0,max:100,val:0,step:1,unit:'%'}],
@@ -470,7 +470,7 @@ D3.titration={en:'Titration: KMnO₄ vs FeSO₄',hi:'अनुमापन: KMnO
   S.text([0,-1.72,0],'Conical flask','ink',10,'center',true);S.text([0.95,-1.05,0],'Analyte + indicator','muted',9,'left');
   S.hud(0.5,0.91,'Step 1: add titrant dropwise · Step 2: swirl flask','accent',11,'center',true);
   S.hud(0.5,0.97,done?'Endpoint: faint permanent pink':'Before endpoint: indicator colour disappears','ink',11,'center',true);
- };
+ }};
 
 var c=CH.filter(function(x){return x.id==='chemistry-mole-concept'})[0];
 c.sections.push(
@@ -564,7 +564,7 @@ D3.eudio={en:'Eudiometry',hi:'यूडियोमेट्री (गैस �
   S.text([1.05,-0.9,0],st===0?'Mix gases':st===1?'Spark + cool':'KOH absorbs CO₂','accent',10,'center',true);
   S.hud(0.5,0.91,'Stage '+(st+1)+' / 3  ·  Gas volume = '+vol+' mL','accent',12,'center',true);
   S.hud(0.5,0.97,st===0?'Initial mixture':st===1?'Water condenses; gases remain':'CO₂ removed; residual gas measured','ink',11,'center',true);
- };
+ }};
 
 D3.dissoc={en:'Dissociation N₂O₄ ⇌ 2NO₂',hi:'वियोजन N₂O₄ ⇌ 2NO₂',h:0.55,view:{yaw:-0.2,pitch:0.15,zoom:1},
  frame:function(S,t,P,l){
@@ -686,7 +686,7 @@ D3.string={en:'Vibrating string',hi:'कंपित तार',h:0.55,view:{yaw
   for(var n=0;n<=cycles;n++){var xx=-1.8+3.6*n/cycles;S.line([xx,-0.4,0],[xx,0.4,0],'muted',0.8,true);S.text([xx,-0.55,0],n===0||n===cycles?'End':(n%2?'A':'N'),'ink',9,'center',true)}
   S.hud(0.5,0.91,'Length = '+len.toFixed(1)+'  ·  Tension = '+F.toFixed(1)+'  ·  μ = '+mu.toFixed(1),'accent',11,'center',true);
   S.hud(0.5,0.97,'Standing wave: nodes remain fixed; antinodes oscillate','ink',11,'center',true);
- };
+ }};
 
 /* 5. Terminal velocity */
 D3.terminal={en:'Terminal velocity',hi:'सीमांत वेग',h:0.9,view:{yaw:-0.4,pitch:0.15,zoom:1},
@@ -698,7 +698,7 @@ D3.terminal={en:'Terminal velocity',hi:'सीमांत वेग',h:0.9,view
   S.arrow([0,y-0.28,0],[0,y-0.75,0],'phys',2.4);S.text([0.22,y-0.65,0],'Buoyancy + drag','phys',9,'left',true);
   S.hud(0.5,0.91,'Speed rises then approaches terminal speed','accent',12,'center',true);
   S.hud(0.5,0.97,'At terminal velocity: mg = buoyancy + viscous drag','ink',11,'center',true);
- };
+ }};
 
 /* 6. Accuracy vs precision */
 D3.target={en:'Accuracy vs precision',hi:'यथार्थता बनाम परिशुद्धता',h:0.78,view:{yaw:-0.2,pitch:0.45,zoom:1},
@@ -710,7 +710,7 @@ D3.target={en:'Accuracy vs precision',hi:'यथार्थता बनाम 
   S.text([0,-1.5,0],mode===0?'Accurate + precise':mode===1?'Precise, not accurate':'Neither accurate nor precise','ink',11,'center',true);
   S.hud(0.5,0.91,'Three patterns: close to centre · tightly grouped · scattered','accent',11,'center',true);
   S.hud(0.5,0.97,'Accuracy = closeness to true value · Precision = repeatability','ink',10,'center',true);
- };
+ }};
 
 /* 7. Simple pendulum */
 D3.pendulum={en:'Simple pendulum',hi:'सरल लोलक',h:0.85,view:{yaw:-0.2,pitch:0.15,zoom:1},
@@ -724,7 +724,7 @@ D3.pendulum={en:'Simple pendulum',hi:'सरल लोलक',h:0.85,view:{yaw:-
   S.text([x+0.65,y+0.1,0],'Tension','phys',10,'left',true);
   S.hud(0.5,0.91,'Length L = '+L.toFixed(2)+' m  ·  angle = '+(theta*57.3).toFixed(1)+'°','accent',12,'center',true);
   S.hud(0.5,0.97,'T = 2π√(L/g)  ·  ideal small-angle model','ink',12,'center',true);
- };
+ }};
 
 /* 8. Vernier calipers */
 D3.vernier={en:'Vernier calipers',hi:'वर्नियर कैलिपर्स',h:0.66,view:{yaw:0,pitch:0.1,zoom:1},
@@ -749,7 +749,7 @@ D3.vernier={en:'Vernier calipers',hi:'वर्नियर कैलिपर�
   S.text([0,-0.62,0.3],'External jaws','ink',10,'center',true);S.text([1.9,0.54,0.2],'Main scale','muted',10,'center',true);
   S.hud(0.5,0.91,'MSR '+msr.toFixed(2)+' cm  +  VSR '+vsr+' × 0.01 cm','accent',12,'center',true);
   S.hud(0.5,0.97,'Reading = '+p.toFixed(2)+' cm  ·  LC = 0.01 cm','ink',12,'center',true);
- };
+ }};
 
 /* 9. Vernier zero error */
 D3.vzero={en:'Vernier zero error',hi:'वर्नियर शून्य त्रुटि',h:0.62,view:{yaw:0,pitch:0.1,zoom:1},
@@ -785,7 +785,7 @@ D3.screw={en:'Screw gauge',hi:'स्क्रू गेज',h:0.62,view:{yaw:-0
   S.text([1.55,-0.72,0],'Thimble','ink',10,'center',true);S.text([2.28,-0.48,0],'Ratchet','ink',10,'center',true);
   S.hud(0.5,0.91,'Pitch = 0.5 mm  ·  50 divisions  ·  LC = 0.01 mm','accent',12,'center',true);
   S.hud(0.5,0.97,'Illustrative reading = '+read+' mm','ink',12,'center',true);
- };
+ }};
 
 /* 11. Screw gauge zero error */
 D3.szero={en:'Screw gauge zero error',hi:'स्क्रू गेज शून्य त्रुटि',h:0.7,view:{yaw:-0.15,pitch:0.1,zoom:1},
@@ -1049,7 +1049,7 @@ D3.powercube={en:'Power set of {1, 2, 3}',hi:'{1, 2, 3} का घात सम�
   S.text([-1.25,1.2,0],'1: in / out','chem',10,'center',true);S.text([1.25,1.2,0],'2: in / out','phys',10,'center',true);S.text([0,-1.35,0],'3: in / out','bad',10,'center',true);
   S.hud(0.5,0.91,'Each of 3 elements has 2 choices','accent',12,'center',true);
   S.hud(0.5,0.97,'2 × 2 × 2 = 2³ = 8 subsets','ink',12,'center',true);
- };
+ }};
 
 /* 4. Intervals */
 D3.intervals={en:'Intervals',hi:'अंतराल',h:0.5,view:{yaw:-0.15,pitch:0.2,zoom:1},
@@ -1094,7 +1094,7 @@ D3.setops={en:'Set operations',hi:'समुच्चयों पर संक�
   S.text([-1.2,0,0.1],'A','chem',14,'center',true);S.text([1.2,0,0.1],'B','phys',14,'center',true);
   S.hud(0.5,0.91,'Operation '+(st+1)+' / 6','accent',12,'center',true);
   S.hud(0.5,0.97,nm[st]+' · highlighted dots = selected region','ink',12,'center',true);
- };
+ }};
 
 /* 7. Three sets, 7 regions */
 D3.threesets={en:'Three sets, seven regions',hi:'तीन समुच्चय, सात क्षेत्र',h:0.78,view:{yaw:-0.2,pitch:0.4,zoom:1},
@@ -1113,7 +1113,7 @@ D3.threesets={en:'Three sets, seven regions',hi:'तीन समुच्चय
   S.text([pos[k][0],pos[k][1],0.12],labels[k],'ink',k===6?10:9,'center',true);
   S.hud(0.5,0.91,'Highlighted region '+(k+1)+' of 7','accent',12,'center',true);
   S.hud(0.5,0.97,labels[k]+' · A, B and C regions','ink',11,'center',true);
- };
+ }};
 
 /* 8. Juice survey: 400 dots */
 D3.juice={en:'Juice survey: 400 students',hi:'जूस सर्वे: 400 विद्यार्थी',h:0.78,view:{yaw:-0.2,pitch:0.4,zoom:1},
