@@ -322,16 +322,15 @@ D3.gasvol={en:'Gay-Lussac: gaseous volumes',hi:'गे-लुसाक: गै�
 
 D3.isotopes={en:'Isotopes of chlorine',hi:'क्लोरीन के समस्थानिक',h:0.62,spin:true,view:{yaw:-0.4,pitch:0.3,zoom:1},
  frame:function(S,t,P,l){
-  [[-1.5,18,'³⁵Cl  75.77%'],[1.5,20,'³⁷Cl  24.23%']].forEach(function(d){
-    var N=17+d[1];
-    for(var i=0;i<N;i++){var y=1-2*(i+0.5)/N,r=Math.sqrt(1-y*y),a=i*2.39996;S.ball([d[0]+0.4*r*Math.cos(a),0.4*y,0.4*r*Math.sin(a)],0.085,i<17?'bad':'muted')}
-    S.ring([d[0],0,0],1.0,'xz','line',1);
-    for(var e=0;e<3;e++){var an=t*1.4+e*2.094;S.ball([d[0]+Math.cos(an),0,Math.sin(an)],0.07,'phys')}
-    S.text([d[0],-1.15,0],d[2],'accent',12,'center',true);
-    S.text([d[0],-0.9,0],'17 p + '+d[1]+' n','muted',11,'center');
-  });
-  S.hud(0.18,0.1,T(l,'● red = protons   ● grey = neutrons','● लाल = प्रोटॉन   ● स्लेटी = न्यूट्रॉन'),'muted',11,'left');
- }};
+  var shift=Math.sin(t*0.7)*0.08;
+  function atom(cx,neut,label){S.ball([cx,0,0],0.55,'soft');S.ball([cx,0,0],0.29,'bad');for(var i=0;i<17;i++){var a=i/17*6.2832;S.ball([cx+0.78*Math.cos(a),0.78*Math.sin(a),0],0.055,'phys')}
+    for(var j=0;j<17;j++){var a2=j*2.399;S.ball([cx+0.22*Math.cos(a2),0.22*Math.sin(a2),0.15],0.045,'white')}
+    for(var n=0;n<neut;n++){var an=n*2.399+0.4;S.ball([cx+0.22*Math.cos(an),0.22*Math.sin(an),-0.15],0.045,'muted')}
+    S.text([cx,1.15,0],label,'ink',13,'center',true);S.text([cx,-1.05,0],'17 p · '+neut+' n · 17 e⁻','ink',10,'center',true)}
+  atom(-1.25,18,'³⁵Cl');atom(1.25,20,'³⁷Cl');
+  S.hud(0.5,0.91,'Same atomic number (17), different neutron count','accent',12,'center',true);
+  S.hud(0.5,0.97,'Isotopes: same element · different mass number','ink',11,'center',true);
+ };
 
 D3.molemap={en:'Mole map',hi:'मोल का नक्शा',h:0.7,view:{yaw:-0.2,pitch:0.2,zoom:1},
  frame:function(S,t,P,l){
@@ -348,12 +347,15 @@ D3.molemap={en:'Mole map',hi:'मोल का नक्शा',h:0.7,view:{yaw:
 
 D3.water={en:'Water molecule H₂O',hi:'जल अणु H₂O',h:0.7,spin:true,view:{yaw:-0.3,pitch:0.25,zoom:1.15},
  frame:function(S,t,P,l){
-  var A=[[0,0,0,O_,0.34,'O'],[-0.79,-0.61,0,H_,0.22,'H'],[0.79,-0.61,0,H_,0.22,'H']];
-  mol(S,A,[[0,1],[0,2]],[0,0.25,0],l);
-  for(var i=0;i<10;i++){var a=t*(1.2+0.12*(i%3))+i*0.63,r=0.95+0.18*(i%3);S.ball([r*Math.cos(a),0.25-0.2+0.5*Math.sin(a*0.7+i),r*0.8*Math.sin(a)],0.05,'gold')}
-  S.text([0,-1.15,0],'104.5°','accent',13,'center',true);
-  S.hud(0.5,0.93,T(l,'3 atoms · 10 electrons','3 परमाणु · 10 इलेक्ट्रॉन'),'muted',12,'center');
- }};
+  var a=t*0.45,ca=Math.cos(a),sa=Math.sin(a),O=[0,0,0],H1=[-0.78,-0.42,0.12],H2=[0.78,-0.42,-0.12];
+  function turn(p){return [p[0]*ca-p[2]*sa,p[1],p[0]*sa+p[2]*ca]}
+  var A=turn(H1),B=turn(H2);S.rod(O,A,0.11,'bad');S.rod(O,B,0.11,'bad');
+  S.ball(O,0.34,'bad');S.ball(A,0.2,'white');S.ball(B,0.2,'white');
+  S.ring(O,0.6,'xz','muted',1,true);S.text([0,0.58,0],'O','white',11,'center',true);
+  S.text([A[0]-0.1,A[1]-0.25,A[2]],'H','ink',11,'center',true);S.text([B[0]+0.1,B[1]-0.25,B[2]],'H','ink',11,'center',true);
+  S.hud(0.5,0.91,'H–O–H bond angle = 104.5°','accent',13,'center',true);
+  S.hud(0.5,0.97,'Bent molecule · 2 O–H bonds · oxygen has 2 lone pairs','ink',11,'center',true);
+ };
 
 var B=function(e,h){return {en:e,hi:h}};
 
@@ -428,16 +430,15 @@ var N2=[[-0.16,0,0,N_,0.15],[0.16,0,0,N_,0.15]],H2=[[-0.13,0,0,H_,0.1],[0.13,0,0
 
 D3.limiting={en:'Limiting reagent',hi:'सीमांत अभिकर्मक',h:0.6,view:{yaw:-0.2,pitch:0.18,zoom:1},
  frame:function(S,t,P,l){
-  var p=(t%9)/9,go=p<0.25?0:(p<0.55?(p-0.25)/0.3:1),R=[[-2.4,0.7],[-2.4,-0.7]],Hs=[[-0.9,0.9],[-0.9,0],[-0.9,-0.9]];
-  mol(S,N2,[[0,1]],[R[1][0],R[1][1],0],l);
-  S.text([R[1][0],R[1][1]-0.4,0],T(l,'left over','बचा'),'accent',11,'center',true);
-  if(p<0.6){
-    mol(S,N2,[[0,1]],[R[0][0]+go*(0.2-R[0][0]),R[0][1]*(1-go),0],l);
-    Hs.forEach(function(h){mol(S,H2,[[0,1]],[h[0]+go*(0.2-h[0]),h[1]*(1-go),0],l)});
-  }else if(p<0.68){S.ball([0.2,0,0],0.3+0.2*Math.sin((p-0.6)/0.08*3.14),'gold')}
-  if(p>=0.68){var y=Math.min(1,(p-0.68)/0.2);[0.55,-0.55].forEach(function(q){mol(S,NH3,[[0,1],[0,2],[0,3]],[0.2+y*2.0,q*y,0],l)})}
-  S.hud(0.5,0.9,'2 N₂ + 3 H₂ → 2 NH₃ + N₂   (H₂ '+T(l,'limiting','सीमांत')+')','accent',13,'center',true);
- }};
+  var phase=(t%10)/10,used=phase>0.58,move=Math.min(1,phase/0.58);
+  function particle(x,y,c,label){S.ball([x,y,0],0.17,c);S.text([x,y-0.28,0],label,'ink',9,'center',true)}
+  particle(-1.8,0.8,'phys','N₂');particle(-1.8,-0.8,'phys','N₂');
+  particle(-1.4,1.3,'chem','H₂');particle(-1.4,0.35,'chem','H₂');particle(-1.4,-0.6,'chem','H₂');
+  if(used){particle(0.1,0.55,'good','NH₃');particle(0.1,-0.55,'good','NH₃');particle(1.45,0.8,'phys','N₂');particle(1.45,-0.8,'phys','N₂')}
+  else{S.arrow([-1.0,0,0],[0.4,0,0],'gold',2)}
+  S.hud(0.5,0.91,'2 N₂ + 3 H₂ → 2 NH₃ + N₂ left over','accent',12,'center',true);
+  S.hud(0.5,0.97,'H₂ is limiting: it is consumed first; N₂ remains in excess','ink',11,'center',true);
+ };
 
 D3.dilution={en:'Dilution',hi:'तनुकरण',h:0.7,view:{yaw:-0.45,pitch:0.28,zoom:1},
  params:[{k:'w',en:'Water added',hi:'मिलाया पानी',min:0,max:100,val:0,step:1,unit:'%'}],
@@ -678,55 +679,52 @@ D3.drop={en:'Liquid drop oscillation',hi:'द्रव बूँद का द�
 D3.string={en:'Vibrating string',hi:'कंपित तार',h:0.55,view:{yaw:-0.2,pitch:0.2,zoom:1},
  params:[{k:'l',en:'Length l',hi:'लंबाई l',min:1,max:2,val:1.5,step:0.1,unit:''},{k:'F',en:'Tension F',hi:'तनाव F',min:1,max:4,val:1,step:0.1,unit:''},{k:'m',en:'Mass per length µ',hi:'प्रति इकाई लंबाई द्रव्यमान µ',min:1,max:4,val:1,step:0.1,unit:''}],
  frame:function(S,t,P,l){
-  var L=P.l*2.2,f=Math.sqrt(P.F/P.m)/P.l,w=5*f,pts=[],i;
-  for(i=0;i<=40;i++){var x=-L/2+L*i/40;pts.push([x,0.7*Math.sin(Math.PI*i/40)*Math.cos(w*t),0])}
-  S.path(pts,'gold',3,false,false);
-  S.ball([-L/2,0,0],0.1,'ink');S.ball([L/2,0,0],0.1,'ink');
-  S.text([0,-0.95,0],'f = (1/2l)·√(F/µ)  →  f ∝ '+f.toFixed(2),'accent',13,'center',true);
-  S.hud(0.5,0.93,T(l,'Longer string: lower f · more tension: higher f','लंबा तार: कम f · अधिक तनाव: अधिक f'),'muted',11,'center');
- }};
+  var len=P.l||1.5,F=P.F||1,mu=P.m||1,amp=0.28,cycles=Math.max(1,Math.round(Math.sqrt(F/mu)*len/1.5)),pts=[];
+  S.rod([-1.8,0,0],[1.8,0,0],0.045,'muted');
+  for(var i=0;i<=60;i++){var x=-1.8+3.6*i/60,y=amp*Math.sin((x+1.8)/3.6*cycles*6.2832)*Math.cos(t*3.5);pts.push([x,y,0]);}
+  S.path(pts,'chem',2.5,false,false);
+  for(var n=0;n<=cycles;n++){var xx=-1.8+3.6*n/cycles;S.line([xx,-0.4,0],[xx,0.4,0],'muted',0.8,true);S.text([xx,-0.55,0],n===0||n===cycles?'End':(n%2?'A':'N'),'ink',9,'center',true)}
+  S.hud(0.5,0.91,'Length = '+len.toFixed(1)+'  ·  Tension = '+F.toFixed(1)+'  ·  μ = '+mu.toFixed(1),'accent',11,'center',true);
+  S.hud(0.5,0.97,'Standing wave: nodes remain fixed; antinodes oscillate','ink',11,'center',true);
+ };
 
 /* 5. Terminal velocity */
 D3.terminal={en:'Terminal velocity',hi:'सीमांत वेग',h:0.9,view:{yaw:-0.4,pitch:0.15,zoom:1},
  frame:function(S,t,P,l){
-  var tt=t%7,vt=0.55,tau=0.6,s=vt*(tt-tau*(1-Math.exp(-tt/tau))),y=Math.max(-1.25,1.25-s),v=vt*(1-Math.exp(-tt/tau)),done=y<=-1.25;
-  S.box([0,0,0],[1.6,3.2,1.2],'#5BA7C7');
-  S.ball([0,y,0],0.22,'bad');
-  var Wv=0.9,Bv=0.3,Fv=done?0:(Wv-Bv)*(v/vt);
-  S.arrow([0.45,y,0],[0.45,y-Wv,0],'ink',2.4);S.text([0.9,y-Wv/2,0],'mg','ink',12,'left',true);
-  S.arrow([-0.45,y,0],[-0.45,y+Bv,0],'good',2.4);S.text([-0.9,y+Bv/2,0],T(l,'buoyancy','उत्प्लावन'),'good',11,'right',true);
-  if(Fv>0.03){S.arrow([0,y+0.25,0],[0,y+0.25+Fv,0],'bad',2.4);S.text([0,y+0.45+Fv,0],'Fᵥ','bad',12,'center',true)}
-  S.hud(0.5,0.93,T(l,'Speed becomes constant when Fᵥ + buoyancy = mg','जब Fᵥ + उत्प्लावन = mg हो, वेग स्थिर हो जाता है'),'accent',11,'center',true);
- }};
+  var v=Math.min(1,t/5),speed=1.2+2.8*(1-Math.exp(-t/2.5)),y=1.0-v*2.1;
+  S.box([0,0,0],[3.4,3.2,1.0],'soft');S.box([0,-0.95,0],[3.25,1.15,0.92],'#B9DCEB');
+  S.line([-1.6,0.95,0],[1.6,0.95,0],'muted',1);S.ball([0,y,0],0.24,'gold');
+  S.arrow([0,y+0.32,0],[0,y+0.95,0],'bad',2.6);S.text([0.22,y+0.78,0],'Weight mg','bad',10,'left',true);
+  S.arrow([0,y-0.28,0],[0,y-0.75,0],'phys',2.4);S.text([0.22,y-0.65,0],'Buoyancy + drag','phys',9,'left',true);
+  S.hud(0.5,0.91,'Speed rises then approaches terminal speed','accent',12,'center',true);
+  S.hud(0.5,0.97,'At terminal velocity: mg = buoyancy + viscous drag','ink',11,'center',true);
+ };
 
 /* 6. Accuracy vs precision */
 D3.target={en:'Accuracy vs precision',hi:'यथार्थता बनाम परिशुद्धता',h:0.78,view:{yaw:-0.2,pitch:0.45,zoom:1},
  frame:function(S,t,P,l){
-  var st=Math.floor(t/6)%3,lt=t%6,n=Math.min(6,Math.floor(lt/0.9)+1),i,
-   nm=[T(l,'Accurate + precise','यथार्थ + परिशुद्ध'),T(l,'Precise, not accurate','परिशुद्ध, यथार्थ नहीं'),T(l,'Accurate, not precise','यथार्थ, परिशुद्ध नहीं')];
-  [1.5,1.1,0.7,0.3].forEach(function(r,k){S.ring([0,0,0],r,'xy',k===3?'bad':'muted',k===3?2:1.2)});
-  S.ball([0,0,0.03],0.06,'bad');
-  for(i=0;i<n;i++){
-    var ox=st===1?0.85:0,oy=st===1?0.55:0,sp=st===2?0.8:0.12,a=rnd(i+st*10)*6.28,rr=rnd(i+30+st*10)*sp;
-    S.ball([ox+rr*Math.cos(a),oy+rr*Math.sin(a),0.1],0.07,'gold');
-  }
-  S.hud(0.5,0.93,nm[st],'accent',15,'center',true);
- }};
+  var mode=Math.floor(t/3)%3,shots=mode===0?[[0.05,0.02],[-0.05,0.04],[0.02,-0.04],[0,0]]:mode===1?[[0.62,0.55],[0.7,0.5],[0.55,0.66],[0.64,0.58]]:[[-0.55,-0.48],[0.55,0.5],[-0.6,0.55],[0.6,-0.55]];
+  S.disc([0,0,0],1.25,'xy','soft',0.35);S.ring([0,0,0.03],1.25,'xy','muted',2);
+  S.ring([0,0,0.04],0.08,'xy','bad',1.5);
+  shots.forEach(function(q,i){S.ball([q[0],q[1],0.1],0.065,'bad');S.line([q[0],q[1],0.12],[q[0]*1.08,q[1]*1.08,0.12],'bad',1)});
+  S.text([0,-1.5,0],mode===0?'Accurate + precise':mode===1?'Precise, not accurate':'Neither accurate nor precise','ink',11,'center',true);
+  S.hud(0.5,0.91,'Three patterns: close to centre · tightly grouped · scattered','accent',11,'center',true);
+  S.hud(0.5,0.97,'Accuracy = closeness to true value · Precision = repeatability','ink',10,'center',true);
+ };
 
 /* 7. Simple pendulum */
 D3.pendulum={en:'Simple pendulum',hi:'सरल लोलक',h:0.85,view:{yaw:-0.2,pitch:0.15,zoom:1},
  params:[{k:'L',en:'Length L (m)',hi:'लंबाई L (m)',min:0.5,max:2.2,val:1,step:0.05,unit:''}],
  frame:function(S,t,P,l){
-  var L=P.L,g=9.8,w=Math.sqrt(g/L),Tp=2*Math.PI/w,th=0.45*Math.cos(w*t),px=0,py=1.3,bx=L*Math.sin(th),by=py-L*Math.cos(th),n=Math.floor(t/Tp),i;
-  S.line([-0.6,py,0],[0.6,py,0],'ink',3);
-  S.line([px,py,0],[bx,by,0],'ink',1.6);S.ball([bx,by,0],0.12,'bad');
-  S.line([1.4,py,0],[1.4,py-L,0],'muted',2);
-  for(i=0;i<=10;i++)S.line([1.3,py-L*i/10,0],[1.4,py-L*i/10,0],'muted',1);
-  S.text([1.5,py-L/2,0],'L','muted',12,'left',true);
-  S.text([0.25,py-0.35,0],'θ','accent',12,'left');
-  S.hud(0.5,0.9,'T = 2π√(L/g) = '+Tp.toFixed(2)+' s','accent',13,'center',true);
-  S.hud(0.5,0.06,T(l,'Stopwatch: ','स्टॉपवॉच: ')+t.toFixed(1)+' s · '+T(l,'oscillations: ','दोलन: ')+n,'ink',12,'center',true);
- }};
+  var L=P.L||1,theta=0.62*Math.sin(t*2.2),x=L*Math.sin(theta),y=-L*Math.cos(theta);
+  S.box([0,1.55,0],[1.45,0.12,0.6],'muted');S.rod([0,1.48,0],[x,y,0],0.035,'ink');S.ball([x,y,0],0.18,'gold');S.shadow([x,y,0],0.3,-1.5);
+  S.ring([0,1.48,0],0.18,'xz','muted',1.5);S.arrow([x,y,0],[x,y-0.55,0],'bad',2);
+  S.arrow([x,y,0],[x+0.55*Math.sin(theta),y+0.55*Math.cos(theta),0],'phys',2);
+  S.text([0.75,1.1,0],'Support','ink',10,'left',true);S.text([x+0.35,y-0.55,0],'mg','bad',11,'left',true);
+  S.text([x+0.65,y+0.1,0],'Tension','phys',10,'left',true);
+  S.hud(0.5,0.91,'Length L = '+L.toFixed(2)+' m  ·  angle = '+(theta*57.3).toFixed(1)+'°','accent',12,'center',true);
+  S.hud(0.5,0.97,'T = 2π√(L/g)  ·  ideal small-angle model','ink',12,'center',true);
+ };
 
 /* 8. Vernier calipers */
 D3.vernier={en:'Vernier calipers',hi:'वर्नियर कैलिपर्स',h:0.66,view:{yaw:0,pitch:0.1,zoom:1},
