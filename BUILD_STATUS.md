@@ -1,95 +1,58 @@
-# Build Status — current project snapshot
+# Venu JEE — Modular Migration Status
 
-## Runtime file map
+## Working branch
 
-```text
-index.html
- ├── styles.css                 Shared layout, typography, themes, diagrams and responsive rules
- ├── app.js                     Active Class 11 study-book application and chapter content
- │    ├── shared language / theme / storage helpers
- │    ├── 2D SVG diagram registry (DG) + 2D companions for interactive 3D models
- │    ├── Class 11 Chemistry: Some Basic Concepts of Chemistry (Mole Concept)
- │    ├── Class 11 Physics: Units, Dimensions and Measurement
- │    ├── Class 11 Mathematics: Sets
- │    ├── book / chapter / page rendering and navigation
- │    └── window.VENU_CHAPTERS bridge for Mock Test chapter navigation
- └── mock-test-engine.js        Separate Mock Test / PYQ route shell (question bank not populated)
+`refactor/modular-architecture`
 
-build.py                         Root-file and local-reference validator; not a bundler
-BUILD_STATUS.md                  This project map and verification notes
+The migration is isolated on this branch. **The main branch and deployed/main website are not changed by this work.** Do not merge until the browser checks below pass.
 
-ch01-mole-concept.js             Legacy / standalone chapter file; NOT loaded by index.html
-ch01-units-dimensions.js         Legacy / standalone chapter file; NOT loaded by index.html
-ch01-sets.js                     Legacy / standalone chapter file; NOT loaded by index.html
-```
+## Current runtime map
 
-**Important:** the three `ch01-*.js` files are not the active source of the displayed chapters. The active runtime chapter data is embedded in `app.js`. Do not edit a standalone chapter file expecting the live website to change. These duplicate files need a deliberate reconciliation/migration plan before they can safely become active modules.
+- `index.html`: loads core preferences and shared visual engines, then the Class 11 sequential content loader.
+- `src/core/storage.js`, `theme.js`, `language.js`: separate preference modules.
+- `src/visuals/engines/registry.js`: shared chapter, 3D and 2D registries.
+- `src/visuals/engines/3d-engine.js`: shared interactive 3D canvas renderer and controls.
+- `src/visuals/diagrams/diagram-renderer.js`: shared bilingual 2D diagram renderer.
+- `src/classes/class-11/<subject>/<chapter>/index.js`: chapter shell and currently retained subject-specific 3D model definitions.
+- `topics/`: individual topic/section registration files.
+- `examples/`: individual solved-example registration files.
+- `formulas/`: individual formula registration files.
+- `exercises/`: exercise section registration files.
+- `src/classes/class-11/content-extensions.js`: chapter-specific extra content, photo metadata and 2D diagram registrations that still need finer separation.
+- `src/features/books/navigation.js`: book, notes, page and route navigation.
+- `mock-test-engine.js`: separate Mock Test/PYQ route shell; left unchanged.
 
-## Active Class 11 chapter inventory
+## Class 11 content files currently split
 
-| Subject | Chapter | Sections | Solved examples | Practice questions | Interactive 3D definitions |
-|---|---|---:|---:|---:|---:|
-| Chemistry | Some Basic Concepts of Chemistry (Mole Concept) | 29 | 33 | 22 | 12 |
-| Physics | Units, Dimensions and Measurement | 41 | 31 | 22 | 11 |
-| Mathematics | Sets | 25 | 25 | 24 | 9 |
+| Subject | Chapter | Topic/section files | Solved-example files | Formula files |
+|---|---|---:|---:|---:|
+| Chemistry | Some Basic Concepts of Chemistry (Mole Concept) | 23 | 23 | 13 |
+| Physics | Units, Dimensions and Measurement | 38 | 31 | 8 |
+| Mathematics | Sets | 19 | 20 | 8 |
+| **Total** | | **80** | **74** | **29** |
 
-Counts are source inventory after the latest additions; they are not proof that every explanation, numerical answer, diagram, or interactive animation has been visually/browser tested.
+There are additional topic/example/formula registrations for the later Class 11 content additions. The loader currently lists 222 sequential scripts, including chapter shells, individual content files, extension registry, app bootstrap, navigation and Mock Test engine.
 
-## Diagrams and visual assets
+## Known work still remaining
 
-- Existing interactive 3D topics are paired with 2D companion drawings through the shared chapter renderer.
-- Topic-specific static 2D diagrams are registered in `DG` and assigned to selected sections without an existing 3D model.
-- Real apparatus reference photos currently cover Vernier calipers, screw gauge and titration setup.
-- A 2D process diagram is a conceptual summary; it is not a substitute for a measured instrument scale drawing or a realistic 3D model.
+- Move each 3D model definition out of the chapter shell into its own `models-3d` module.
+- Move each topic-specific 2D diagram definition and photo metadata into the chapter's own `diagrams-2d` and `photos` modules. The shared renderer is already separate.
+- Split remaining application feature responsibilities out of `src/features/books/navigation.js` (home, chapter list, notes/page renderer, progress/bookmarks, search).
+- Reconcile or archive inactive root-level legacy duplicates: `90-3d-engine.js`, `99-books-navigation.js`, and `ch01-*.js`. They are not loaded by the active modular entrypoint; `99-books-navigation.js` currently fails a standalone syntax parse and must not be loaded.
+- Add Class 12 chapter content as a separate, explicitly scoped project phase.
+- Mock Test and PYQ question banks remain empty placeholders; no changes were made to their engine.
+- Full academic proofreading of every worked answer and diagram remains pending.
 
-## Known product/content boundaries
+## Structural verification
 
-- Class 12 chapter content has not been added yet.
-- Mock Test question banks are empty; `mock-test-engine.js` currently provides navigation/Coming Soon states only.
-- JEE Main and JEE Advanced PYQ pages are navigation placeholders; papers/questions have not been added.
-- These are planned content gaps, not JavaScript syntax errors.
-- The app is currently a compact root-level static website, not a fully split feature/module architecture.
+- `index.html` has no missing local file references in the repository tree.
+- The sequential loader manifest contains 222 paths; all 222 currently exist in the branch tree.
+- `app.js` has been reduced from about 254 KB at the start of this branch to about 2.9 KB (bootstrap/registry hand-off).
+- Shared engine, diagram renderer, app bootstrap, navigation and loader syntax checks passed with a JavaScript parser check.
+- Generated topic/example/formula files were syntax-checked when created.
+- `build.py` validates root files, index references and every sequential loader path.
 
-## Navigation and runtime
+## Not yet verified
 
-- `index.html` loads `styles.css?v=6`, `app.js?v=16`, and `mock-test-engine.js`.
-- The shared top header contains the Home link; the study-book app owns chapter/page navigation.
-- `mock-test-engine.js` listens for hash changes and renders Mock Test/PYQ placeholder routes in the same `#app` element.
-- The chapter data bridge is `window.VENU_CHAPTERS`; Mock Test chapter navigation reads this list.
-- `build.py` checks required root files and local references from `index.html`; it does not rebuild `app.js` from the legacy chapter files.
-
-## Verification status
-
-- Latest `app.js` JavaScript parse check: passed with `new Function(app.js)`.
-- Latest `mock-test-engine.js` JavaScript parse check: passed with `new Function(mock-test-engine.js)`.
-- `index.html` local runtime references: checked against the repository's required root files.
-- Mock Test engine source hash remains unchanged during the recent Class 11 content/diagram edits.
-- Actual browser/Android testing of every route, page turn, language switch, image load, slider control and 3D interaction is still pending.
-- Independent full academic proofread of every answer and diagram is still pending.
-
-## Modular architecture migration — working branch
-
-Branch: `refactor/modular-architecture` (main remains unchanged while migration is verified).
-
-### Completed first safe extraction
-
-- Extracted the safe local-storage adapter to `src/core/storage.js`.
-- Extracted theme preference handling to `src/core/theme.js`.
-- Extracted bilingual language preference handling to `src/core/language.js`.
-- Updated `index.html` to load these classic-script modules in dependency order before `app.js?v=17`.
-- Removed those three bootstrap responsibilities from the beginning of `app.js`; chapter/rendering runtime remains intact for now.
-- Added architecture directory markers for Class 11's three current chapter targets and initial class/feature/docs structure.
-
-### Migration not yet complete
-
-The Class 11 chapter payloads, topic sections, examples, exercises, formulas, diagrams and 3D model definitions are still embedded in `app.js`. The new chapter directories are scaffolding, not yet the active data source. The legacy `ch01-*.js` files remain inactive and must not be treated as migrated content. The old `90-3d-engine.js` and `99-books-navigation.js` remain inactive pending dependency analysis.
-
-### Protected scope
-
-`mock-test-engine.js` and all Class 12 runtime/content have not been changed. The Mock Test/PYQ placeholders remain as before.
-
-### Verification on this branch
-
-- JavaScript syntax parsed successfully for `app.js`, `src/core/storage.js`, `src/core/theme.js`, `src/core/language.js`, and `mock-test-engine.js` using a JavaScript parser check.
-- `index.html` now references the three extracted core files and the updated app runtime in dependency order.
-- Browser/Android interaction testing has not yet been performed.
+- No real browser or Android device session has been run in this migration. Do not treat syntax/path checks as proof that page turning, language switching, 3D rendering, photos or touch controls work visually.
+- No end-to-end visual or academic acceptance test has been completed.
