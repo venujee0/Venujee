@@ -56,6 +56,10 @@ var U={
   easy:B('Easy','आसान'),
   medium:B('Medium','मध्यम'),
   hard:B('Hard','कठिन'),
+  board:B('Board Level','बोर्ड स्तर'),
+  fnd:B('NCERT / Foundation','NCERT / आधार स्तर'),
+  main:B('JEE Main','JEE Main'),
+  adv:B('JEE Advanced','JEE Advanced'),
   mark:B('Mark as revised','दोहराया हुआ चिह्नित करो'),
   marked:B('Revised ✓','दोहरा लिया ✓'),
   next:B('Next chapter','अगला चैप्टर'),
@@ -1107,6 +1111,16 @@ c.examples.push(
   a:B('ΔY/Y % = 2(0.01/0.50 × 100) + (0.01/0.80 × 100) = 4 + 1.25 = <b>5.25%</b>.','ΔY/Y % = 2(0.01/0.50 × 100) + (0.01/0.80 × 100) = 4 + 1.25 = <b>5.25%</b>।')}
 );
 
+c.examples.push(
+{lv:'board',q:B("Write the seven SI base quantities with their units and symbols.","सात SI मूल राशियाँ उनके मात्रकों और प्रतीकों सहित लिखिए।"),a:B("Length–metre (m), mass–kilogram (kg), time–second (s), current–ampere (A), temperature–kelvin (K), amount–mole (mol), luminous intensity–candela (cd).","लंबाई–मीटर (m), द्रव्यमान–किलोग्राम (kg), समय–सेकंड (s), धारा–ऐम्पियर (A), ताप–केल्विन (K), पदार्थ की मात्रा–मोल (mol), ज्योति तीव्रता–कैंडेला (cd)।")},
+{lv:'board',q:B("A screw gauge has pitch 0.5 mm and 50 circular divisions. Find its least count.","एक स्क्रू गेज की पिच 0.5 mm और 50 वृत्ताकार भाग हैं। अल्पतमांक ज्ञात कीजिए।"),a:B("LC = pitch / divisions = 0.5/50 = <b>0.01 mm</b>.","LC = पिच / भाग = 0.5/50 = <b>0.01 mm</b>।")},
+{lv:'board',q:B("A vernier has 10 VSD = 9 MSD and 1 MSD = 0.1 cm. MSR = 2.4 cm and the 6th division coincides. Find the reading.","एक वर्नियर में 10 VSD = 9 MSD और 1 MSD = 0.1 cm है। MSR = 2.4 cm और छठा भाग मिलता है। पाठ्यांक ज्ञात कीजिए।"),a:B("1 VSD = 0.09 cm; LC = 0.1 − 0.09 = 0.01 cm. Reading = 2.4 + 6(0.01) = <b>2.46 cm</b>.","1 VSD = 0.09 cm; LC = 0.1 − 0.09 = 0.01 cm। पाठ्यांक = 2.4 + 6(0.01) = <b>2.46 cm</b>।")},
+{lv:'board',q:B("Observed vernier reading is 4.28 cm and positive zero error is +0.03 cm. Find the corrected reading.","वर्नियर का प्रेक्षित पाठ्यांक 4.28 cm और धनात्मक शून्य त्रुटि +0.03 cm है। सही पाठ्यांक ज्ञात कीजिए।"),a:B("Corrected = observed − zero error = 4.28 − 0.03 = <b>4.25 cm</b>.","सही = प्रेक्षित − शून्य त्रुटि = 4.28 − 0.03 = <b>4.25 cm</b>।")},
+{lv:'board',q:B("Round 0.004786 to three significant figures. How many significant figures are in 2.500?","0.004786 को तीन सार्थक अंकों तक पूर्णांकित कीजिए। 2.500 में कितने सार्थक अंक हैं?"),a:B("<b>0.00479</b>. In 2.500, both trailing zeros after the decimal are significant: <b>4 significant figures</b>.","<b>0.00479</b>। 2.500 में दशमलव के बाद दोनों अंतिम शून्य सार्थक हैं: <b>4 सार्थक अंक</b>।")},
+{lv:'board',q:B("Distinguish between accuracy and precision.","यथार्थता और परिशुद्धता में अंतर लिखिए।"),a:B("Accuracy is closeness to the accepted value; precision is agreement among repeated readings. A biased instrument may be precise but inaccurate.","यथार्थता स्वीकृत मान के निकटता है; परिशुद्धता बार-बार के पाठ्यांकों का आपसी मेल है। पक्षपाती उपकरण परिशुद्ध लेकिन अयथार्थ हो सकता है।")},
+{lv:'board',q:B("A measured length is (20.0 ± 0.2) cm. Calculate percentage uncertainty.","मापी गई लंबाई (20.0 ± 0.2) cm है। प्रतिशत अनिश्चितता ज्ञात कीजिए।"),a:B("(0.2/20.0) × 100 = <b>1%</b>.","(0.2/20.0) × 100 = <b>1%</b>।")},
+{lv:'board',q:B("Check dimensionally whether v² = u² + 2as is consistent.","विमीय रूप से जाँचिए कि v² = u² + 2as संगत है या नहीं।"),a:B("[v²] = [u²] = [L²T⁻²] and [as] = [LT⁻²][L] = [L²T⁻²]. All terms match, so the equation is dimensionally consistent.","[v²] = [u²] = [L²T⁻²] और [as] = [LT⁻²][L] = [L²T⁻²]। सभी पद समान हैं, अतः समीकरण विमीय रूप से संगत है।")}
+);
 c.formulas.push(
  [B('Unit and measurement','मात्रक और मापन'),'n<sub>1</sub>u<sub>1</sub> = n<sub>2</sub>u<sub>2</sub>; θ = s/r; Ω = A/r²; d = b/θ'],
  [B('Unit conversion','मात्रक परिवर्तन'),'n<sub>2</sub> = n<sub>1</sub>(M<sub>1</sub>/M<sub>2</sub>)<sup>a</sup>(L<sub>1</sub>/L<sub>2</sub>)<sup>b</sup>(T<sub>1</sub>/T<sub>2</sub>)<sup>c</sup>'],
