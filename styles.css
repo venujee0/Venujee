@@ -294,6 +294,8 @@ svg text{font-family:inherit}
 .homebtn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--edge);border-radius:999px;background:var(--paper);color:var(--ink);font-weight:600;font-size:.88rem;padding:6px 12px;min-height:38px;text-decoration:none;white-space:nowrap}
 .homebtn[hidden]{display:none}
 .homebtn:active{background:var(--ink);color:var(--paper)}
+.themebtn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:38px;padding:6px 10px;border:1px solid var(--edge);border-radius:999px;background:var(--paper);color:var(--ink);font:600 .84rem var(--font-b);cursor:pointer;white-space:nowrap}
+.themebtn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
 
 /* Small Home shortcut at the top-right of every notes page */
