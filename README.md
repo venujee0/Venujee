@@ -17,35 +17,35 @@ src/
   core/                 storage, theme, language preferences
   classes/
     class-11/
-      content-loader.js
-      content-extensions.js
+      content-loader.js      ordered module loader
+      content-extensions.js  chapter metadata/extension wiring
       chemistry/
         chapter-01-mole-concept/
-          index.js      chapter shell + 3D model definitions
-          topics/       one file per topic/section
-          examples/     one file per solved example
-          formulas/     one file per formula entry
-          exercises/    exercise sections
-          diagrams-2d/  chapter diagram assets/modules (migration ongoing)
-          models-3d/    chapter 3D assets/modules (migration ongoing)
-          photos/       chapter photo assets/modules (migration ongoing)
+          index.js            chapter shell
+          topics/             one file per topic/section
+          examples/           one file per solved example
+          formulas/           one file per formula entry
+          exercises/          exercise section files
+          diagrams-2d/        individual topic diagrams
+          models-3d/           individual interactive model files
+          photos/              individual real-photo references
       physics/
         chapter-01-units-dimensions/ (same layout)
       mathematics/
         chapter-01-sets/ (same layout)
-    class-12/            reserved structure; content not yet migrated
+    class-12/                 reserved structure; content not migrated
   features/
-    books/navigation.js book pages, routing and notes navigation
+    books/navigation.js       book, notes, page and route navigation
   visuals/
-    engines/             shared 3D renderer + registries
-    diagrams/            shared bilingual 2D diagram renderer
-assets/                   styles and image assets
-docs/                     architecture and maintenance notes
-tests/                    validation guidance
+    engines/                  shared 3D renderer and registries
+    diagrams/                 shared 2D renderer and flow primitive
+assets/                       styles and image assets
+docs/                         architecture and maintenance notes
+tests/                        structural validation guidance
 ```
 
 ## Modular loading
 
-`index.html` loads the small shared core and visual runtime first. `src/classes/class-11/content-loader.js` then loads chapter shells, individual topic/example/formula files, visual registrations, the application bootstrap, book navigation and the separate mock-test route in dependency order.
+`index.html` loads shared preferences and visual engines, then `src/classes/class-11/content-loader.js`. The loader sequentially loads chapter shells, each chapter's model/content files, photo and diagram modules, extension wiring, application bootstrap, navigation and the separate Mock Test route.
 
 Run `python build.py` to validate local index references and every path in the sequential loader manifest. This is a structural check, not a browser/device test.

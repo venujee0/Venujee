@@ -4,55 +4,55 @@
 
 `refactor/modular-architecture`
 
-The migration is isolated on this branch. **The main branch and deployed/main website are not changed by this work.** Do not merge until the browser checks below pass.
+The migration is isolated on this branch. **The main branch and deployed/main website have not been changed.** Do not merge until browser and device checks pass.
 
-## Current runtime map
+## Runtime map
 
-- `index.html`: loads core preferences and shared visual engines, then the Class 11 sequential content loader.
+- `index.html`: loads shared preferences and visual engines, then the sequential Class 11 content loader.
 - `src/core/storage.js`, `theme.js`, `language.js`: separate preference modules.
-- `src/visuals/engines/registry.js`: shared chapter, 3D and 2D registries.
-- `src/visuals/engines/3d-engine.js`: shared interactive 3D canvas renderer and controls.
-- `src/visuals/diagrams/diagram-renderer.js`: shared bilingual 2D diagram renderer.
-- `src/classes/class-11/<subject>/<chapter>/index.js`: chapter shell and currently retained subject-specific 3D model definitions.
+- `src/visuals/engines/registry.js`: shared chapter, 3D and diagram registries.
+- `src/visuals/engines/3d-engine.js`: shared interactive 3D renderer and controls.
+- `src/visuals/diagrams/diagram-renderer.js` and `flow.js`: shared 2D renderer and flow-diagram primitive.
+- `src/classes/class-11/<subject>/<chapter>/index.js`: chapter shell and subject-level helper setup.
 - `topics/`: individual topic/section registration files.
 - `examples/`: individual solved-example registration files.
 - `formulas/`: individual formula registration files.
 - `exercises/`: exercise section registration files.
-- `src/classes/class-11/content-extensions.js`: chapter-specific extra content, photo metadata and 2D diagram registrations that still need finer separation.
+- `models-3d/`: one JavaScript file per interactive model.
+- `diagrams-2d/`: one JavaScript file per topic-specific 2D flow diagram.
+- `photos/`: individual real-apparatus photo reference modules.
+- `src/classes/class-11/content-extensions.js`: additional chapter content, photo attachment and diagram-to-topic wiring.
 - `src/features/books/navigation.js`: book, notes, page and route navigation.
 - `mock-test-engine.js`: separate Mock Test/PYQ route shell; left unchanged.
 
-## Class 11 content files currently split
+## Class 11 content inventory in the active loader
 
-| Subject | Chapter | Topic/section files | Solved-example files | Formula files |
-|---|---|---:|---:|---:|
-| Chemistry | Some Basic Concepts of Chemistry (Mole Concept) | 23 | 23 | 13 |
-| Physics | Units, Dimensions and Measurement | 38 | 31 | 8 |
-| Mathematics | Sets | 19 | 20 | 8 |
-| **Total** | | **80** | **74** | **29** |
+| Subject | Chapter | Topic files | Solved examples | Formula files | Exercise sections | 3D models | 2D topic diagrams |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Chemistry | Some Basic Concepts of Chemistry (Mole Concept) | 28 | 33 | 16 | 1 | 12 | 6 |
+| Physics | Units, Dimensions and Measurement | 40 | 31 | 8 | 1 | 11 | 4 |
+| Mathematics | Sets | 23 | 25 | 8 | 1 | 9 | 3 |
+| **Total** | | **91** | **89** | **32** | **3** | **32** | **13** |
 
-There are additional topic/example/formula registrations for the later Class 11 content additions. The loader currently lists 222 sequential scripts, including chapter shells, individual content files, extension registry, app bootstrap, navigation and Mock Test engine.
+There are also 3 real-apparatus photo reference modules (Vernier caliper, screw gauge and titration). The loader currently lists 271 sequential scripts, including chapter shells, individual content and visual modules, app bootstrap, navigation and Mock Test route.
 
-## Known work still remaining
+## Remaining architecture work
 
-- Move each 3D model definition out of the chapter shell into its own `models-3d` module.
-- Move each topic-specific 2D diagram definition and photo metadata into the chapter's own `diagrams-2d` and `photos` modules. The shared renderer is already separate.
-- Split remaining application feature responsibilities out of `src/features/books/navigation.js` (home, chapter list, notes/page renderer, progress/bookmarks, search).
-- Reconcile or archive inactive root-level legacy duplicates: `90-3d-engine.js`, `99-books-navigation.js`, and `ch01-*.js`. They are not loaded by the active modular entrypoint; `99-books-navigation.js` currently fails a standalone syntax parse and must not be loaded.
-- Add Class 12 chapter content as a separate, explicitly scoped project phase.
+- Split the remaining responsibilities inside `src/features/books/navigation.js` into smaller home, chapter-list, notes/page-rendering and progress/bookmark/search feature modules.
+- Split the shared 2D companion-diagram data registry further if a future chapter requires independently maintained model companion drawings. The common renderer is separate and the 13 topic-specific flow diagrams are already separate.
+- Review and archive inactive root-level legacy duplicates (`90-3d-engine.js`, `99-books-navigation.js`, and `ch01-*.js`) after final comparison. They are not loaded by the active entrypoint; `99-books-navigation.js` fails a standalone syntax parse and must not be loaded.
+- Class 12 chapter content is not migrated/populated.
 - Mock Test and PYQ question banks remain empty placeholders; no changes were made to their engine.
-- Full academic proofreading of every worked answer and diagram remains pending.
+- Full academic proofreading of every answer and diagram remains pending.
 
 ## Structural verification
 
-- `index.html` has no missing local file references in the repository tree.
-- The sequential loader manifest contains 222 paths; all 222 currently exist in the branch tree.
-- `app.js` has been reduced from about 254 KB at the start of this branch to about 2.9 KB (bootstrap/registry hand-off).
-- Shared engine, diagram renderer, app bootstrap, navigation and loader syntax checks passed with a JavaScript parser check.
-- Generated topic/example/formula files were syntax-checked when created.
-- `build.py` validates root files, index references and every sequential loader path.
+- `index.html` local file references and all 271 sequential loader paths were checked against the branch tree; none were missing.
+- JavaScript parser checks passed for the app bootstrap, navigation, content loader, chapter shells, shared visual engines, extension module and generated topic/example/formula/model/diagram/photo modules at creation time.
+- `app.js` is now about 2.9 KB, down from about 254 KB at the start of this branch. Navigation is in `src/features/books/navigation.js` (about 19.7 KB).
+- `build.py` checks required root files, index references and every path in the sequential loader manifest.
 
 ## Not yet verified
 
-- No real browser or Android device session has been run in this migration. Do not treat syntax/path checks as proof that page turning, language switching, 3D rendering, photos or touch controls work visually.
-- No end-to-end visual or academic acceptance test has been completed.
+- No real browser or Android device session has been run in this migration. Syntax/path checks do not prove page turns, language switching, image loading, 3D rendering, slider controls or touch interactions work visually.
+- No end-to-end visual acceptance test or independent academic proofread has been completed.
