@@ -8,6 +8,7 @@ parts=[
  'assets/js/core/01-chapter-render-helpers.js',
  'assets/js/core/90-3d-engine.js',
  'assets/js/data/chapters/class-11/chemistry/ch01-mole-concept.js',
+ 'assets/js/data/chapters/class-11/physics/ch01-units-dimensions.js',
  'assets/js/data/chapters/class-11/mathematics/ch01-sets.js',
  'assets/js/core/99-books-navigation.js',
 ]
