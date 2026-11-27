@@ -300,3 +300,18 @@ svg text{font-family:inherit}
 .pagehome{display:flex;justify-content:flex-end;margin:-8px 8px 12px 0}
 .pagehome a{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:4px 10px;border:1px solid var(--edge);border-radius:999px;background:var(--paper);color:var(--ink);font-size:.82rem;font-weight:600;text-decoration:none;line-height:1.2}
 .pagehome a:active{background:var(--ink);color:var(--paper)}
+
+/* Class 11 notes pages: keep paper white and readable in every device theme. */
+.paper{--paper:#fff;--ink:#111;--muted:#454545;--line:#d7dce2;--edge:#c4cbd3;--soft:#f3f5f7;color:#111;background:#fff}
+.paper .sec,.paper .sec p,.paper .sec li,.paper .sec td,.paper .sec th,.paper .ph,.paper .fx,.paper .fl,.paper .exa{color:#111}
+.paper .sec th{background:#eef1f4}
+.realphoto{max-width:640px;margin:18px 0;padding:10px;border:1px solid #d7dce2;border-radius:10px;background:#fff}
+.realphoto img{display:block;width:100%;max-height:360px;object-fit:contain;background:#fff}
+.realphoto figcaption{font-size:.82rem;color:#333;margin-top:8px}
+.realphoto a{color:#164e9a}
+.d3control{display:grid;gap:2px}
+.d3stepper{display:flex;align-items:center;justify-content:flex-end;gap:9px;padding:0 2px 4px}
+.d3stepper button{width:34px;height:32px;border:1px solid var(--edge);border-radius:8px;background:#fff;color:#111;font-size:1.2rem;font-weight:700;line-height:1;cursor:pointer}
+.d3stepper button:active{background:#e8eef7}
+.d3stepper span{font-size:.75rem;color:var(--muted)}
+@media(max-width:420px){.d3p{grid-template-columns:1fr 1fr 3.4em;gap:7px}.d3stepper{justify-content:center}}
