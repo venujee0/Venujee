@@ -1,11 +1,12 @@
 # Tests
 
-Run `python build.py` from the repository root.
+Run the following from the repository root:
 
-The validator checks:
-- required root entry files;
-- every local `src` / `href` in `index.html`;
-- the JSON manifest embedded in `src/classes/class-11/content-loader.js`;
-- existence of every script loaded sequentially.
+```sh
+python build.py
+node tests/check-js-syntax.mjs
+```
 
-It does not execute a browser, validate rendered layouts, test touch interactions, or prove academic correctness. Those require browser/device and subject-matter testing.
+The structural validator checks required root files, local `index.html` references and every path in the sequential loader manifest. The Node script runs `node --check` against every active loader module.
+
+These checks do not execute a browser, validate rendered layouts, test touch interactions, or prove academic correctness. Those still require browser/device and subject-matter testing.
