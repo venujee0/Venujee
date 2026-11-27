@@ -66,3 +66,30 @@ Counts are source inventory after the latest additions; they are not proof that 
 - Mock Test engine source hash remains unchanged during the recent Class 11 content/diagram edits.
 - Actual browser/Android testing of every route, page turn, language switch, image load, slider control and 3D interaction is still pending.
 - Independent full academic proofread of every answer and diagram is still pending.
+
+## Modular architecture migration — working branch
+
+Branch: `refactor/modular-architecture` (main remains unchanged while migration is verified).
+
+### Completed first safe extraction
+
+- Extracted the safe local-storage adapter to `src/core/storage.js`.
+- Extracted theme preference handling to `src/core/theme.js`.
+- Extracted bilingual language preference handling to `src/core/language.js`.
+- Updated `index.html` to load these classic-script modules in dependency order before `app.js?v=17`.
+- Removed those three bootstrap responsibilities from the beginning of `app.js`; chapter/rendering runtime remains intact for now.
+- Added architecture directory markers for Class 11's three current chapter targets and initial class/feature/docs structure.
+
+### Migration not yet complete
+
+The Class 11 chapter payloads, topic sections, examples, exercises, formulas, diagrams and 3D model definitions are still embedded in `app.js`. The new chapter directories are scaffolding, not yet the active data source. The legacy `ch01-*.js` files remain inactive and must not be treated as migrated content. The old `90-3d-engine.js` and `99-books-navigation.js` remain inactive pending dependency analysis.
+
+### Protected scope
+
+`mock-test-engine.js` and all Class 12 runtime/content have not been changed. The Mock Test/PYQ placeholders remain as before.
+
+### Verification on this branch
+
+- JavaScript syntax parsed successfully for `app.js`, `src/core/storage.js`, `src/core/theme.js`, `src/core/language.js`, and `mock-test-engine.js` using a JavaScript parser check.
+- `index.html` now references the three extracted core files and the updated app runtime in dependency order.
+- Browser/Android interaction testing has not yet been performed.
