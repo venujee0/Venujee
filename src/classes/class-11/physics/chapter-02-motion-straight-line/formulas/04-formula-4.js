@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-motion-straight-line';})[0];if(!ch)throw new Error('Missing chapter 2');var B=function(en,hi){return {en:en,hi:hi};};ch.formulas.push([B("Uniformly accelerated motion","समान त्वरण की गति"),"v=u+at ; s=ut+½at² ; v²=u²+2as ; s=(u+v)t/2"]);})();

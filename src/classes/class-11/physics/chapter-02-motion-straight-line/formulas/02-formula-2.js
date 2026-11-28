@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-motion-straight-line';})[0];if(!ch)throw new Error('Missing chapter 2');var B=function(en,hi){return {en:en,hi:hi};};ch.formulas.push([B("Average speed and velocity","औसत चाल और वेग"),"v̄=Δx/Δt ; average speed=total distance/total time"]);})();
