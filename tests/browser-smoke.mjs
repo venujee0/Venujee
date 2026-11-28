@@ -20,7 +20,7 @@ try {
 
   await page.locator("#pg-next").click();
   await page.locator("#app .paper").waitFor({ state: "visible" });
-  await page.locator("#homebtn").click();
+  await page.locator("a.brand").click();
   await page.locator("#app .hero h1").waitFor({ state: "visible" });
 
   await page.locator('#app a[href="#c11"]').first().click();
@@ -31,11 +31,16 @@ try {
   await page.locator("#app .op-t").filter({ hasText: "Motion in a Straight Line" }).waitFor({ state: "visible" });
 
   const topicRows = page.locator("#app .tl-list a.tl");
-  await topicRows.first().click();
+  await topicRows.filter({ hasText: "2.1 Motion and reference frame" }).click();
   await page.locator("#app .paper").waitFor({ state: "visible" });
   await page.locator("#app .d3 canvas").waitFor({ state: "visible" });
 
-  await page.locator("#pg-next").click();
+  await page.locator("a.brand").click();
+  await page.locator('#app a[href="#c11"]').first().click();
+  await page.locator('#app a[href="#b11-physics"]').click();
+  await page.locator('#app a[href="#b11-physics-toc"]').click();
+  await page.locator("#app .tl-list a.tl").nth(1).click();
+  await page.locator("#app .tl-list a.tl").filter({ hasText: "2.3 Average speed and average velocity" }).click();
   await page.locator("#app .paper").waitFor({ state: "visible" });
   await page.locator("#app .diagram2d").waitFor({ state: "visible" });
 
