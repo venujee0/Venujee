@@ -82,7 +82,7 @@ var pager=document.getElementById('pager');
 var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var cur={book:false,prev:'',next:''};
 
-function t(o){return o[lang]}
+function t(o){if(o==null){console.warn('Venu JEE: missing bilingual text value');return '';}if(typeof o==='string')return o;return o[lang]||o.en||o.hi||''}
 function ot(o){return (typeof o==='string')?o:o[lang]}
 function getDone(){try{var a=JSON.parse(LS.get('venu.done')||'[]');return Array.isArray(a)?a:[]}catch(e){return []}}
 function isDone(id){return getDone().indexOf(id)>-1}
