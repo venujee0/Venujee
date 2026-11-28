@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.xtgraph=function(l){return DG.flow(l==='hi'?['x–t का secant ढाल','औसत वेग','स्पर्शरेखा ढाल = तात्क्षणिक वेग']:['Secant slope of x–t','Average velocity','Tangent slope = instantaneous velocity'],l==='hi'?'स्थिति-समय ग्राफ':'Position-time graph')};})();

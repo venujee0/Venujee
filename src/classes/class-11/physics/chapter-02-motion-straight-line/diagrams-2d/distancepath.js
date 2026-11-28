@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.distancepath=function(l){return DG.flow(l==='hi'?['5 m पूर्व','3 m पश्चिम','दूरी 8 m; विस्थापन 2 m पूर्व']:['5 m east','3 m west','Distance 8 m; displacement 2 m east'],l==='hi'?'पथ लंबाई बनाम शुद्ध स्थिति परिवर्तन':'Path length versus net position change')};})();
