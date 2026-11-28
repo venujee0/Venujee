@@ -206,7 +206,7 @@ var tx=0,ty=0,tok=false;
 app.addEventListener('touchstart',function(e){
   if(!e.touches||!e.touches.length)return;
   var target=e.target,p0=e.touches[0];tx=p0.clientX;ty=p0.clientY;
-  tok=!!(target&&target.closest)&&!target.closest('a,button,input,textarea,select,.fx,.eq,.mx,.dt,.d3');
+  tok=!!(target&&target.closest)&&!target.closest('a,button,input,textarea,select,.fx,.eq,.mx,.dt,.d3,.fig2,.diagram2d');
 },{passive:true});
 app.addEventListener('touchend',function(e){
   if(!tok||!cur.book||!e.changedTouches||!e.changedTouches.length){tok=false;return}
