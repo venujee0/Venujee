@@ -33,7 +33,7 @@ try {
 
   const chapter2Links = await page.locator("#app .tl-list a.tl").evaluateAll(els => els
     .map(a => ({ href: a.getAttribute("href"), text: a.innerText.trim() }))
-    .filter(item => /^2\\./.test(item.text) && item.href));
+    .filter(item => /^2\./.test(item.text) && item.href));
   if (chapter2Links.length < 10) throw new Error("Expected Chapter 2 topic links, found " + chapter2Links.length);
   for (const item of chapter2Links) {
     await page.goto(baseURL + item.href, { waitUntil: "domcontentloaded" });
