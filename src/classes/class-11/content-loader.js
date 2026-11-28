@@ -340,7 +340,9 @@ var root=document.getElementById('app'), index=0, batchSize=16, loaded=0;
 function escapeHTML(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function status(){
  if(!root)return;
- root.innerHTML='<div class="in startup" role="status" aria-live="polite" style="padding:48px 18px;text-align:center;min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><div aria-hidden="true" style="width:30px;height:30px;border:3px solid var(--edge,#64748b);border-top-color:var(--accent,#e879a9);border-radius:50%;animation:venu-spin .8s linear infinite"></div><strong>Venu JEE</strong><span>Loading study material…</span><small>'+loaded+' / '+files.length+' modules loaded</small></div>';
+ var count=root.querySelector('.startup-count');
+ if(count){count.textContent=loaded+' / '+files.length+' modules loaded';return;}
+ if(loaded===0)root.innerHTML='<div class="in startup" role="status" aria-live="polite" style="padding:48px 18px;text-align:center;min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><div aria-hidden="true" style="width:30px;height:30px;border:3px solid var(--edge,#64748b);border-top-color:var(--accent,#e879a9);border-radius:50%;animation:venu-spin .8s linear infinite"></div><strong>Venu JEE</strong><span>Loading study material…</span><small class="startup-count">0 / '+files.length+' modules loaded</small></div>';
 }
 function fail(src,error){
  if(root)root.innerHTML='<div class="in" role="alert" style="padding:28px 18px"><h2>Venu JEE could not finish loading</h2><p>Failed module: <code>'+escapeHTML(src)+'</code></p><p>'+escapeHTML(error&&error.message||'Network or script loading error')+'</p><button type="button" onclick="location.reload()">Reload website</button></div>';
