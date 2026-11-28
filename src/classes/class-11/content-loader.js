@@ -284,7 +284,6 @@
   "src/classes/class-11/physics/chapter-02-motion-straight-line/topics/10-variable-acceleration.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/topics/11-free-fall-vertical-throw.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/topics/12-relative-motion.js",
-  "src/classes/class-11/physics/chapter-02-motion-straight-line/visuals.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/examples/01-example-1.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/examples/02-example-2.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/examples/03-example-3.js",
