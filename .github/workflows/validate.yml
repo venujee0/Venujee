@@ -20,3 +20,17 @@ jobs:
         run: python build.py
       - name: Parse every active JavaScript module
         run: node tests/check-js-syntax.mjs
+      - name: Install browser test runner
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser smoke tests
+        run: |
+          python -m http.server 4173 > /tmp/venu-http.log 2>&1 &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID" EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node tests/browser-smoke.mjs

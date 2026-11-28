@@ -1,5 +1,7 @@
-// Sequential loader: chapter shells, models, content, visuals, application, book model, page renderer, views, navigation and tests.
-(function(){'use strict';var files=[
+// Ordered, batched loader: downloads a small batch concurrently but executes scripts in manifest order.
+(function(){
+'use strict';
+var files=[
   "src/classes/class-11/chemistry/chapter-01-mole-concept/index.js",
   "src/classes/class-11/physics/chapter-01-units-dimensions/index.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/index.js",
@@ -333,4 +335,29 @@
   "src/features/notes/page-renderer.js",
   "src/features/books/navigation.js",
   "mock-test-engine.js"
-];var i=0;function fail(src){var root=document.getElementById('app');if(root)root.innerHTML='<div class="in"><p role="alert">Venu JEE could not load '+src+'. Refresh the page or report this issue.</p></div>';}function next(){if(i>=files.length)return;var src=files[i++],el=document.createElement('script');el.src=src+'?v=10';el.onload=next;el.onerror=function(){fail(src)};document.body.appendChild(el);}next();})();
+];
+var root=document.getElementById('app'), index=0, batchSize=16, loaded=0;
+function escapeHTML(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function status(){
+ if(!root)return;
+ root.innerHTML='<div class="in startup" role="status" aria-live="polite" style="padding:48px 18px;text-align:center;min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><div aria-hidden="true" style="width:30px;height:30px;border:3px solid var(--edge,#64748b);border-top-color:var(--accent,#e879a9);border-radius:50%;animation:venu-spin .8s linear infinite"></div><strong>Venu JEE</strong><span>Loading study material…</span><small>'+loaded+' / '+files.length+' modules loaded</small></div>';
+}
+function fail(src,error){
+ if(root)root.innerHTML='<div class="in" role="alert" style="padding:28px 18px"><h2>Venu JEE could not finish loading</h2><p>Failed module: <code>'+escapeHTML(src)+'</code></p><p>'+escapeHTML(error&&error.message||'Network or script loading error')+'</p><button type="button" onclick="location.reload()">Reload website</button></div>';
+}
+function loadBatch(){
+ if(index>=files.length)return;
+ var batch=files.slice(index,index+batchSize);index+=batch.length;
+ var jobs=batch.map(function(src){
+  return new Promise(function(resolve,reject){
+   var el=document.createElement('script');el.src=src+'?v=11';el.async=false;
+   el.onload=function(){loaded++;resolve();};
+   el.onerror=function(){reject(new Error('Network request failed'));};
+   document.body.appendChild(el);
+  });
+ });
+ Promise.all(jobs).then(function(){status();loadBatch()}).catch(function(error){fail(batch.find(function(src){return !document.querySelector('script[src^="'+src+'?v=11"]')})||batch[0],error)});
+}
+var style=document.createElement('style');style.textContent='@keyframes venu-spin{to{transform:rotate(360deg)}}';document.head.appendChild(style);
+status();loadBatch();
+})();
