@@ -40,11 +40,23 @@ window.diagram2D=function(name,l){
   setops:[['Union A ∪ B','संघ A ∪ B'],['Intersection A ∩ B','प्रतिच्छेद A ∩ B'],['Difference A − B','अंतर A − B']],
   threesets:[['A only','केवल A'],['A ∩ B ∩ C','A ∩ B ∩ C'],['Seven Venn regions','वेन के सात क्षेत्र']],
   juice:[['Mango: 180','आम: 180'],['Orange: 150','संतरा: 150'],['Both / neither','दोनों / कोई नहीं']],
-  fourchoice:[['Include element','अवयव शामिल'],['Exclude element','अवयव छोड़ें'],['2ⁿ subsets','2ⁿ उपसमुच्चय']]
+  fourchoice:[['Include element','अवयव शामिल'],['Exclude element','अवयव छोड़ें'],['2ⁿ subsets','2ⁿ उपसमुच्चय']],
+  motiontrack:[['Position x','स्थिति x'],['Velocity v','वेग v'],['Direction of motion','गति की दिशा']],
+  velocitytime:[['Velocity v','वेग v'],['Time t','समय t'],['Slope = acceleration','ढाल = त्वरण']],
+  freefall:[['Initial velocity u','प्रारंभिक वेग u'],['Maximum height','अधिकतम ऊँचाई'],['Gravity g downward','गुरुत्व g नीचे']]
  };
  var d=data[name]||[[name,'मॉडल'],['Part / region','भाग / क्षेत्र'],['Measurement / relation','मापन / संबंध']];
  var labs=d.map(function(x){return window.VENU_RUNTIME.esc(l==='hi'?x[1]:x[0])});
  var isChem=['states','classify','gasvol','limiting'].indexOf(name)>=0;
+ if(name==='motiontrack'){
+  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'एक विमीय गति पथ':'One-dimensional motion track')+'"><path d="M85 118H555" stroke="#64748b" stroke-width="4"/><path d="M555 118l-12 -7v14z" fill="#64748b"/><g stroke="#334155" stroke-width="2"><path d="M145 106v24M245 106v24M345 106v24M445 106v24"/></g><g font-size="12" fill="#111827" text-anchor="middle"><text x="145" y="151">−2</text><text x="245" y="151">−1</text><text x="345" y="151">0</text><text x="445" y="151">+1</text><text x="545" y="151">+2</text></g><circle cx="445" cy="118" r="13" fill="#eab308" stroke="#92400e" stroke-width="2"/><path d="M445 78H515m-10 -8 10 8 -10 8" stroke="#2563eb" stroke-width="4" fill="none"/><g font-size="13" fill="#111827" font-weight="600"><text x="320" y="25" text-anchor="middle">'+labs[0]+'</text><text x="480" y="63" text-anchor="middle">'+labs[1]+'</text><text x="320" y="195" text-anchor="middle">'+labs[2]+'</text></g><text x="555" y="105" font-size="12" fill="#111827">+x</text></svg>';
+ }
+ if(name==='velocitytime'){
+  return '<svg class="diagram2d" viewBox="0 0 640 250" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'वेग समय ग्राफ':'Velocity-time graph')+'"><path d="M90 205V35M90 125H570" stroke="#334155" stroke-width="2.5"/><path d="M90 205l-7 -12h14zM570 125l-12 -7v14z" fill="#334155"/><path d="M110 185L500 55L500 125L110 125Z" fill="#93c5fd" fill-opacity=".35"/><path d="M110 185L500 55" stroke="#2563eb" stroke-width="4" fill="none"/><g font-size="13" fill="#111827" font-weight="600"><text x="570" y="150" text-anchor="end">t</text><text x="70" y="35">v</text><text x="330" y="34" text-anchor="middle">'+labs[2]+'</text><text x="315" y="170" text-anchor="middle">'+labs[0]+' × '+labs[1]+'</text></g><text x="345" y="220" text-anchor="middle" font-size="12" fill="#475569">'+window.VENU_RUNTIME.esc(l==='hi'?'क्षेत्रफल = विस्थापन':'Area = displacement')+'</text></svg>';
+ }
+ if(name==='freefall'){
+  return '<svg class="diagram2d" viewBox="0 0 640 250" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'ऊर्ध्वाधर प्रक्षेप और मुक्त पतन':'Vertical throw and free fall')+'"><path d="M170 210V35" stroke="#64748b" stroke-width="2" stroke-dasharray="6 5"/><path d="M170 190V90" stroke="#2563eb" stroke-width="4"/><path d="M170 90l-8 12h16z" fill="#2563eb"/><circle cx="170" cy="78" r="12" fill="#eab308" stroke="#92400e" stroke-width="2"/><circle cx="170" cy="48" r="7" fill="#f59e0b" opacity=".55"/><circle cx="170" cy="130" r="7" fill="#f59e0b" opacity=".55"/><path d="M430 72V160m-8 -12 8 12 8 -12" stroke="#dc2626" stroke-width="4" fill="none"/><path d="M145 210H195" stroke="#334155" stroke-width="3"/><g font-size="13" fill="#111827" font-weight="600"><text x="170" y="25" text-anchor="middle">'+labs[1]+'</text><text x="260" y="82">'+labs[0]+'</text><text x="455" y="112">'+labs[2]+'</text></g><text x="320" y="235" text-anchor="middle" font-size="12" fill="#475569">'+window.VENU_RUNTIME.esc(l==='hi'?'ऊपर जाते समय भी g नीचे की ओर रहता है':'Gravity points downward during both ascent and descent')+'</text></svg>';
+ }
  if(name==='vernier'||name==='vzero'){
   var mt='',vt='',labels='';
   for(var i=0;i<=50;i++){var x=95+i*8.5;mt+='<path d="M'+x.toFixed(1)+' 92v'+(i%10===0?19:i%5===0?14:8)+'" stroke="#334155" stroke-width="1.4"/>'}
