@@ -2,9 +2,9 @@
 
 ## Working branch
 
-`refactor/modular-architecture`
+`main`
 
-The migration is isolated on this branch. **The main branch and deployed/main website have not been changed.** Do not merge until browser and device checks pass.
+The active website is maintained on `main`. Keep fixes on this branch unless the owner explicitly approves a branch change.
 
 ## Runtime map
 
@@ -35,10 +35,11 @@ The migration is isolated on this branch. **The main branch and deployed/main we
 |---|---|---:|---:|---:|---:|---:|---:|
 | Chemistry | Some Basic Concepts of Chemistry (Mole Concept) | 28 | 33 | 16 | 1 | 12 | 6 |
 | Physics | Units, Dimensions and Measurement | 40 | 31 | 8 | 1 | 11 | 4 |
+| Physics | Motion in a Straight Line | 20 | 20 | 8 | 1 | 3 | 4 |
 | Mathematics | Sets | 23 | 25 | 8 | 1 | 9 | 3 |
-| **Total** | | **91** | **89** | **32** | **3** | **32** | **13** |
+| **Total** | | **111** | **109** | **40** | **4** | **35** | **17** |
 
-There are also 3 real-apparatus photo reference modules (Vernier caliper, screw gauge and titration). The loader currently lists 271 sequential scripts, including chapter shells, individual content and visual modules, app bootstrap, navigation and Mock Test route.
+There are also 3 real-apparatus photo reference modules (Vernier caliper, screw gauge and titration). The loader currently lists 333 sequential scripts, including chapter shells, individual content and visual modules, app bootstrap, navigation and Mock Test route.
 
 ## Remaining architecture work
 
@@ -51,7 +52,7 @@ There are also 3 real-apparatus photo reference modules (Vernier caliper, screw 
 
 ## Structural verification
 
-- `index.html` local file references and all 271 sequential loader paths were checked against the branch tree; none were missing.
+- `index.html` local file references and all 333 sequential loader paths were checked against the branch tree; none were missing.
 - JavaScript parser checks passed for the app bootstrap, navigation, content loader, chapter shells, shared visual engines, extension module and generated topic/example/formula/model/diagram/photo modules at creation time.
 - `app.js` is now about 2.9 KB, down from about 254 KB at the start of this branch. Navigation is in `src/features/books/navigation.js` (about 19.7 KB).
 - `build.py` checks required root files, index references and every path in the sequential loader manifest.
