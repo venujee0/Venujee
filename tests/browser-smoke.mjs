@@ -7,7 +7,8 @@ page.on("pageerror", error => errors.push(error.stack || error.message));
 page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
 page.on("requestfailed", request => errors.push("Request failed: " + request.url()));
 try {
-  await page.goto("http://127.0.0.1:4173/", { waitUntil: "domcontentloaded" });
+  const baseURL = process.env.BASE_URL || "http://127.0.0.1:4173/";
+  await page.goto(baseURL, { waitUntil: "domcontentloaded" });
   await page.locator("#app .hero h1").waitFor({ state: "visible", timeout: 60000 });
   if (!(await page.locator("#app").innerText()).includes("JEE")) throw new Error("Home page content did not render");
 
@@ -30,8 +31,17 @@ try {
   await chapterRows.nth(1).click();
   await page.locator("#app .op-t").filter({ hasText: "Motion in a Straight Line" }).waitFor({ state: "visible" });
 
-  const topicRows = page.locator("#app .tl-list a.tl");
-  await topicRows.filter({ hasText: "2.1 Motion and reference frame" }).click();
+  const allChapter2Links = await page.locator("#app .tl-list a.tl").evaluateAll(els => els.map(a => ({href:a.getAttribute("href"), text:a.innerText.trim()})));
+  for (const item of allChapter2Links) {
+    if (!item.href) continue;
+    await page.locator('#app .tl-list a.tl[href="' + item.href + '"]').click();
+    await page.locator("#app .paper").waitFor({ state: "visible" });
+    const visibleText = await page.locator("#app").innerText();
+    if (visibleText.includes("Venu JEE loading error")) throw new Error("Chapter 2 topic failed: " + item.text + "\\n" + visibleText.slice(0,500));
+  }
+  console.log("PASS: all Chapter 2 topic links rendered: " + allChapter2Links.length);
+
+  await page.locator("#app .tl-list a.tl").filter({ hasText: "2.1 Motion and reference frame" }).click();
   await page.locator("#app .paper").waitFor({ state: "visible" });
   await page.locator("#app .d3 canvas").waitFor({ state: "visible" });
 
