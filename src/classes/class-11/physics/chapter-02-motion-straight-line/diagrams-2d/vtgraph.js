@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.vtgraph=function(l){return DG.flow(l==='hi'?['v–t का ढाल = त्वरण','क्षेत्रफल = विस्थापन','चाल के लिए क्षेत्रफल का परिमाण जोड़ें']:['Slope of v–t = acceleration','Area = displacement','For distance add area magnitudes'],l==='hi'?'वेग-समय ग्राफ':'Velocity-time graph')};})();

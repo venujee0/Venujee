@@ -308,6 +308,7 @@
   "src/classes/class-11/physics/chapter-02-motion-straight-line/examples/10-example-10.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/examples/11-example-11.js",
   "src/classes/class-11/physics/chapter-02-motion-straight-line/examples/12-example-12.js",
+  "src/classes/class-11/physics/chapter-02-motion-straight-line/diagrams-2d/vtgraph.js",
   "src/classes/class-11/content-extensions.js",
   "app.js",
   "src/features/home/home.js",
