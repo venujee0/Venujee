@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-motion-straight-line';})[0];if(!ch)throw new Error('Missing chapter 2');var B=function(en,hi){return {en:en,hi:hi};};ch.formulas.push([B("Relative motion","सापेक्ष गति"),"x_AB=x_A−x_B ; v_AB=v_A−v_B ; a_AB=a_A−a_B"]);})();

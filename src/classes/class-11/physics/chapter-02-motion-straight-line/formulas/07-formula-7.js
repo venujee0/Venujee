@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-motion-straight-line';})[0];if(!ch)throw new Error('Missing chapter 2');var B=function(en,hi){return {en:en,hi:hi};};ch.formulas.push([B("Free fall and vertical throw","मुक्त पतन और ऊर्ध्वाधर प्रक्षेप"),"a=−g ; v=u−gt ; y=ut−½gt² ; H=u²/(2g) ; T=2u/g"]);})();
