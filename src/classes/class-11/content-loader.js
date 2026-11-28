@@ -352,13 +352,13 @@ function loadBatch(){
  var batch=files.slice(index,index+batchSize);index+=batch.length;
  var jobs=batch.map(function(src){
   return new Promise(function(resolve,reject){
-   var el=document.createElement('script');el.src=src+'?v=11';el.async=false;
+   var el=document.createElement('script');el.src=src+'?v=12';el.async=false;
    el.onload=function(){loaded++;resolve();};
    el.onerror=function(){reject(new Error('Network request failed'));};
    document.body.appendChild(el);
   });
  });
- Promise.all(jobs).then(function(){status();loadBatch()}).catch(function(error){fail(batch.find(function(src){return !document.querySelector('script[src^="'+src+'?v=11"]')})||batch[0],error)});
+ Promise.all(jobs).then(function(){status();loadBatch()}).catch(function(error){fail(batch.find(function(src){return !document.querySelector('script[src^="'+src+'?v=12"]')})||batch[0],error)});
 }
 var style=document.createElement('style');style.textContent='@keyframes venu-spin{to{transform:rotate(360deg)}}';document.head.appendChild(style);
 status();loadBatch();
