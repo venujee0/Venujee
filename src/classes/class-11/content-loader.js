@@ -354,11 +354,11 @@ function loadBatch(){
   return new Promise(function(resolve,reject){
    var el=document.createElement('script');el.src=src+'?v=13';el.async=false;
    el.onload=function(){loaded++;resolve();};
-   el.onerror=function(){reject(new Error('Network request failed'));};
+   el.onerror=function(){var error=new Error('Network request failed');error.src=src;reject(error);};
    document.body.appendChild(el);
   });
  });
- Promise.all(jobs).then(function(){status();loadBatch()}).catch(function(error){fail(batch.find(function(src){return !document.querySelector('script[src^="'+src+'?v=12"]')})||batch[0],error)});
+ Promise.all(jobs).then(function(){status();loadBatch()}).catch(function(error){fail(error.src||batch[0],error)});
 }
 var style=document.createElement('style');style.textContent='@keyframes venu-spin{to{transform:rotate(360deg)}}';document.head.appendChild(style);
 status();loadBatch();
