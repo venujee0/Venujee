@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 const errors = [];
-page.on("pageerror", error => errors.push(error.message));
+page.on("pageerror", error => errors.push(error.stack || error.message));
 page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
 page.on("requestfailed", request => errors.push("Request failed: " + request.url()));
 try {
@@ -42,6 +42,12 @@ try {
   await page.locator("#app .tl-list a.tl").nth(1).click();
   await page.locator("#app .tl-list a.tl").filter({ hasText: "2.3 Average speed and average velocity" }).click();
   await page.locator("#app .paper").waitFor({ state: "visible" });
+  console.log("Chapter 2 diagram diagnostic:", JSON.stringify(await page.evaluate(() => ({
+    errorText: document.querySelector("#app")?.innerText?.slice(0,700),
+    chapter: window.VENU_CHAPTERS_DATA?.find(c => c.id === "physics-motion-straight-line")?.sections?.map(s => ({title:s.h?.en,d3:s.d3,dg:s.dg,cap:!!(s.cap3||s.cap)})),
+    diagramKeys: Object.keys(window.VENU_DG || {}),
+    runtimeLanguage: window.VENU_LANGUAGE
+  }))));
   await page.locator("#app .diagram2d").waitFor({ state: "visible" });
 
   await page.locator('[data-lang="hi"]').first().click();
