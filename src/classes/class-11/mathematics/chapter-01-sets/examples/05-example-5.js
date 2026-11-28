@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('Find n(P(P(P(∅)))).','n(P(P(P(∅)))) ज्ञात करो।'),
+   a:B('n(∅) = 0. n(P(∅)) = 1, n(P(P(∅))) = 2, n(P(P(P(∅)))) = 2² = <b>4</b>.','n(∅) = 0। n(P(∅)) = 1, n(P(P(∅))) = 2, n(P(P(P(∅)))) = 2² = <b>4</b>।')});})();

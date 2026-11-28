@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('Solution preparation','विलयन की तैयारी'),'mass (g) = M × molar mass × V<sub>final</sub>(L)']);})();

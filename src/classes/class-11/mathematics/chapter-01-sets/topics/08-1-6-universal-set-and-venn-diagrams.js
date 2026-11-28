@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.6 Universal set and Venn diagrams','1.6 सार्वत्रिक समुच्चय एवं वेन आरेख'),
+  body:B('<p>The big set inside which all the discussion happens is the <b>universal set</b> U. In a Venn diagram U is a rectangle and subsets are circles.</p><p class="fx">B ⊂ A ⊂ U</p>',
+  '<p>जिस बड़े समुच्चय के अंदर सारी बात हो रही है वह <b>सार्वत्रिक समुच्चय</b> U है। वेन आरेख में U को आयत और उपसमुच्चयों को वृत्तों से दिखाते हैं।</p><p class="fx">B ⊂ A ⊂ U</p>'),
+  d3:'venn',cap3:B('Circles appear inside the universal set; the subset B sits inside the bigger circle A.','सार्वत्रिक समुच्चय के अंदर वृत्त आते हैं; उपसमुच्चय B बड़े वृत्त A के अंदर बैठता है।')});})();

@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('Average atomic mass','औसत परमाणु द्रव्यमान'),'M̄ = ΣM<sub>i</sub>x<sub>i</sub> / Σx<sub>i</sub>']);})();

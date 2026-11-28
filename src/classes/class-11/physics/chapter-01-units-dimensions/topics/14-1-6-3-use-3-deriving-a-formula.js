@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='physics-units-dimensions';})[0];if(!ch)throw new Error('Missing chapter physics-units-dimensions');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.6.3 Use 3: deriving a formula','1.6.3 उपयोग 3: सूत्र व्युत्पन्न करना'),
+  body:B('<p>Assume the quantity depends on a power-product of some variables: y = k x₁ᵃ x₂ᵇ x₃ᶜ. Compare the powers of M, L, T and find a, b, c. The constant k is <b>not</b> found by this method. See Example 9.</p>',
+  '<p>मान लो राशि कुछ चरों के घात-गुणनफल पर निर्भर है: y = k x₁ᵃ x₂ᵇ x₃ᶜ। M, L, T की घातों की तुलना करके a, b, c निकालो। नियतांक k इस विधि से <b>नहीं</b> मिलता। उदाहरण 9 देखो।</p>'),
+  d3:'drop',cap3:B('The drop stretches and flattens; surface tension tries to bring it back to a sphere. Change r and S.','बूँद लंबी और चपटी होती है; पृष्ठ तनाव उसे वापस गोला बनाने की कोशिश करता है। r और S बदलकर देखो।')});})();

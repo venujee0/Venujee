@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('Molality and molarity','मोललता और मोलरता'),'m = 1000M / (1000d − M·M<sub>2</sub>), M = 10d(%)/M<sub>2</sub>']);})();

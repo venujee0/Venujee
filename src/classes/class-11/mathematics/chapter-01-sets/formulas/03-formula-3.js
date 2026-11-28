@@ -1,0 +1,1 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.formulas.push([B('De Morgan','डी मॉर्गन'),'(A ∪ B)′ = A′ ∩ B′, (A ∩ B)′ = A′ ∪ B′']);})();

@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('4 g NaOH in 250 mL solution. Find the molarity.','4 g NaOH, 250 mL विलयन में। मोलरता ज्ञात करो।'),
+  a:B('n = 0.1; M = 0.1/0.250 = <b>0.4 M</b>.','n = 0.1; M = 0.1/0.250 = <b>0.4 M</b>।')});})();

@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('Find the percentage composition of ethanol, C₂H₅OH.','एथेनॉल C₂H₅OH का प्रतिशत संघटन ज्ञात करो।'),
+  a:B('M = 46. C = 24/46 = 52.17%; H = 6/46 = 13.04%; O = 16/46 = 34.78%.','M = 46। C = 24/46 = 52.17%; H = 6/46 = 13.04%; O = 16/46 = 34.78%।')});})();

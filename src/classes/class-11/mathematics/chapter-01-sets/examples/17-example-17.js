@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'fnd',q:B('How many subsets of {1, …, 10} have at least one odd number?','{1, …, 10} के कितने उपसमुच्चयों में कम से कम एक विषम संख्या है?'),
+   a:B('Total − (only even ones) = 2¹⁰ − 2⁵ = <b>992</b>.','कुल − (सिर्फ़ सम वाले) = 2¹⁰ − 2⁵ = <b>992</b>।')});})();

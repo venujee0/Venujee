@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.siunits=function(l){return DG.flow(l==='hi'?['7 मूल राशियाँ','7 SI मात्रक','व्युत्पन्न मात्रक']:['7 base quantities','7 SI units','Derived units'],l==='hi'?'SI मात्रकों की संरचना':'SI unit structure')};})();

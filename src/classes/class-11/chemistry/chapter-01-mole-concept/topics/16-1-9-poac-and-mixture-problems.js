@@ -1,0 +1,3 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.9 POAC and mixture problems','1.9 POAC एवं मिश्रण के प्रश्न'),
+  body:B('<p><b>Principle of Atom Conservation:</b> the moles of atoms of an element are equal on both sides of a reaction, so you do not even need the fully balanced equation. See Examples 18 and 19.</p>',
+  '<p><b>परमाणु संरक्षण का सिद्धांत:</b> किसी तत्व के परमाणुओं के मोल अभिक्रिया के दोनों ओर बराबर होते हैं, इसलिए पूरा संतुलित समीकरण भी ज़रूरी नहीं। उदाहरण 18 और 19 देखो।</p>')});})();

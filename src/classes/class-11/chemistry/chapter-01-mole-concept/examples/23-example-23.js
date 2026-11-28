@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'adv',q:B('N₂O₄ ⇌ 2NO₂ mixture has VD 30. Find α.','N₂O₄ ⇌ 2NO₂ मिश्रण का VD 30 है। α ज्ञात करो।'),
+  a:B('D = 46. α = (46 − 30)/30 = <b>0.533</b>.','D = 46। α = (46 − 30)/30 = <b>0.533</b>।')});})();

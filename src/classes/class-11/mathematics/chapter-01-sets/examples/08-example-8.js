@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('Prove: (A ∪ B)′ = A′ ∩ B′.','सिद्ध करो: (A ∪ B)′ = A′ ∩ B′।'),
+   a:B('x ∈ (A ∪ B)′ ⟺ x ∉ A ∪ B ⟺ x ∉ A and x ∉ B ⟺ x ∈ A′ and x ∈ B′ ⟺ x ∈ A′ ∩ B′. Every step works both ways, so the sets are equal.','x ∈ (A ∪ B)′ ⟺ x ∉ A ∪ B ⟺ x ∉ A और x ∉ B ⟺ x ∈ A′ और x ∈ B′ ⟺ x ∈ A′ ∩ B′। हर कदम दोनों तरफ़ चलता है, इसलिए समुच्चय समान हैं।')});})();

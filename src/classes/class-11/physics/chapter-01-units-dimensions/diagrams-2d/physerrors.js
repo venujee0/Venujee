@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.physerrors=function(l){return DG.flow(l==='hi'?['मापन','निरपेक्ष त्रुटि','सापेक्ष / प्रतिशत']:['Measurement','Absolute error','Relative / percentage'],l==='hi'?'मापन त्रुटि की प्रक्रिया':'Measurement-error pathway')};})();

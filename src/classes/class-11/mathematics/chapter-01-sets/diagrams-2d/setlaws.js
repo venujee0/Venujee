@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.setlaws=function(l){return DG.flow(l==='hi'?['तत्समक / पूरक','वितरण / अवशोषण','डी मॉर्गन']:['Identity / complement','Distributive / absorption','De Morgan'],l==='hi'?'समुच्चय बीजगणित के नियम':'Set algebra laws')};})();

@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.5 Intervals (subsets of R)','1.5 अंतराल (R के उपसमुच्चय)'),
+  body:B('<p>For a &lt; b: (a, b) is open, [a, b] is closed, [a, b) and (a, b] are half-open.</p><p>Empty circle = point not included; filled circle = included. Length = b − a. Next to ∞ always use an open bracket: [2, ∞) = {x : x ≥ 2}, R = (−∞, ∞). See Example 7.</p>',
+  '<p>a &lt; b के लिए: (a, b) खुला, [a, b] बंद, [a, b) और (a, b] अर्द्ध-खुले हैं।</p><p>खाली गोला = बिंदु शामिल नहीं; भरा गोला = शामिल। लंबाई = b − a। ∞ के साथ हमेशा खुला कोष्ठक: [2, ∞) = {x : x ≥ 2}, R = (−∞, ∞)। उदाहरण 7 देखो।</p>'),
+  d3:'intervals',cap3:B('The interval fills along the number line; the end points turn open or closed.','अंतराल संख्या रेखा पर भरता है; अंत बिंदु खुले या बंद होते हैं।')});})();

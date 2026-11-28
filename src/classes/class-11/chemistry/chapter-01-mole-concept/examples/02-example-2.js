@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('Chlorine: ³⁵Cl (34.97 u, 75.77%) and ³⁷Cl (36.97 u, 24.23%). Find the average atomic mass.','क्लोरीन: ³⁵Cl (34.97 u, 75.77%) और ³⁷Cl (36.97 u, 24.23%)। औसत परमाणु द्रव्यमान ज्ञात करो।'),
+   a:B('34.97(0.7577) + 36.97(0.2423) = <b>35.45 u</b>.','34.97(0.7577) + 36.97(0.2423) = <b>35.45 u</b>।')});})();

@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.physdims=function(l){return DG.flow(l==='hi'?['मूल राशियाँ','घातों में लिखें','विमा सूत्र']:['Base quantities','Write powers','Dimensional formula'],l==='hi'?'विमा सूत्र बनाने की प्रक्रिया':'Build a dimensional formula')};})();

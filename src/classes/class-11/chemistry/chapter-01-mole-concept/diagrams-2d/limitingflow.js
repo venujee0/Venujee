@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.limitingflow=function(l){return DG.flow(l==='hi'?['मोल / गुणांक','सबसे छोटा मान','उत्पाद + अतिरिक्त']:['Moles / coefficient','Smallest value','Product + excess'],l==='hi'?'सीमांत अभिकर्मक की पहचान':'Identify limiting reagent')};})();

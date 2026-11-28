@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('How many electrons are in 1.6 g of CH₄?','1.6 g CH₄ में कितने इलेक्ट्रॉन हैं?'),
+   a:B('n = 1.6/16 = 0.1; each molecule has 10 electrons; total = 1 mol = <b>6.022×10²³</b>.','n = 1.6/16 = 0.1; प्रति अणु 10 इलेक्ट्रॉन; कुल = 1 मोल = <b>6.022×10²³</b>।')});})();

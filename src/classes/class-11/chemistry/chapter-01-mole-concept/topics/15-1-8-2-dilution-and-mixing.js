@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.8.2 Dilution and mixing','1.8.2 तनुकरण एवं मिश्रण'),
+  body:B('<p class="fx">M₁V₁ = M₂V₂ &nbsp; M<sub>mix</sub> = (M₁V₁ + M₂V₂)/(V₁ + V₂)</p><p>(same solute, no reaction). Always add acid to water, never the reverse. See Examples 16 and 17.</p>',
+  '<p class="fx">M₁V₁ = M₂V₂ &nbsp; M<sub>मिश्रण</sub> = (M₁V₁ + M₂V₂)/(V₁ + V₂)</p><p>(एक ही विलेय, कोई अभिक्रिया नहीं)। अम्ल को हमेशा पानी में डालो, उल्टा कभी नहीं। उदाहरण 16 और 17 देखो।</p>'),
+  d3:'dilution',cap3:B('On adding water the number of solute particles stays the same but they spread apart. Move the slider.','पानी डालने पर विलेय कणों की संख्या वही रहती है पर वे दूर-दूर हो जाते हैं। स्लाइडर चलाओ।')});})();

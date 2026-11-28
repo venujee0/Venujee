@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.setcardinality=function(l){return DG.flow(l==='hi'?['n(A), n(B)','प्रतिच्छेद घटाएँ','संघ / पूरक']:['n(A), n(B)','Subtract intersection','Union / complement'],l==='hi'?'गणनांक में दोहरी गिनती':'Double-counting in cardinality')};})();

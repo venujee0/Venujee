@@ -1,0 +1,4 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.sections.push({h:B('1.11 Gas analysis (eudiometry)','1.11 गैस विश्लेषण (यूडियोमेट्री)'),
+  body:B('<p>CₓHᵧ + (x + y/4) O₂ → x CO₂ + (y/2) H₂O(l)</p><p>On cooling, water becomes liquid; KOH absorbs CO₂; the gas left is excess O₂. See Example 22.</p>',
+  '<p>CₓHᵧ + (x + y/4) O₂ → x CO₂ + (y/2) H₂O(द्र)</p><p>ठंडा करने पर पानी द्रव बन जाता है; KOH CO₂ सोख लेता है; बची गैस अधिक O₂ है। उदाहरण 22 देखो।</p>'),
+  d3:'eudio',cap3:B('Spark causes an explosion, water condenses, and KOH absorbs the CO₂.','स्पार्क से विस्फोट होता है, पानी जम जाता है और KOH CO₂ सोख लेता है।')});})();

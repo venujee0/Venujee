@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.concentration=function(l){return DG.flow(l==='hi'?['द्रव्यमान %','मोलरता mol/L','मोललता mol/kg']:['Mass %','Molarity mol/L','Molality mol/kg'],l==='hi'?'सांद्रता की परिभाषाएँ':'Concentration terms')};})();

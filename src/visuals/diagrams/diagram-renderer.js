@@ -1,0 +1,86 @@
+/* ---------- Diagrams ---------- */
+var sx=function(l,a,b){return l==='hi'?b:a};
+var VY='v<tspan dy="3" font-size="8.5">y</tspan><tspan dy="-3"> = 0</tspan>';
+var NA='N<tspan dy="3" font-size="8.5">A</tspan>';
+function blocks(cx,n,cls){var o='';for(var k=0;k<n;k++){o+='<rect class="'+cls+'" x="'+(cx-15)+'" y="'+(150-19*(k+1))+'" width="30" height="16" rx="3"/>'}return o}
+
+
+/* Paired 2D companion drawings for every interactive 3D model. Labels are bilingual. */
+window.diagram2D=function(name,l){
+ var T=function(locale,en,hi){return locale==='hi'?hi:en};
+ var data={
+  states:[['Solid','ठोस'],['Liquid','द्रव'],['Gas','गैस']],
+  classify:[['Pure substance','शुद्ध पदार्थ'],['Element / compound','तत्व / यौगिक'],['Mixture','मिश्रण']],
+  co2:[['Carbon atom','कार्बन परमाणु'],['Oxygen atoms','ऑक्सीजन परमाणु'],['CO₂ molecule','CO₂ अणु']],
+  gasvol:[['N₂: 1 volume','N₂: 1 आयतन'],['H₂: 3 volumes','H₂: 3 आयतन'],['NH₃: 2 volumes','NH₃: 2 आयतन']],
+  isotopes:[['³⁵Cl: 17p, 18n','³⁵Cl: 17p, 18n'],['³⁷Cl: 17p, 20n','³⁷Cl: 17p, 20n'],['Same atomic number','समान परमाणु क्रमांक']],
+  molemap:[['Mass (g)','द्रव्यमान (g)'],['Moles (n)','मोल (n)'],['Particles (N)','कण (N)']],
+  water:[['Oxygen atom','ऑक्सीजन परमाणु'],['Hydrogen atoms','हाइड्रोजन परमाणु'],['104.5° bond angle','104.5° बंध कोण']],
+  limiting:[['N₂: excess','N₂: आधिक्य'],['H₂: limiting','H₂: सीमांत'],['NH₃: product','NH₃: उत्पाद']],
+  dilution:[['Concentrated solution','सांद्र विलयन'],['Add solvent','विलायक मिलाएँ'],['Dilute solution','तनु विलयन']],
+  titration:[['Burette: titrant','ब्यूरेट: अनुमापक'],['Conical flask: analyte','शंक्वाकार फ्लास्क: विश्लेष्य'],['End point / indicator','अंतिम बिंदु / सूचक']],
+  eudio:[['Gas burette','गैस ब्युरेट'],['Absorption pipette','अवशोषण पिपेट'],['Volume change','आयतन परिवर्तन']],
+  dissoc:[['N₂O₄: colourless','N₂O₄: रंगहीन'],['2 NO₂: brown','2 NO₂: भूरा'],['Equilibrium ⇌','साम्यावस्था ⇌']],
+  solidangle:[['Area A','क्षेत्रफल A'],['Radius r','त्रिज्या r'],['Ω = A / r²','Ω = A / r²']],
+  parsec:[['Baseline','आधार रेखा'],['Parallax angle','लंबन कोण'],['Distance: 1 pc','दूरी: 1 pc']],
+  drop:[['Surface tension','पृष्ठ तनाव'],['Oscillating drop','दोलित बूँद'],['Restoring force','पुनर्स्थापक बल']],
+  string:[['Fixed end','स्थिर सिरा'],['Node / antinode','निस्पंद / प्रस्पंद'],['Wavelength λ','तरंगदैर्ध्य λ']],
+  terminal:[['Weight mg','भार mg'],['Buoyant force','उत्प्लावन बल'],['Drag: 6πηrv','प्रतिरोध: 6πηrv']],
+  target:[['Accurate','यथार्थ'],['Precise','परिशुद्ध'],['Random scatter','यादृच्छिक फैलाव']],
+  pendulum:[['Support / pivot','आधार / धुरी'],['Length L, bob','लंबाई L, गोलक'],['Time period T','आवर्तकाल T']],
+  vernier:[['Fixed jaw + inside jaws','स्थिर जबड़ा + आंतरिक जबड़े'],['Main scale + sliding vernier','मुख्य पैमाना + चल वर्नियर'],['Object + depth rod + lock','वस्तु + गहराई छड़ + लॉक']],
+  vzero:[['Main zero','मुख्य शून्य'],['Vernier zero offset','वर्नियर शून्य विस्थापन'],['Signed zero correction','चिह्न सहित शून्य संशोधन']],
+  screw:[['Anvil + object + spindle','एनविल + वस्तु + स्पिंडल'],['Sleeve / main scale','स्लीव / मुख्य पैमाना'],['Thimble + ratchet','थिम्बल + रैचेट']],
+  szero:[['Reference line','संदर्भ रेखा'],['Circular scale zero','वृत्ताकार पैमाना शून्य'],['Zero error sign','शून्य त्रुटि का चिह्न']],
+  setelem:[['Set A','समुच्चय A'],['Elements a, b, c','अवयव a, b, c'],['Membership ∈','सदस्यता ∈']],
+  numsets:[['N: Natural','N: प्राकृतिक'],['Z, Q: Integers / rational','Z, Q: पूर्णांक / परिमेय'],['R: Real numbers','R: वास्तविक संख्याएँ']],
+  powercube:[['∅: none selected','∅: कोई नहीं'],['{a}, {b}: singletons','{a}, {b}: एकल समुच्चय'],['{a,b,c}: full set','{a,b,c}: पूरा समुच्चय']],
+  intervals:[['Open: (a,b)','खुला: (a,b)'],['Closed: [a,b]','बंद: [a,b]'],['Half-open: [a,b)','अर्ध-खुला: [a,b)']],
+  venn:[['Universal set U','सार्वत्रिक समुच्चय U'],['Set A','समुच्चय A'],['Set B','समुच्चय B']],
+  setops:[['Union A ∪ B','संघ A ∪ B'],['Intersection A ∩ B','प्रतिच्छेद A ∩ B'],['Difference A − B','अंतर A − B']],
+  threesets:[['A only','केवल A'],['A ∩ B ∩ C','A ∩ B ∩ C'],['Seven Venn regions','वेन के सात क्षेत्र']],
+  juice:[['Mango: 180','आम: 180'],['Orange: 150','संतरा: 150'],['Both / neither','दोनों / कोई नहीं']],
+  fourchoice:[['Include element','अवयव शामिल'],['Exclude element','अवयव छोड़ें'],['2ⁿ subsets','2ⁿ उपसमुच्चय']]
+ };
+ var d=data[name]||[[name,'मॉडल'],['Part / region','भाग / क्षेत्र'],['Measurement / relation','मापन / संबंध']];
+ var labs=d.map(function(x){return window.VENU_RUNTIME.esc(l==='hi'?x[1]:x[0])});
+ var isChem=['states','classify','gasvol','limiting'].indexOf(name)>=0;
+ if(name==='vernier'||name==='vzero'){
+  var mt='',vt='',labels='';
+  for(var i=0;i<=50;i++){var x=95+i*8.5;mt+='<path d="M'+x.toFixed(1)+' 92v'+(i%10===0?19:i%5===0?14:8)+'" stroke="#334155" stroke-width="1.4"/>'}
+  for(var j=0;j<=10;j++){var vx=95+3.27*85+j*7.65;vt+='<path d="M'+vx.toFixed(1)+' 128v'+(j===7?24:14)+'" stroke="'+(j===7?'#d97706':'#2563eb')+'" stroke-width="'+(j===7?3:1.6)+'"/>'}
+  for(var k=0;k<=5;k++)labels+='<text x="'+(95+k*85)+'" y="82" text-anchor="middle">'+k+'</text>';
+  return '<svg class="diagram2d" viewBox="0 0 640 250" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'वर्नियर कैलिपर्स: 10 वर्नियर भाग 9 मुख्य भाग के बराबर':'Vernier caliper: 10 vernier divisions equal 9 main divisions')+'"><rect x="85" y="88" width="450" height="27" rx="4" fill="#cbd5e1" stroke="#475569"/><path d="M85 101H535" stroke="#475569" stroke-width="2"/>'+mt+'<g font-size="11" fill="#111827">'+labels+'</g><rect x="'+(95+3.27*85-8).toFixed(1)+'" y="119" width="93" height="28" rx="3" fill="#dbeafe" stroke="#2563eb"/>'+vt+'<path d="M95 88V35h17v53M95 115v72h17v-72M'+(95+3.27*85-8).toFixed(1)+' 119V45h16v74M'+(95+3.27*85+85).toFixed(1)+' 147v40h16v-40" fill="none" stroke="#475569" stroke-width="6"/><path d="M'+(95+3.27*85+7*7.65).toFixed(1)+' 151v22" stroke="#d97706" stroke-width="2"/><g font-size="12" fill="#111827" font-weight="600"><text x="105" y="25">'+labs[0]+'</text><text x="265" y="39">'+labs[1]+'</text><text x="430" y="205">'+labs[2]+'</text><text x="300" y="232">'+window.VENU_RUNTIME.esc(l==='hi'?'10 VSD = 9 MSD · LC = 0.01 cm · VSR = 7':'10 VSD = 9 MSD · LC = 0.01 cm · VSR = 7')+'</text></g><text x="'+(95+3.27*85+7*7.65+12).toFixed(1)+'" y="174" font-size="11" fill="#d97706">7</text></svg>';
+ }
+ if(name==='screw'||name==='szero'){
+  var mt='';for(var j=0;j<18;j++){var tx=270+j*13;mt+='<path d="M'+tx+' 75v'+(j%3===0?22:11)+'" stroke="#334155" stroke-width="1.5"/>'}
+  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'स्क्रू गेज के नामांकित भाग':'Labelled micrometer screw gauge schematic')+'"><path d="M155 45H405M155 45V178H405" stroke="#64748b" stroke-width="22" fill="none" stroke-linecap="round"/><rect x="185" y="84" width="44" height="50" rx="6" fill="#fbbf24" stroke="#92400e"/><path d="M229 109H300" stroke="#0f766e" stroke-width="12"/><path d="M300 109H430" stroke="#475569" stroke-width="10"/><rect x="390" y="67" width="125" height="85" rx="15" fill="#f9a8d4" stroke="#9d174d" stroke-width="2"/>'+mt+'<rect x="515" y="89" width="45" height="40" rx="8" fill="#94a3b8" stroke="#334155"/><path d="M235 109H292" stroke="#16a34a" stroke-width="6"/><g font-size="12" fill="#111827" font-weight="600"><text x="175" y="29">'+labs[0]+'</text><text x="265" y="59">'+labs[1]+'</text><text x="425" y="178">'+labs[2]+'</text><text x="260" y="202">'+window.VENU_RUNTIME.esc(l==='hi'?'पिच · वृत्ताकार भाग · अल्पतमांक':'Pitch · circular divisions · least count')+'</text></g></svg>';
+ }
+ if(name==='titration'){
+  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'अनुमापन उपकरण':'Titration apparatus')+'"><path d="M105 22v175m-42 0h84m-42-155h180" stroke="#64748b" stroke-width="7" fill="none"/><rect x="225" y="25" width="22" height="105" rx="4" fill="#dbeafe" stroke="#2563eb"/><path d="M236 130v22m-5 -5 5 5 5 -5" stroke="#2563eb" stroke-width="3" fill="none"/><path d="M205 160h62l-22 45h-18z" fill="#dbeafe" fill-opacity=".65" stroke="#2563eb" stroke-width="2"/><path d="M210 190h52" stroke="#db2777" stroke-width="5"/><g font-size="12" fill="#111827" font-weight="600"><text x="255" y="30">'+labs[0]+'</text><text x="285" y="95">'+labs[1]+'</text><text x="300" y="185">'+labs[2]+'</text><text x="50" y="215">'+window.VENU_RUNTIME.esc(l==='hi'?'स्टैंड और क्लैम्प':'Stand and clamp')+'</text></g></svg>';
+ }
+ if(name==='eudio'){
+  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'गैस विश्लेषण उपकरण':'Gas analysis apparatus')+'"><rect x="105" y="25" width="80" height="165" rx="10" fill="#dbeafe" fill-opacity=".3" stroke="#2563eb" stroke-width="3"/><path d="M115 125h60v55h-60z" fill="#7dd3fc" fill-opacity=".45"/><path d="M145 25v-12m-10 12h20" stroke="#2563eb" stroke-width="3"/><path d="M185 75h95v50h-95" fill="none" stroke="#64748b" stroke-width="4"/><rect x="285" y="60" width="130" height="90" rx="18" fill="#dbeafe" fill-opacity=".35" stroke="#2563eb" stroke-width="3"/><g font-size="12" fill="#111827" font-weight="600"><text x="145" y="15" text-anchor="middle">'+labs[0]+'</text><text x="350" y="45" text-anchor="middle">'+labs[1]+'</text><text x="350" y="175" text-anchor="middle">'+labs[2]+'</text></g></svg>';
+ }
+ if(name==='dilution'){
+  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'बीकर में तनुकरण':'Dilution in a beaker')+'"><path d="M105 45h120l-12 140q-2 12-12 12h-72q-10 0-12-12z" fill="#dbeafe" fill-opacity=".35" stroke="#2563eb" stroke-width="3"/><path d="M112 125h106l-4 60h-98z" fill="#60a5fa" fill-opacity=".4"/><path d="M290 45h120l-12 140q-2 12-12 12h-72q-10 0-12-12z" fill="#dbeafe" fill-opacity=".35" stroke="#2563eb" stroke-width="3"/><path d="M297 95h106l-6 90h-94z" fill="#60a5fa" fill-opacity=".35"/><path d="M235 110h45m-9 -7 9 7 -9 7" stroke="#111827" stroke-width="2" fill="none"/><g fill="#dc2626"><circle cx="140" cy="140" r="5"/><circle cx="165" cy="155" r="5"/><circle cx="190" cy="138" r="5"/><circle cx="320" cy="120" r="5"/><circle cx="350" cy="155" r="5"/><circle cx="380" cy="105" r="5"/></g><g font-size="12" fill="#111827" font-weight="600"><text x="165" y="25" text-anchor="middle">'+labs[0]+'</text><text x="350" y="25" text-anchor="middle">'+labs[1]+'</text><text x="260" y="95" text-anchor="middle">'+window.VENU_RUNTIME.esc(l==='hi'?'विलायक मिलाएँ':'Add solvent')+'</text><text x="350" y="210" text-anchor="middle">'+labs[2]+'</text></g></svg>';
+ }
+ if(name==='co2'){
+  return '<svg class="diagram2d" viewBox="0 0 640 190" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'CO₂ अणु का 2D आरेख':'CO2 molecule 2D diagram')+'"><path d="M190 92H265m-10 -8 10 8 -10 8M375 92H450m-10 -8 10 8 -10 8" stroke="#334155" stroke-width="5" fill="none"/><circle cx="160" cy="92" r="36" fill="#ef4444"/><circle cx="320" cy="92" r="42" fill="#64748b"/><circle cx="480" cy="92" r="36" fill="#ef4444"/><g font-size="20" font-weight="700" text-anchor="middle" fill="#fff"><text x="160" y="99">O</text><text x="320" y="99">C</text><text x="480" y="99">O</text></g><g font-size="13" font-weight="600" fill="#111827" text-anchor="middle"><text x="160" y="150">'+labs[1]+'</text><text x="320" y="150">'+labs[0]+'</text><text x="480" y="150">'+labs[2]+'</text></g></svg>';
+ }
+ if(name==='water'){
+  return '<svg class="diagram2d" viewBox="0 0 640 190" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'जल अणु का 2D आरेख':'Water molecule 2D diagram')+'"><path d="M320 85L230 145M320 85L410 145" stroke="#334155" stroke-width="8" stroke-linecap="round"/><circle cx="320" cy="75" r="40" fill="#ef4444"/><circle cx="220" cy="150" r="27" fill="#2563eb"/><circle cx="420" cy="150" r="27" fill="#2563eb"/><g font-size="20" font-weight="700" text-anchor="middle" fill="#fff"><text x="320" y="82">O</text><text x="220" y="157">H</text><text x="420" y="157">H</text></g><text x="320" y="28" font-size="14" fill="#111827" text-anchor="middle" font-weight="700">'+labs[2]+'</text><text x="320" y="185" font-size="12" fill="#111827" text-anchor="middle">'+labs[0]+' · '+labs[1]+'</text></svg>';
+ }
+ if(name==='isotopes'){
+  return '<svg class="diagram2d" viewBox="0 0 640 190" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'क्लोरीन समस्थानिकों का 2D आरेख':'Chlorine isotope 2D diagram')+'"><circle cx="190" cy="90" r="58" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><circle cx="450" cy="90" r="58" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><g fill="#ef4444"><circle cx="170" cy="75" r="8"/><circle cx="190" cy="75" r="8"/><circle cx="210" cy="75" r="8"/><circle cx="170" cy="95" r="8"/><circle cx="190" cy="95" r="8"/><circle cx="210" cy="95" r="8"/></g><g fill="#64748b"><circle cx="430" cy="75" r="8"/><circle cx="450" cy="75" r="8"/><circle cx="470" cy="75" r="8"/><circle cx="430" cy="95" r="8"/><circle cx="450" cy="95" r="8"/><circle cx="470" cy="95" r="8"/><circle cx="450" cy="115" r="8"/></g><g font-size="13" font-weight="700" fill="#111827" text-anchor="middle"><text x="190" y="170">'+labs[0]+'</text><text x="450" y="170">'+labs[1]+'</text><text x="320" y="30">'+labs[2]+'</text></g></svg>';
+ }
+ if(name==='dissoc'){
+  return '<svg class="diagram2d" viewBox="0 0 640 190" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'वियोजन का 2D आरेख':'Dissociation 2D diagram')+'"><circle cx="145" cy="90" r="30" fill="#2563eb"/><circle cx="190" cy="90" r="25" fill="#ef4444"/><circle cx="100" cy="90" r="25" fill="#ef4444"/><path d="M240 90H350m-12 -9 12 9 -12 9" stroke="#334155" stroke-width="3" fill="none"/><g fill="#ef4444"><circle cx="415" cy="90" r="25"/><circle cx="505" cy="90" r="25"/></g><g fill="#2563eb"><circle cx="460" cy="90" r="30"/><circle cx="550" cy="90" r="30"/></g><text x="190" y="160" text-anchor="middle" font-size="13" fill="#111827">'+labs[0]+'</text><text x="485" y="160" text-anchor="middle" font-size="13" fill="#111827">'+labs[1]+'</text><text x="320" y="30" text-anchor="middle" font-size="13" fill="#111827">'+labs[2]+'</text></svg>';
+ }
+ if(isChem){
+  var particles='';for(var be=0;be<3;be++){for(var k=0;k<6;k++){var px=85+be*205+(k%3)*18,py=76+Math.floor(k/3)*25;particles+='<circle cx="'+px+'" cy="'+py+'" r="5" fill="'+(be===0?'#2563eb':be===1?'#e879f9':'#f59e0b')+'" stroke="#fff" stroke-width="1"/>'}}
+  return '<svg class="diagram2d" viewBox="0 0 640 220" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'रसायन का नामांकित 2D कण आरेख':'Labelled chemistry particle and glassware diagram')+'"><g fill="#dbeafe" fill-opacity=".35" stroke="#2563eb" stroke-width="2"><path d="M65 48h95l-10 118q-3 12-15 12H90q-12 0-15-12z"/><path d="M270 48h95l-10 118q-3 12-15 12h-45q-12 0-15-12z"/><path d="M475 48h95l-10 118q-3 12-15 12h-45q-12 0-15-12z"/></g><path d="M76 118h73M281 118h73M486 118h73" stroke="#0ea5e9" stroke-width="2"/>'+particles+'<g font-size="12" fill="#111827" font-weight="600"><text x="112" y="28" text-anchor="middle">'+labs[0]+'</text><text x="317" y="28" text-anchor="middle">'+labs[1]+'</text><text x="522" y="28" text-anchor="middle">'+labs[2]+'</text><text x="112" y="205" text-anchor="middle">'+window.VENU_RUNTIME.esc(l==='hi'?'काँच का पात्र':'Glass vessel')+'</text><text x="317" y="205" text-anchor="middle">'+window.VENU_RUNTIME.esc(l==='hi'?'कण / विलयन':'Particles / solution')+'</text><text x="522" y="205" text-anchor="middle">'+window.VENU_RUNTIME.esc(l==='hi'?'अवस्था / उत्पाद':'State / product')+'</text></g></svg>';
+ }
+ return '<svg class="diagram2d" viewBox="0 0 640 190" role="img" aria-label="'+window.VENU_RUNTIME.esc(l==='hi'?'नामांकित 2D अवधारणा आरेख':'Labelled 2D concept diagram')+'"><g stroke="#64748b" stroke-width="2" fill="none"><path d="M205 92H245m-9 -7 9 7 -9 7M405 92H445m-9 -7 9 7 -9 7"/></g>'+labs.map(function(v,i){var x=25+i*205;return '<rect x="'+x+'" y="45" width="170" height="95" rx="12" fill="'+(i===0?'#dbeafe':i===1?'#dcfce7':'#fef3c7')+'" stroke="'+(i===0?'#2563eb':i===1?'#16a34a':'#d97706')+'" stroke-width="2"/><circle cx="'+(x+85)+'" cy="72" r="10" fill="'+(i===0?'#2563eb':i===1?'#16a34a':'#d97706')+'"/><text x="'+(x+85)+'" y="110" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">'+v+'</text>'}).join('')+'</svg>';
+}
+

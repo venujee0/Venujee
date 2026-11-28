@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='maths-sets';})[0];if(!ch)throw new Error('Missing chapter maths-sets');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('If A ∪ B = A ∩ B, prove A = B.','यदि A ∪ B = A ∩ B, तो सिद्ध करो A = B।'),
+   a:B('A ⊆ A ∪ B = A ∩ B ⊆ B. In the same way B ⊆ A. So <b>A = B</b>.','A ⊆ A ∪ B = A ∩ B ⊆ B। इसी तरह B ⊆ A। अतः <b>A = B</b>।')});})();

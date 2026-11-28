@@ -1,0 +1,2 @@
+(function(){'use strict';var ch=window.VENU_CHAPTERS_DATA.filter(function(x){return x.id==='chemistry-mole-concept';})[0];if(!ch)throw new Error('Missing chapter chemistry-mole-concept');var B=function(en,hi){return {en:en,hi:hi}};ch.examples.push({lv:'main',q:B('For 10 volume H₂O₂ (1 atm convention) find molarity and strength in g/L.','10 आयतन H₂O₂ (1 atm परिपाटी) की मोलरता और g/L में सामर्थ्य ज्ञात करो।'),
+  a:B('M = 10/11.2 = 0.893 M; strength = 0.893 × 34 = <b>30.4 g L⁻¹</b>.','M = 10/11.2 = 0.893 M; सामर्थ्य = 0.893 × 34 = <b>30.4 g L⁻¹</b>।')});})();
