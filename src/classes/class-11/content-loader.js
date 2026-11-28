@@ -352,7 +352,7 @@ function loadBatch(){
  var batch=files.slice(index,index+batchSize);index+=batch.length;
  var jobs=batch.map(function(src){
   return new Promise(function(resolve,reject){
-   var el=document.createElement('script');el.src=src+'?v=12';el.async=false;
+   var el=document.createElement('script');el.src=src+'?v=13';el.async=false;
    el.onload=function(){loaded++;resolve();};
    el.onerror=function(){reject(new Error('Network request failed'));};
    document.body.appendChild(el);
