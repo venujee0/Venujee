@@ -35,21 +35,16 @@ try {
     .map(a => ({ href: a.getAttribute("href"), text: a.innerText.trim() }))
     .filter(item => /^2\./.test(item.text) && item.href));
   if (chapter2Links.length < 10) throw new Error("Expected Chapter 2 topic links, found " + chapter2Links.length);
-  for (const item of chapter2Links) {
+  let chapter2Has3D = false, chapter2Has2D = false;  for (const item of chapter2Links) {
     await page.goto(baseURL + item.href, { waitUntil: "domcontentloaded" });
     await page.locator("#app .paper").waitFor({ state: "visible", timeout: 15000 });
     const visibleText = await page.locator("#app").innerText();
-    if (visibleText.includes("Venu JEE loading error")) throw new Error("Chapter 2 topic failed: " + item.text + "\\n" + visibleText.slice(0,500));
+    if (visibleText.includes("Venu JEE loading error")) throw new Error("Chapter 2 topic failed: " + item.text + "\\n" + visibleText.slice(0,500));    if (await page.locator("#app .d3 canvas").count()) {      chapter2Has3D = true;      await page.locator("#app [data-zoom-range]").waitFor({ state: "visible" });      const zoom = page.locator("#app [data-zoom-range]");      await zoom.fill("0.2");      if (await zoom.inputValue() !== "0.2") throw new Error("3D zoom minimum control failed");      await zoom.fill("8");      if (await zoom.inputValue() !== "8") throw new Error("3D zoom maximum control failed");      await page.locator("#app [data-zoom-out]").click();      await page.locator("#app [data-zoom-in]").click();    }    if (await page.locator("#app .diagram2d").count()) chapter2Has2D = true;
   }
   console.log("PASS: Chapter 2 topic pages rendered: " + chapter2Links.length);
 
-  await page.goto(baseURL + "#b11-physics-p58", { waitUntil: "domcontentloaded" });
-  await page.locator("#app .paper").waitFor({ state: "visible" });
-  await page.locator("#app .d3 canvas").waitFor({ state: "visible" });
-
-  await page.goto(baseURL + "#b11-physics-p59", { waitUntil: "domcontentloaded" });
-  await page.locator("#app .paper").waitFor({ state: "visible" });
-  await page.locator("#app .diagram2d").waitFor({ state: "visible" });
+  if (!chapter2Has3D) throw new Error("No Chapter 2 topic exposed a working 3D model");
+  if (!chapter2Has2D) throw new Error("No Chapter 2 topic exposed a 2D diagram");
 
   await page.locator('[data-lang="hi"]').first().click();
   if ((await page.locator("html").getAttribute("lang")) !== "hi") throw new Error("Hindi language switch failed");

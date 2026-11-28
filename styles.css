@@ -320,3 +320,9 @@ svg text{font-family:inherit}
 
 /* Paired 2D diagrams shown with each Class 11 interactive 3D model. */
 .fig2{margin:14px 0 20px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}.fig2 figcaption{font-size:.86rem;color:var(--ink);font-weight:600;margin:0 0 8px}.diagram2d{display:block;width:100%;height:auto;max-height:240px;background:#fff;border-radius:8px}.paper .fig2{background:#fff;border-color:#d7dce2}.paper .fig2 figcaption{color:#111}
+
+/* Accessible zoom controls for interactive 3D learning models. */
+.d3zoom{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:10px 0 4px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.d3zoom input[type=range]{flex:1 1 120px;min-width:110px;accent-color:var(--accent);touch-action:pan-y}
+.d3zoom .btn{min-width:42px;min-height:42px;padding:5px 12px;font-size:1.2rem}
+.d3zoom output{min-width:48px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}

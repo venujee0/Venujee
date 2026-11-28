@@ -140,7 +140,7 @@ var D3R=window.VENU_D3R;
       return '<div class="d3control"><label class="d3p"><span>'+(rt.lang==='hi'?p.hi:p.en)+'</span><input type="range" data-k="'+p.k+'" min="'+p.min+'" max="'+p.max+'" step="'+(p.step||1)+'" value="'+p.val+'"><output>'+p.val+(p.unit||'')+'</output></label><div class="d3stepper" aria-label="'+(rt.lang==='hi'?'एक-एक चरण में मान बदलें':'Adjust by one step')+'"><button type="button" data-d3step="-1" data-k="'+p.k+'" aria-label="'+(rt.lang==='hi'?'एक चरण घटाएँ':'Decrease one step')+'">−</button><span>'+(rt.lang==='hi'?'एक चरण':'1 step')+'</span><button type="button" data-d3step="1" data-k="'+p.k+'" aria-label="'+(rt.lang==='hi'?'एक चरण बढ़ाएँ':'Increase one step')+'">+</button></div></div>';
     }).join('');
     return '<div class="d3" data-d3="'+name+'"><canvas class="d3c" role="img" aria-label="'+rt.esc(rt.lang==='hi'?(d.hi||name):(d.en||name))+'"></canvas>'
-      +'<div class="d3bar"><button type="button" class="btn sm" data-d3a="play">'+rt.t(rt.U.pauseW)+'</button><button type="button" class="btn sm" data-d3a="reset">'+rt.t(rt.U.resetW)+'</button><span class="d3hint">'+rt.t(rt.U.dragHint)+'</span></div>'
+      +'<div class="d3bar"><button type="button" class="btn sm" data-d3a="play">'+rt.t(rt.U.pauseW)+'</button><button type="button" class="btn sm" data-d3a="reset">'+rt.t(rt.U.resetW)+'</button><span class="d3hint">'+rt.t(rt.U.dragHint)+'</span></div>'+'<div class="d3zoom" role="group" aria-label="'+(rt.lang==='hi'?'3D ज़ूम नियंत्रण':'3D zoom controls')+'"><button type="button" class="btn sm" data-zoom-out aria-label="'+(rt.lang==='hi'?'ज़ूम कम करें':'Zoom out')+'">−</button><input type="range" data-zoom-range min="0.2" max="8" step="0.1" value="'+(d.view&&d.view.zoom||1)+'" aria-label="'+(rt.lang==='hi'?'ज़ूम स्तर':'Zoom level')+'"><button type="button" class="btn sm" data-zoom-in aria-label="'+(rt.lang==='hi'?'ज़ूम बढ़ाएँ':'Zoom in')+'">+</button><output data-zoom-label>'+(d.view&&d.view.zoom||1).toFixed(1)+'×</output></div>'
       +(pars?'<div class="d3pars">'+pars+'</div>':'')+'</div>';
   };
   window.mount3d=function(root){
@@ -156,7 +156,7 @@ var D3R=window.VENU_D3R;
       function pl(){pb.textContent=m.play?rt.t(rt.U.pauseW):rt.t(rt.U.playW)}
       pl();
       pb.addEventListener('click',function(){m.play=!m.play;pl()});
-      el.querySelector('[data-d3a="reset"]').addEventListener('click',function(){m.yaw=v.yaw;m.pitch=v.pitch;m.zoom=v.zoom||1;m.t=0;render(m)});
+      function zoomUI(){var zr=el.querySelector('[data-zoom-range]'),zo=el.querySelector('[data-zoom-label]');if(zr)zr.value=String(m.zoom);if(zo)zo.textContent=m.zoom.toFixed(1)+'×';}function setZoom(z){m.zoom=Math.max(0.2,Math.min(8,z));zoomUI();if(!m.play)render(m);}el.querySelector('[data-zoom-in]').addEventListener('click',function(){setZoom(m.zoom+0.1)});el.querySelector('[data-zoom-out]').addEventListener('click',function(){setZoom(m.zoom-0.1)});el.querySelector('[data-zoom-range]').addEventListener('input',function(e){setZoom(+e.target.value)});el.querySelector('[data-d3a="reset"]').addEventListener('click',function(){m.yaw=v.yaw;m.pitch=v.pitch;m.t=0;setZoom(v.zoom||1)});
       var inp=el.querySelectorAll('input[type=range]');
       for(var j=0;j<inp.length;j++){(function(r){r.addEventListener('input',function(){m.P[r.getAttribute('data-k')]=+r.value;var o=r.parentNode.querySelector('output');var pp=def.params.filter(function(q){return q.k===r.getAttribute('data-k')})[0];o.textContent=r.value+(pp.unit||'');if(!m.play)render(m)})})(inp[j])}
       el.querySelectorAll('[data-d3step]').forEach(function(btn){btn.addEventListener('click',function(){var key=btn.getAttribute('data-k'),dir=+btn.getAttribute('data-d3step'),r=el.querySelector('input[data-k="'+key+'"]');if(!r)return;var step=+(r.step||1),min=+(r.min||0),max=+(r.max||100),next=Math.max(min,Math.min(max,+(r.value)+dir*step));r.value=String(+next.toFixed(8));r.dispatchEvent(new Event('input',{bubbles:true}));});});
@@ -169,7 +169,7 @@ var D3R=window.VENU_D3R;
           var a=ptrs[ids[0]],b=ptrs[ids[1]],d0=Math.hypot(a[0]-b[0],a[1]-b[1]);
           ptrs[e.pointerId]=[e.clientX,e.clientY];
           a=ptrs[ids[0]];b=ptrs[ids[1]];var d1=Math.hypot(a[0]-b[0],a[1]-b[1]);
-          if(d0>0)m.zoom=Math.max(0.5,Math.min(3,m.zoom*d1/d0));
+          if(d0>0)m.zoom=Math.max(0.2,Math.min(8,m.zoom*d1/d0));zoomUI();
         }else{
           m.yaw+=(e.clientX-o[0])*0.011;m.pitch=Math.max(-1.45,Math.min(1.45,m.pitch+(e.clientY-o[1])*0.011));
           ptrs[e.pointerId]=[e.clientX,e.clientY];
@@ -178,7 +178,7 @@ var D3R=window.VENU_D3R;
       });
       var up=function(e){delete ptrs[e.pointerId];if(!Object.keys(ptrs).length)m.drag=false};
       cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
-      cv.addEventListener('wheel',function(e){e.preventDefault();m.zoom=Math.max(0.5,Math.min(3,m.zoom*(e.deltaY<0?1.1:0.91)));if(!m.play)render(m)},{passive:false});
+      cv.addEventListener('wheel',function(e){e.preventDefault();setZoom(m.zoom*(e.deltaY<0?1.1:0.91));if(!m.play)render(m)},{passive:false});
       if(!D3R.COL)readCols(cv);
       size(m);render(m);
       D3R.mounts.push(m);
