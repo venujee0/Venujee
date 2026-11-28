@@ -1,4 +1,4 @@
-(function(w){'use strict';w.VENU_CLASS_VIEW=function(cls,ctx){var app=ctx.app,pager=ctx.pager,cur=ctx.cur,SUBS=ctx.SUBS,book=ctx.book,LS=ctx.LS,t=ctx.t,U=ctx.U,coverHTML=ctx.coverHTML,CLS=ctx.CLS;
+(function(w){'use strict';w.VENU_CLASS_VIEW=function(cls,ctx){var app=ctx.app,pager=ctx.pager,cur=ctx.cur,SUBS=ctx.SUBS,book=ctx.book,LS=ctx.LS,t=ctx.t,U=ctx.U,coverHTML=ctx.coverHTML,brandHTML=ctx.brandHTML,CLS=ctx.CLS;
   var shelf=SUBS.map(function(sub){
     var bk=book(cls,sub), saved=LS.get('venu.last.'+bk.base)||'', mm=new RegExp('^'+bk.base+'-p(\\d+)$').exec(saved), cont='';
     if(mm&&+mm[1]>=1&&+mm[1]<=bk.total){cont='<a class="btn" href="#'+saved+'">'+t(U.contin)+' '+mm[1]+'</a>'}
