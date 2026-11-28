@@ -171,7 +171,7 @@ function route(anim,top){
     }else if((m=/^t(11|12)(?:-(physics|chemistry|maths))?$/.exec(h))){
     testView(+m[1],m[2]||'');
   }else if((m=/^c(11|12)(?:-.*)?$/.exec(h))){
-    window.VENU_CLASS_VIEW(+m[1],{app:app,pager:pager,cur:cur,SUBS:SUBS,book:book,LS:LS,t:t,U:U,coverHTML:coverHTML,CLS:CLS});
+    window.VENU_CLASS_VIEW(+m[1],{app:app,pager:pager,cur:cur,SUBS:SUBS,book:book,LS:LS,t:t,U:U,coverHTML:coverHTML,brandHTML:brandHTML,CLS:CLS});
   }else{
     pager.hidden=true; cur={book:false,prev:'',next:''};
     window.VENU_HOME_VIEW({app:app,t:t,U:U,coverHTML:coverHTML,brandHTML:brandHTML});
