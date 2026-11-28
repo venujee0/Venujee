@@ -1,0 +1,1 @@
+(function(){'use strict';var DG=window.VENU_DG;DG.velocitytime=function(l){return DG.flow(l==='hi'?['v–t का ढाल = त्वरण','चिह्न सहित क्षेत्रफल = विस्थापन','चिह्न बदले तो दूरी अलग जोड़ें']:['Slope of v–t = acceleration','Signed area = displacement','Split distance at sign changes'],l==='hi'?'वेग-समय ग्राफ':'Velocity-time graph')};})();
