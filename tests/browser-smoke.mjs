@@ -12,8 +12,8 @@ try {
   if (!(await page.locator("#app").innerText()).includes("JEE")) throw new Error("Home page content did not render");
 
   await page.locator('#app a[href="#c11"]').first().click();
-  await page.locator('#app a[href="#b11-physics"]').waitFor({ state: "visible" });
-  await page.locator('#app a[href="#b11-physics"]').click();
+  await page.locator('#app a.btn.pri[href="#b11-physics"]').waitFor({ state: "visible" });
+  await page.locator('#app a.btn.pri[href="#b11-physics"]').click();
   await page.locator('#app a[href="#b11-physics-p1"]').waitFor({ state: "visible" });
   await page.locator('#app a[href="#b11-physics-p1"]').click();
   await page.locator("#app .paper").waitFor({ state: "visible" });
@@ -24,7 +24,7 @@ try {
   await page.locator("#app .hero h1").waitFor({ state: "visible" });
 
   await page.locator('#app a[href="#c11"]').first().click();
-  await page.locator('#app a[href="#b11-physics"]').click();
+  await page.locator('#app a.btn.pri[href="#b11-physics"]').click();
   await page.locator('#app a[href="#b11-physics-toc"]').click();
   const chapterRows = page.locator("#app .tl-list a.tl");
   await chapterRows.nth(1).click();
@@ -37,7 +37,7 @@ try {
 
   await page.locator("a.brand").click();
   await page.locator('#app a[href="#c11"]').first().click();
-  await page.locator('#app a[href="#b11-physics"]').click();
+  await page.locator('#app a.btn.pri[href="#b11-physics"]').click();
   await page.locator('#app a[href="#b11-physics-toc"]').click();
   await page.locator("#app .tl-list a.tl").nth(1).click();
   await page.locator("#app .tl-list a.tl").filter({ hasText: "2.3 Average speed and average velocity" }).click();
