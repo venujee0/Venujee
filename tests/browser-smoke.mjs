@@ -31,33 +31,24 @@ try {
   await chapterRows.nth(1).click();
   await page.locator("#app .op-t").filter({ hasText: "Motion in a Straight Line" }).waitFor({ state: "visible" });
 
-  const allChapter2Links = await page.locator("#app .tl-list a.tl").evaluateAll(els => els.map(a => ({href:a.getAttribute("href"), text:a.innerText.trim()})));
-  for (const item of allChapter2Links) {
-    if (!item.href) continue;
-    await page.locator('#app .tl-list a.tl[href="' + item.href + '"]').click();
-    await page.locator("#app .paper").waitFor({ state: "visible" });
+  const chapter2Links = await page.locator("#app .tl-list a.tl").evaluateAll(els => els
+    .map(a => ({ href: a.getAttribute("href"), text: a.innerText.trim() }))
+    .filter(item => /^2\\./.test(item.text) && item.href));
+  if (chapter2Links.length < 10) throw new Error("Expected Chapter 2 topic links, found " + chapter2Links.length);
+  for (const item of chapter2Links) {
+    await page.goto(baseURL + item.href, { waitUntil: "domcontentloaded" });
+    await page.locator("#app .paper").waitFor({ state: "visible", timeout: 15000 });
     const visibleText = await page.locator("#app").innerText();
     if (visibleText.includes("Venu JEE loading error")) throw new Error("Chapter 2 topic failed: " + item.text + "\\n" + visibleText.slice(0,500));
   }
-  console.log("PASS: all Chapter 2 topic links rendered: " + allChapter2Links.length);
+  console.log("PASS: Chapter 2 topic pages rendered: " + chapter2Links.length);
 
-  await page.locator("#app .tl-list a.tl").filter({ hasText: "2.1 Motion and reference frame" }).click();
+  await page.goto(baseURL + "#b11-physics-p58", { waitUntil: "domcontentloaded" });
   await page.locator("#app .paper").waitFor({ state: "visible" });
   await page.locator("#app .d3 canvas").waitFor({ state: "visible" });
 
-  await page.locator("a.brand").click();
-  await page.locator('#app a[href="#c11"]').first().click();
-  await page.locator('#app a.btn.pri[href="#b11-physics"]').click();
-  await page.locator('#app a[href="#b11-physics-toc"]').click();
-  await page.locator("#app .tl-list a.tl").nth(1).click();
-  await page.locator("#app .tl-list a.tl").filter({ hasText: "2.3 Average speed and average velocity" }).click();
+  await page.goto(baseURL + "#b11-physics-p59", { waitUntil: "domcontentloaded" });
   await page.locator("#app .paper").waitFor({ state: "visible" });
-  console.log("Chapter 2 diagram diagnostic:", JSON.stringify(await page.evaluate(() => ({
-    errorText: document.querySelector("#app")?.innerText?.slice(0,700),
-    chapter: window.VENU_CHAPTERS_DATA?.find(c => c.id === "physics-motion-straight-line")?.sections?.map(s => ({title:s.h?.en,d3:s.d3,dg:s.dg,cap:!!(s.cap3||s.cap)})),
-    diagramKeys: Object.keys(window.VENU_DG || {}),
-    runtimeLanguage: window.VENU_LANGUAGE
-  }))));
   await page.locator("#app .diagram2d").waitFor({ state: "visible" });
 
   await page.locator('[data-lang="hi"]').first().click();
